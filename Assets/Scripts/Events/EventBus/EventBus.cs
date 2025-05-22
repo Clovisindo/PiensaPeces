@@ -1,0 +1,29 @@
+﻿using Assets.Scripts.Events.Bindings;
+using Assets.Scripts.Events.Events;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Assets.Scripts.Events.EventBus
+{
+    public class EventBus<T> : IEventBus<T> where T : IEvent
+    {
+        private readonly HashSet<IEventBinding<T>> bindings = new HashSet<IEventBinding<T>>();
+
+        public void Register(EventBinding<T> binding) => bindings.Add(binding);
+        public void Deregister(EventBinding<T> binding) => bindings.Remove(binding);
+        public void Raise(T gameEvent)
+        {
+            foreach (var binding in bindings)
+            {
+                binding.OnEvent.Invoke(gameEvent);
+                binding.OnEventNoArgs.Invoke();
+            }
+        }
+
+        public void Clear()
+        {
+            Debug.Log($"Clearing {typeof(T).Name} bindings");
+            bindings.Clear();
+        }
+    }
+}
