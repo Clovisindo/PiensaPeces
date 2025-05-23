@@ -7,7 +7,7 @@ public class SwimState : IState
     private readonly IBoundsService boundsService;
     private readonly StateMachine stateMachine;
     private readonly float speed;
-    private Vector3 destination;
+    private Vector2 destination;
 
     public SwimState(BaseFishController fish,IBoundsService boundsService, StateMachine stateMachine, float speed)
     {
@@ -25,18 +25,33 @@ public class SwimState : IState
 
     public void Update()
     {
-        var t = fish.GetTransform();
-        t.position = Vector3.MoveTowards(t.position, destination, speed * Time.deltaTime);
-
-        if (Vector3.Distance(t.position, destination) < 0.1f || IsNearBounds(t.position))
-        {
-            SetNewDestination();
-        }
+        SwimMovement();
     }
 
     public void Exit() 
     {
         Debug.Log("Exiting swim state.");
+    }
+
+    private void SwimMovement()
+    {
+        var t = fish.GetTransform();
+        Vector2 currentPos = t.position;
+
+        // Mover hacia el destino
+        Vector2 newPos = Vector2.MoveTowards(currentPos, destination, speed * Time.deltaTime);
+        t.position = new Vector3(newPos.x, newPos.y, t.position.z); // mantén Z fijo en 2D
+
+        // Rotar hacia la dirección del movimiento
+        Vector2 direction = destination - currentPos;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        t.rotation = Quaternion.Slerp(t.rotation, Quaternion.Euler(0, 0, angle), 5f * Time.deltaTime);
+
+        // Cambiar de destino si está cerca o fuera de límites
+        if (Vector2.Distance(currentPos, destination) < 0.1f || IsNearBounds(currentPos))
+        {
+            SetNewDestination();
+        }
     }
 
     private void SetNewDestination()
@@ -45,18 +60,10 @@ public class SwimState : IState
         var min = boundsService.GetMinBounds();
         var max = boundsService.GetMaxBounds();
 
-        // genera un punto aleatorio cercano, pero dentro de los límites
-        var randomOffset = Random.insideUnitSphere * 3f;
-        randomOffset.y = 0;
+        float x = Random.Range(min.x + 0.5f, max.x - 0.5f);
+        float y = Random.Range(min.y + 0.5f, max.y - 0.5f);
 
-        var newDestination = currentPos + randomOffset;
-
-        // clamp para no salirse de la pecera
-        newDestination.x = Mathf.Clamp(newDestination.x, min.x + 0.5f, max.x - 0.5f);
-        newDestination.y = currentPos.y;
-        //newDestination.z = Mathf.Clamp(newDestination.z, min.y + 0.5f, max.y - 0.5f); 
-
-        destination = newDestination;
+        destination = new Vector2(x, y);
     }
 
     private bool IsNearBounds(Vector3 position)

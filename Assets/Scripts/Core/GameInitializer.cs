@@ -7,6 +7,7 @@ namespace Assets.Scripts.Core
 {
     public class GameInitializer : MonoBehaviour
     {
+        [SerializeField] private Collider2D fishTankCollider;
         [SerializeField] private PlayerFishController fishPlayer;
         [SerializeField] private FoodSpawnerController spawnerController;
 
@@ -17,7 +18,8 @@ namespace Assets.Scripts.Core
 
         void Awake()
         {
-            var boundsService = new CameraBoundsService(Camera.main);
+            //var boundsService = new CameraBoundsService(Camera.main);
+            var boundsService = new FishTankBoundsService(fishTankCollider);
 
             fishPlayer.Init(boundsService, foodEatentEventBus, FoodSpawnedEventBus);
             spawnerController.Init(foodEatentEventBus, FoodSpawnedEventBus);

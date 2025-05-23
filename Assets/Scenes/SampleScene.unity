@@ -990,8 +990,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a9c7e521d94f240be5e7789bfc3905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishTankCollider: {fileID: 1866592458}
   fishPlayer: {fileID: 1053646822}
   spawnerController: {fileID: 810252946}
+  npcFish: []
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0
@@ -1398,7 +1400,7 @@ GameObject:
   - component: {fileID: 1866592457}
   - component: {fileID: 1866592456}
   - component: {fileID: 1866592458}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: ColliderWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
