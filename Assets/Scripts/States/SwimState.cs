@@ -40,7 +40,7 @@ public class SwimState : IState
 
         // Mover hacia el destino
         Vector2 newPos = Vector2.MoveTowards(currentPos, destination, speed * Time.deltaTime);
-        t.position = new Vector3(newPos.x, newPos.y, t.position.z); // mantén Z fijo en 2D
+        t.position = new Vector3(newPos.x, newPos.y, t.position.z); 
 
         // Rotar hacia la dirección del movimiento
         Vector2 direction = destination - currentPos;
