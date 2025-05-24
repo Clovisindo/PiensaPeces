@@ -7,7 +7,8 @@ namespace Assets.Scripts.Fish.Player
 {
     public class PlayerFishEventHandler
     {
-        private readonly PlayerFishController controller;
+        private readonly FishIntentScheduler intentScheduler;
+        private readonly HungerComponent hungerComponent;
 
         private readonly IEventBus<FoodEaten> foodEatenBus;
         private readonly IEventBus<FoodSpawned> foodSpawnedBus;
@@ -16,12 +17,15 @@ namespace Assets.Scripts.Fish.Player
         private EventBinding<FoodSpawned> foodSpawnedBinding;
         private EventBinding<HungryEvent> hungryBinding;
 
-        public PlayerFishEventHandler(PlayerFishController controller,
+        public PlayerFishEventHandler(
+            FishIntentScheduler fishIntentScheduler,
+            HungerComponent hungerComponent,
             IEventBus<FoodEaten> foodEatenBus,
             IEventBus<FoodSpawned> foodSpawnedBus,
             IEventBus<HungryEvent> hungryBus)
         {
-            this.controller = controller;
+            this.intentScheduler = fishIntentScheduler;
+            this.hungerComponent = hungerComponent;
             this.foodEatenBus = foodEatenBus;
             this.foodSpawnedBus = foodSpawnedBus;
             this.hungryBus = hungryBus;
@@ -47,17 +51,22 @@ namespace Assets.Scripts.Fish.Player
 
         private void OnFoodEaten()
         {
-            controller.HandleFoodEatenEvent();
+            hungerComponent.ResetHunger();
+            intentScheduler.Stop();
+            intentScheduler.EvaluateNow();
         }
 
         private void OnFoodSpawned(FoodSpawned e)
         {
-            controller.HandleFoodSpawnedEvent();
+            if (hungerComponent.IsHungry)
+            {
+                intentScheduler.EvaluateNow();
+            }
         }
 
         private void OnHungry(HungryEvent e)
         {
-            controller.HandleHungryEvent();
+            intentScheduler.StartEvaluatingPeriodically(1f);
         }
     }
 }

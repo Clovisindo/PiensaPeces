@@ -10,9 +10,9 @@ public class PlayerFishController : BaseFishController
 {
     private IBoundsService boundsService;
     private HungerComponent hungerComponent;
-    private FoodManagerService foodManagerService;
     private PlayerFishAI ai;
     private PlayerFishEventHandler eventHandler;
+    private FishIntentScheduler intentScheduler;
 
     protected override void Awake()
     {
@@ -29,11 +29,11 @@ public class PlayerFishController : BaseFishController
         {
             limiter.Init(boundsService);
         }
-        this.foodManagerService = foodManagerService;
         hungerComponent = GetComponent<HungerComponent>();
         hungerComponent.Init(hungryEventBus);
-        ai = new PlayerFishAI(transform, hungerComponent, foodManagerService); 
-        eventHandler = new PlayerFishEventHandler(this, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus);
+        ai = new PlayerFishAI(transform, hungerComponent, foodManagerService);
+        intentScheduler = new FishIntentScheduler(this, ai.EvaluateIntent, ApplyIntent);
+        eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus);
         eventHandler.RegisterEvents();
     }
 
@@ -47,23 +47,6 @@ public class PlayerFishController : BaseFishController
         ApplyIntent(FishIntent.Idle);
     }
   
-    public void HandleFoodEatenEvent()
-    {
-        hungerComponent.ResetHunger();
-        ApplyIntent(ai.EvaluateIntent());
-    }
-
-    public void HandleFoodSpawnedEvent()
-    {
-        if (!hungerComponent.IsHungry || !foodManagerService.HasAnyFood()) return;
-        ApplyIntent(ai.EvaluateIntent());
-    }
-
-    public void HandleHungryEvent()
-    {
-        ApplyIntent(ai.EvaluateIntent());
-    }
-
     private void ApplyIntent(FishIntent intent)
     {
         switch (intent)
