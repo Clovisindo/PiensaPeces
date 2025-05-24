@@ -1022,6 +1022,7 @@ GameObject:
   - component: {fileID: 1053646825}
   - component: {fileID: 1053646822}
   - component: {fileID: 1053646826}
+  - component: {fileID: 1053646827}
   m_Layer: 0
   m_Name: PlayerFish
   m_TagString: PlayerFish
@@ -1156,6 +1157,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea0895f661c619429ca99a75fd7a4d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1053646827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053646821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6253520be3d5844a45294a88fbac5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerDelay: 10
 --- !u!1 &1336644303
 GameObject:
   m_ObjectHideFlags: 0

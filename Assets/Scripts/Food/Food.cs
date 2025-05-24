@@ -1,17 +1,19 @@
 using Assets.Scripts.Events.EventBus;
 using Assets.Scripts.Events.Events;
+using Assets.Scripts.Services.FoodService;
 using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    //[SerializeField] private FoodEatenEventChannelSO foodEatenEvent;
-
+    private FoodManagerService foodManager;
     private IEventBus<FoodEaten> foodEatentBus;
 
-
-    public void Init(IEventBus<FoodEaten> foodEatentBus)
+    public void Init(FoodManagerService foodManager,  IEventBus<FoodEaten> foodEatentBus)
     {
+        this.foodManager = foodManager;
         this.foodEatentBus = foodEatentBus;
+
+        foodManager.RegisterFood(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -20,8 +22,13 @@ public class Food : MonoBehaviour
         if (other.CompareTag("PlayerFish"))
         {
             foodEatentBus.Raise(new FoodEaten());
-            //foodEatenEvent.Raise();
+            foodManager.UnregisterFood(gameObject);
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        foodManager?.UnregisterFood(gameObject); 
     }
 }
