@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Components;
+using Assets.Scripts.Core;
 using Assets.Scripts.Events.EventBus;
 using Assets.Scripts.Events.Events;
 using Assets.Scripts.Fish.Player;
@@ -23,7 +24,6 @@ public class PlayerFishController : BaseFishController
         EventBus<FoodSpawned> foodSpawnedEventBus, EventBus<HungryEvent> hungryEventBus)
     {
         this.boundsService = boundsService;
-        
         var limiter = GetComponent<TransformLimiter>();
         if (limiter != null)
         {
@@ -52,16 +52,16 @@ public class PlayerFishController : BaseFishController
         switch (intent)
         {
             case FishIntent.SwimRandomly:
-                stateMachine.ChangeState(new SwimState(this, boundsService, stateMachine, speed));
+                stateManager.ApplyState(new SwimState(this, boundsService, stateMachine, speed));
                 break;
             case FishIntent.FollowFood:
                 var target = ai.GetTargetFood();
                 if (target != null)
-                    stateMachine.ChangeState(new FollowTargetState(this, stateMachine, speed, target));
+                    stateManager.ApplyState(new FollowTargetState(this, stateMachine, speed, target));
                 break;
             case FishIntent.Idle:
             default:
-                stateMachine.ChangeState(new IdleState(this, stateMachine));
+                stateManager.ApplyState(new IdleState(this, stateMachine));
                 break;
         }
     }

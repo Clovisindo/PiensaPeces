@@ -1,15 +1,18 @@
-﻿using Assets.Scripts.States;
+﻿using Assets.Scripts.Core;
+using Assets.Scripts.States;
 using UnityEngine;
 
 public abstract class BaseFishController : MonoBehaviour
 {
     protected StateMachine stateMachine;
+    protected StateManager stateManager;
     [SerializeField] protected float speed;
 
     protected virtual void Awake()
     {
         stateMachine = new StateMachine();
-        stateMachine.ChangeState(new IdleState(this,stateMachine));
+        stateManager = new StateManager(stateMachine);
+        stateManager.ApplyState(new IdleState(this,stateMachine));
     }
 
     protected virtual void Update()

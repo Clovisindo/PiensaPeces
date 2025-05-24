@@ -2,21 +2,14 @@
 
 public class StateMachine
 {
-    private IState currentState;
+    public IState currentState {get;private set;}
 
     public void ChangeState(IState newState)
     {
-        if (currentState != null && currentState.GetType() == newState.GetType()) return;
-
         currentState?.Exit();
         currentState = newState;
         currentState.Enter();
     }
 
     public void Update() => currentState?.Update();
-
-    //public Type GetCurrentStateType()
-    //{
-    //    return currentState?.GetType();
-    //}
 }
