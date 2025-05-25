@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Components;
-using Assets.Scripts.Core;
 using Assets.Scripts.Events.EventBus;
 using Assets.Scripts.Events.Events;
 using Assets.Scripts.Fish.Dialogue;
@@ -15,7 +14,7 @@ public class PlayerFishController : BaseFishController
     private TransformLimiter limiter;
     private PlayerFishAI ai;
     private PlayerFishEventHandler eventHandler;
-    private FishIntentScheduler intentScheduler;
+    private PlayerFishIntentScheduler intentScheduler;
     private FishTalker talker;
 
     protected override void Awake()
@@ -32,14 +31,11 @@ public class PlayerFishController : BaseFishController
         talker = GetComponent<FishTalker>();
 
         this.boundsService = boundsService;
-        if (limiter != null)
-        {
-            limiter.Init(boundsService);
-        }
+        limiter.Init(boundsService);
         this.hungerComponent.Init(hungryEventBus);
-        this.talker.Init(hungerComponent);
+        this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent));
         ai = new PlayerFishAI(transform, hungerComponent, foodManagerService);
-        intentScheduler = new FishIntentScheduler(this, ai.EvaluateIntent, ApplyIntent);
+        intentScheduler = new PlayerFishIntentScheduler(this, ai.EvaluateIntent, ApplyIntent);
         eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus);
         eventHandler.RegisterEvents();
     }

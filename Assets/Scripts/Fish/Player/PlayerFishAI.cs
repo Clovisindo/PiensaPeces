@@ -11,7 +11,7 @@ namespace Assets.Scripts.Fish.Player
         FollowFood
     }
 
-    public class PlayerFishAI
+    public class PlayerFishAI : IFishAI
     {
         private readonly Transform fishTransform;
         private readonly HungerComponent hungerComponent;

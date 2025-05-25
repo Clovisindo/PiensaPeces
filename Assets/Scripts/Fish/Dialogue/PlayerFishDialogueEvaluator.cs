@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Assets.Scripts.Fish.Dialogue
 {
-    public class FishDialogueEvaluator
+    public class PlayerFishDialogueEvaluator: IDialogueEvaluator
     {
         private readonly HungerComponent hungerComponent;
-        private readonly float gameTime = Time.time;
+        public float currentTime => Time.time;
 
-        public FishDialogueEvaluator(HungerComponent hungerComponent)
+        public PlayerFishDialogueEvaluator(HungerComponent hungerComponent)
         {
             this.hungerComponent = hungerComponent;
         }
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Fish.Dialogue
             {
                 var parts = condition.Split('>');
                 if (float.TryParse(parts[1].Trim(), out float minTime))
-                    return gameTime > minTime;
+                    return currentTime > minTime;
             }
 
             if (condition == "IsHungry")

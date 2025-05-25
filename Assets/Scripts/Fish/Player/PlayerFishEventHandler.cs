@@ -7,7 +7,7 @@ namespace Assets.Scripts.Fish.Player
 {
     public class PlayerFishEventHandler
     {
-        private readonly FishIntentScheduler intentScheduler;
+        private readonly PlayerFishIntentScheduler intentScheduler;
         private readonly HungerComponent hungerComponent;
 
         private readonly IEventBus<FoodEaten> foodEatenBus;
@@ -18,7 +18,7 @@ namespace Assets.Scripts.Fish.Player
         private EventBinding<HungryEvent> hungryBinding;
 
         public PlayerFishEventHandler(
-            FishIntentScheduler fishIntentScheduler,
+            PlayerFishIntentScheduler fishIntentScheduler,
             HungerComponent hungerComponent,
             IEventBus<FoodEaten> foodEatenBus,
             IEventBus<FoodSpawned> foodSpawnedBus,

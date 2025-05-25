@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Components;
 using Assets.Scripts.Core;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,7 +9,8 @@ namespace Assets.Scripts.Fish.Dialogue
 {
     public class FishTalker : MonoBehaviour
     {
-        [SerializeField] private string dialogueCsvPath;
+        [SerializeField] private string playerDialogueCsvPath;
+        [SerializeField] private string npcDialogueCsvPath;
         [SerializeField] private float minSpeakInterval = 5f;
 
         [SerializeField] private GameObject speechBubblePrefab;
@@ -16,12 +18,18 @@ namespace Assets.Scripts.Fish.Dialogue
 
         private float lastSpeakTime;
         private List<FishDialogueLine> dialogueLines;
-        private FishDialogueEvaluator evaluator;
+        private IDialogueEvaluator evaluator;
 
-        public void Init(HungerComponent hunger)
+        public void Init(IDialogueEvaluator evaluator)
         {
-            dialogueLines = DialogueLoaderCsv.Load(Application.dataPath + "/Scripts/Data/" + dialogueCsvPath);
-            evaluator = new FishDialogueEvaluator(hunger);
+            string pathDialoge = evaluator switch
+            {
+                PlayerFishDialogueEvaluator => playerDialogueCsvPath,
+                NPCFishDialogueEvaluator => npcDialogueCsvPath,
+                _ => throw new ArgumentException("Unknown evaluator type")
+            };
+            dialogueLines = DialogueLoaderCsv.Load(Application.dataPath + "/Scripts/Data/" + pathDialoge);
+            this.evaluator = evaluator;
             lastSpeakTime = -minSpeakInterval;
         }
 

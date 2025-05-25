@@ -29,10 +29,10 @@ namespace Assets.Scripts.Core
             fishPlayer.Init(boundsService, foodManagerService, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus);
             spawnerController.Init(foodManagerService, foodEatentEventBus, FoodSpawnedEventBus);
 
-            //foreach (var npc in npcFish)
-            //{
-            //    npc.Init(boundsService);
-            //}
+            foreach (var npc in npcFish)
+            {
+                npc.Init(boundsService);
+            }
         }
     }
 }
