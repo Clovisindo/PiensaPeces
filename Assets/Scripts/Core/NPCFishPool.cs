@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Services.Bounds;
+﻿using Assets.Scripts.Fish.NPC;
+using Assets.Scripts.Services.Bounds;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,13 +9,15 @@ namespace Assets.Scripts.Core
     public class NPCFishPool : MonoBehaviour
     {
         IBoundsService boundsService;
+
         [SerializeField] private NPCFishController npcFishPrefab;
         [SerializeField] private int poolSize = 1;
-        [SerializeField] private float minAmountLifeTime;
-        [SerializeField] private float maxAmountLifeTime;
 
-        private Queue<NPCFishController> availableFish = new Queue<NPCFishController>();
-        private List<NPCFishController> activeFish = new List<NPCFishController>();
+        [Header("Fish Configs")]
+        [SerializeField] private FishConfig[] fishConfigs;
+
+        private Queue<NPCFishController> availableFish = new();
+        private List<NPCFishController> activeFish = new();
 
         public void Init(IBoundsService boundservice)
         {
@@ -27,7 +30,6 @@ namespace Assets.Scripts.Core
             {
                 var fish = Instantiate(npcFishPrefab, transform);
                 fish.gameObject.SetActive(false);
-               
                 availableFish.Enqueue(fish);
             }
 
@@ -46,10 +48,24 @@ namespace Assets.Scripts.Core
                 var fish = availableFish.Dequeue();
                 fish.transform.position = GetRandomSpawnPosition();
                 fish.gameObject.SetActive(true);
-                fish.Init(this, boundsService, Random.Range(minAmountLifeTime, maxAmountLifeTime));
-                fish.ResetFish(); // reinicia estados y tiempo de vida
+
+                var config = GetRandomFishConfig();
+                fish.Init(config, this, boundsService);
+                fish.ResetFish();
+
                 activeFish.Add(fish);
             }
+        }
+
+        private FishConfig GetRandomFishConfig()
+        {
+            if (fishConfigs == null || fishConfigs.Length == 0)
+            {
+                Debug.LogWarning("No fish configs provided.");
+                //return ScriptableObject.CreateInstance<FishConfig>();
+            }
+
+            return fishConfigs[Random.Range(0, fishConfigs.Length)];
         }
 
         public void RecycleFish(NPCFishController fish)
@@ -61,9 +77,9 @@ namespace Assets.Scripts.Core
 
         private Vector3 GetRandomSpawnPosition()
         {
-            // puedes ajustar esto según tu escena
             return new Vector3(Random.Range(-5f, 5f), Random.Range(-3f, 3f), 0f);
         }
     }
+
 
 }

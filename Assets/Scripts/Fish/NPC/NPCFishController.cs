@@ -20,20 +20,30 @@ public class NPCFishController : BaseFishController
     private FishTalker talker;
 
     private float lifeTime;
-    [SerializeField] private float maxLifeTime = 30f;
-    public void Init(NPCFishPool pool, IBoundsService boundsService, float maxLifeTime)
+    private float maxLifeTime;
+    public void Init(FishConfig config, NPCFishPool pool, IBoundsService boundsService)
     {
         this.pool = pool;
+        this.boundsService = boundsService;
+
+        var renderer = GetComponent<SpriteRenderer>();
+        if (renderer != null && config.fishSprite != null)
+        {
+            renderer.sprite = config.fishSprite;
+        }
+
         limiter = GetComponent<TransformLimiter>();
         limiter?.Init(boundsService);
-        this.boundsService = boundsService;
+        
         talker = GetComponent<FishTalker>();
         this.talker.Init(new NPCFishDialogueEvaluator());
+
         ai = new NPCFishAI(UnityEngine.Random.value);
         exitFishComponent = new ExitableFish();
         exitFishComponent.Init(this, pool);
         intentScheduler = new PlayerFishIntentScheduler(this, ai.EvaluateIntent, ApplyIntent);
-        this.maxLifeTime = maxLifeTime;
+        this.maxLifeTime = config.maxLifetime;
+        this.speed = config.speed;
 
         stateMachine = new StateMachine();
         stateManager = new StateManager(stateMachine);
