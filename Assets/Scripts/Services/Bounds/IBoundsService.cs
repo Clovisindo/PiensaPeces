@@ -6,5 +6,6 @@ namespace Assets.Scripts.Services.Bounds
     {
         Vector2 GetMinBounds();
         Vector2 GetMaxBounds();
+        bool IsInsideBounds(Vector2 position);
     }
 }

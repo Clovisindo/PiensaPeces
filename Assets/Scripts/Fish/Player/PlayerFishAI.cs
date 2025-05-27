@@ -8,7 +8,8 @@ namespace Assets.Scripts.Fish.Player
     {
         Idle,
         SwimRandomly,
-        FollowFood
+        FollowFood,
+        EndLife
     }
 
     public class PlayerFishAI : IFishAI

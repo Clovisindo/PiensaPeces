@@ -20,7 +20,7 @@ namespace Assets.Scripts.Core
         {
             if (IsSameState(newState))
             {
-                Debug.Log($"[StateManager] Estado {newState.GetType().Name} ya está activo.");
+                //Debug.Log($"[StateManager] Estado {newState.GetType().Name} ya está activo.");
                 return;
             }
             Debug.Log($"[StateManager] Transición: {stateMachine.currentState?.GetType().Name} ➜ {newState.GetType().Name}");

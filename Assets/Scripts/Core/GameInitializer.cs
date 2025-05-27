@@ -11,10 +11,11 @@ namespace Assets.Scripts.Core
         [SerializeField] private Collider2D fishTankCollider;
         [SerializeField] private PlayerFishController fishPlayer;
         [SerializeField] private FoodSpawnerController spawnerController;
+        [SerializeField] private NPCFishPool npcFishPool;
 
         private FoodManagerService foodManagerService;
 
-        [SerializeField] private NPCFishController[] npcFish;//todo implementar
+        //[SerializeField] private NPCFishController[] npcFish;//todo implementar
 
         public EventBus<FoodEaten> foodEatentEventBus = new();
         public EventBus<FoodSpawned> FoodSpawnedEventBus = new();
@@ -26,13 +27,9 @@ namespace Assets.Scripts.Core
             var boundsService = new FishTankBoundsService(fishTankCollider);
             foodManagerService = new FoodManagerService();
 
+            npcFishPool.Init(boundsService);
             fishPlayer.Init(boundsService, foodManagerService, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus);
             spawnerController.Init(foodManagerService, foodEatentEventBus, FoodSpawnedEventBus);
-
-            foreach (var npc in npcFish)
-            {
-                npc.Init(boundsService);
-            }
         }
     }
 }

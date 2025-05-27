@@ -17,5 +17,11 @@ namespace Assets.Scripts.Services.Bounds
 
         public Vector2 GetMinBounds() => minBounds;
         public Vector2 GetMaxBounds() => maxBounds;
+
+        public bool IsInsideBounds(Vector2 position)
+        {
+            return position.x >= minBounds.x && position.x <= maxBounds.x &&
+                   position.y >= minBounds.y && position.y <= maxBounds.y;
+        }
     }
 }

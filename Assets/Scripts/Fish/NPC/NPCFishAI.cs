@@ -16,5 +16,6 @@ namespace Assets.Scripts.Fish.NPC
         {
             return Random.value < swimProbability ? FishIntent.SwimRandomly : FishIntent.Idle;
         }
+
     }
 }

@@ -57,7 +57,7 @@ namespace Assets.Scripts.Fish.Dialogue
                 bubble.GetComponent<SpeechBubbleUI>().Show(text);
             }
 
-            Debug.Log($"[Fish] {text}");
+            //Debug.Log($"[Fish] {text}");
         }
     }
 

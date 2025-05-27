@@ -8,13 +8,6 @@ public abstract class BaseFishController : MonoBehaviour
     protected StateManager stateManager;
     [SerializeField] protected float speed;
 
-    protected virtual void Awake()
-    {
-        stateMachine = new StateMachine();
-        stateManager = new StateManager(stateMachine);
-        stateManager.ApplyState(new IdleState(this,stateMachine));
-    }
-
     protected virtual void Update()
     {
         stateMachine.Update();
