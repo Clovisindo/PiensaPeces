@@ -7,6 +7,15 @@ namespace Assets.Scripts.Fish
 {
     internal class ExitableFish : IExitableFish
     {
+        private NPCFishController controller;
+        private NPCFishPool pool;
+
+
+        public void Init(NPCFishController controller, NPCFishPool pool)
+        {
+            this.controller = controller;
+            this.pool = pool;
+        }
 
         public void MoveInDirection(Transform transform, Vector2 direction, float speed)
         {
@@ -19,9 +28,9 @@ namespace Assets.Scripts.Fish
             return !boundsService.IsInsideBounds(transform.position);
         }
 
-        public void NotifyExited(NPCFishController fish, NPCFishPool pool)
+        public void NotifyExited()
         {
-            pool.RecycleFish(fish);
+            pool.RecycleFish(controller);
         }
     }
 }

@@ -6,6 +6,7 @@ using Assets.Scripts.Fish.NPC;
 using Assets.Scripts.Fish.Player;
 using Assets.Scripts.Services.Bounds;
 using Assets.Scripts.States;
+using Assets.Scripts.Utilities;
 using UnityEngine;
 
 public class NPCFishController : BaseFishController
@@ -30,6 +31,7 @@ public class NPCFishController : BaseFishController
         this.talker.Init(new NPCFishDialogueEvaluator());
         ai = new NPCFishAI(UnityEngine.Random.value);
         exitFishComponent = new ExitableFish();
+        exitFishComponent.Init(this, pool);
         intentScheduler = new PlayerFishIntentScheduler(this, ai.EvaluateIntent, ApplyIntent);
         this.maxLifeTime = maxLifeTime;
 
@@ -38,7 +40,7 @@ public class NPCFishController : BaseFishController
         stateManager.ApplyState(new IdleState(this, stateMachine));
 
         stateMachine.ChangeState(new SwimState(this, boundsService, stateMachine, speed));
-        intentScheduler.StartEvaluatingPeriodically(1f);
+        intentScheduler.StartEvaluatingPeriodically(10f);
     }
 
     protected override void Update()
@@ -72,7 +74,8 @@ public class NPCFishController : BaseFishController
     {
         if (LifeTimeBehaviour())
         {
-            stateManager.ApplyState(new ExitScreenState(this.transform, this,boundsService,exitFishComponent, pool,speed));
+            var exitContext = new ExitScreenContext(transform, boundsService, exitFishComponent, speed);
+            stateManager.ApplyState(new ExitScreenState(exitContext));
             intentScheduler.Stop();
             limiter.enabled = false;
         }

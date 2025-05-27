@@ -10,8 +10,8 @@ namespace Assets.Scripts.Core
         IBoundsService boundsService;
         [SerializeField] private NPCFishController npcFishPrefab;
         [SerializeField] private int poolSize = 1;
-        [SerializeField] private int minAmountLifeTime;
-        [SerializeField] private int maxAmountLifeTime;
+        [SerializeField] private float minAmountLifeTime;
+        [SerializeField] private float maxAmountLifeTime;
 
         private Queue<NPCFishController> availableFish = new Queue<NPCFishController>();
         private List<NPCFishController> activeFish = new List<NPCFishController>();

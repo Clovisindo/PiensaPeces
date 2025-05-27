@@ -1,29 +1,19 @@
 ﻿using Assets.Scripts.Core;
 using Assets.Scripts.Fish;
 using Assets.Scripts.Services.Bounds;
+using Assets.Scripts.Utilities;
 using UnityEngine;
 
 namespace Assets.Scripts.States
 {
     public class ExitScreenState : IState
     {
-        private readonly IExitableFish fish;
-        private readonly IBoundsService boundsService;
-        private readonly NPCFishController npcFishController;
-        private readonly NPCFishPool pool;
-        private readonly Transform transform;
-        private readonly float speed;
+        private readonly ExitScreenContext context;
         private Vector2 exitDirection;
 
-        public ExitScreenState(Transform transform, NPCFishController fishController,IBoundsService boundsService, 
-            IExitableFish fish, NPCFishPool pool, float speed)
+        public ExitScreenState(ExitScreenContext exitContext)
         {
-            this.transform = transform;
-            this.boundsService = boundsService;
-            this.npcFishController = fishController;
-            this.pool = pool;
-            this.fish = fish;
-            this.speed = speed;
+            this.context = exitContext;
         }
 
         public void Enter()
@@ -34,11 +24,11 @@ namespace Assets.Scripts.States
 
         public void Update()
         {
-            fish.MoveInDirection(transform ,exitDirection, speed);
+            context.Fish.MoveInDirection(context.Transform ,exitDirection, context.Speed);
 
-            if (fish.IsOutOfBounds(transform,boundsService))
+            if (context.Fish.IsOutOfBounds(context.Transform, context.BoundsService))
             {
-                fish.NotifyExited(npcFishController, pool); // Notifica al pool
+                context.Fish.NotifyExited(); // Notifica al pool
             }
         }
 

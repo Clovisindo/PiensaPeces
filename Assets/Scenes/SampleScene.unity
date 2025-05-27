@@ -297,9 +297,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcFishPrefab: {fileID: 295511665}
-  poolSize: 20
-  minAmountLifeTime: 1
-  maxAmountLifeTime: 5
+  poolSize: 1
+  minAmountLifeTime: 0.02
+  maxAmountLifeTime: 0.05
 --- !u!4 &347493656
 Transform:
   m_ObjectHideFlags: 0
