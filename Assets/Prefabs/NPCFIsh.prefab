@@ -137,7 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  maxLifeTime: 30
 --- !u!114 &6553557412684803810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d18b95095d85814d9372d2d66317b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDialogueCsvPath: FishDialogue_player.csv
-  npcDialogueCsvPath: FishDialogue_NPC.csv
+  playerDialogueCsvPath: FishDialogue_player
+  npcDialogueCsvPath: FishDialogue_NPC
   minSpeakInterval: 5
   speechBubblePrefab: {fileID: 1451446149019317547, guid: 82dcabd0eedf5ba4c86fa4d8b5d7c7d3, type: 3}
   bubbleAnchor: {fileID: 660646149417735559}

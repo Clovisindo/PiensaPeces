@@ -6,25 +6,28 @@ namespace Assets.Scripts.Core
 {
     public class DialogueLoaderCsv
     {
-        public static List<FishDialogueLine> Load(string path)
+
+        public static List<FishDialogueLine> Load(string csvText)
         {
-            var lines = File.ReadAllLines(path);
-            var dialogueLines = new List<FishDialogueLine>();
-
-            foreach (var line in lines)
+            var lines = new List<FishDialogueLine>();
+            using (StringReader reader = new StringReader(csvText))
             {
-                if (string.IsNullOrWhiteSpace(line)) continue;
-                var split = line.Split(';'); // formato: ID;Texto;Condición
-
-                dialogueLines.Add(new FishDialogueLine
+                string line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    Id = split[0],
-                    Text = split[1],
-                    Condition = split.Length > 2 ? split[2] : "Always"
-                });
+                    var parts = line.Split(';'); // o ',' según tu CSV
+                    if (parts.Length >= 2)
+                    {
+                        lines.Add(new FishDialogueLine
+                        {
+                            Id = parts[0],
+                            Text = parts[1],
+                            Condition = parts.Length > 2 ? parts[2] : "Always"
+                        });
+                    }
+                }
             }
-
-            return dialogueLines;
+            return lines;
         }
     }
 }

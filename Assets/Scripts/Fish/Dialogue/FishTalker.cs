@@ -20,6 +20,8 @@ namespace Assets.Scripts.Fish.Dialogue
         private List<FishDialogueLine> dialogueLines;
         private IDialogueEvaluator evaluator;
 
+        private const string pathData = "Dialogues/";
+
         public void Init(IDialogueEvaluator evaluator)
         {
             string pathDialoge = evaluator switch
@@ -28,7 +30,16 @@ namespace Assets.Scripts.Fish.Dialogue
                 NPCFishDialogueEvaluator => npcDialogueCsvPath,
                 _ => throw new ArgumentException("Unknown evaluator type")
             };
-            dialogueLines = DialogueLoaderCsv.Load(Application.dataPath + "/Scripts/Data/" + pathDialoge);
+            TextAsset csvAsset = Resources.Load<TextAsset>(pathData + pathDialoge);
+            if (csvAsset == null)
+            {
+                Debug.LogError($"Dialogue CSV not found at Resources/{pathData + pathDialoge}");
+                dialogueLines = new List<FishDialogueLine>();
+            }
+            else
+            {
+                dialogueLines = DialogueLoaderCsv.Load(csvAsset.text);
+            }
             this.evaluator = evaluator;
             lastSpeakTime = -minSpeakInterval;
         }
@@ -56,7 +67,6 @@ namespace Assets.Scripts.Fish.Dialogue
                 bubble.transform.SetParent(bubbleAnchor.transform);
                 bubble.GetComponent<SpeechBubbleUI>().Show(text);
             }
-
             //Debug.Log($"[Fish] {text}");
         }
     }
