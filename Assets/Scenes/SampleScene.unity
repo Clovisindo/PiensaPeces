@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcFishPrefab: {fileID: 3926834393726923840, guid: e716193aa2810934792adb65c6d0e99a, type: 3}
-  poolSize: 1
+  poolSize: 10
   fishConfigs:
   - {fileID: 11400000, guid: a5cc08f775d55ff4ea50402e12b83679, type: 2}
   - {fileID: 11400000, guid: 0215a1abfd0ab3f4dbb3e9802039d7af, type: 2}

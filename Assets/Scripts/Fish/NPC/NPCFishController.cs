@@ -53,6 +53,7 @@ public class NPCFishController : BaseFishController
     protected override void Update()
     {
         base.Update();
+        lifeTime += Time.deltaTime;
     }
 
     public void NotifyExit()
@@ -69,7 +70,6 @@ public class NPCFishController : BaseFishController
 
     private bool LifeTimeBehaviour()
     {
-        lifeTime += Time.deltaTime;
         if (lifeTime > maxLifeTime)
         {
             return true;

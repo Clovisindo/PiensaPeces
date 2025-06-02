@@ -77,7 +77,30 @@ namespace Assets.Scripts.Core
 
         private Vector3 GetRandomSpawnPosition()
         {
-            return new Vector3(Random.Range(-5f, 5f), Random.Range(-3f, 3f), 0f);
+            Vector2 min = boundsService.GetMinBounds();
+            Vector2 max = boundsService.GetMaxBounds();
+
+            Vector3 spawnPos = Vector3.zero;
+
+            int edge = Random.Range(0, 4); // 0=left, 1=right, 2=top, 3=bottom
+
+            switch (edge)
+            {
+                case 0: // left
+                    spawnPos = new Vector3(min.x, Random.Range(min.y, max.y), 0f);
+                    break;
+                case 1: // right
+                    spawnPos = new Vector3(max.x, Random.Range(min.y, max.y), 0f);
+                    break;
+                case 2: // top
+                    spawnPos = new Vector3(Random.Range(min.x, max.x), max.y, 0f);
+                    break;
+                case 3: // bottom
+                    spawnPos = new Vector3(Random.Range(min.x, max.x), min.y, 0f);
+                    break;
+            }
+
+            return spawnPos;
         }
     }
 
