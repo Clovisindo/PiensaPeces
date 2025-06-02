@@ -7,28 +7,35 @@ public class SwimState : IState
     private readonly IBoundsService boundsService;
     private readonly StateMachine stateMachine;
     private readonly float speed;
+    private readonly SpriteRenderer spriteRenderer;
     private Vector2 destination;
 
-    public SwimState(BaseFishController fish,IBoundsService boundsService, StateMachine stateMachine, float speed)
+    private float timeSinceLastDirectionChange = 0f;
+    private const float minDirectionChangeInterval = 1.0f; // Segundos mínimo entre cambios
+
+    public SwimState(BaseFishController fish, IBoundsService boundsService, StateMachine stateMachine, float speed)
     {
         this.fish = fish;
         this.boundsService = boundsService;
         this.stateMachine = stateMachine;
         this.speed = speed;
+        this.spriteRenderer = fish.GetComponent<SpriteRenderer>();
     }
 
     public void Enter()
     {
         Debug.Log("Entering swim state.");
         SetNewDestination();
+        timeSinceLastDirectionChange = 0f;
     }
 
     public void Update()
     {
+        timeSinceLastDirectionChange += Time.deltaTime;
         SwimMovement();
     }
 
-    public void Exit() 
+    public void Exit()
     {
         Debug.Log("Exiting swim state.");
     }
@@ -40,23 +47,27 @@ public class SwimState : IState
 
         // Mover hacia el destino
         Vector2 newPos = Vector2.MoveTowards(currentPos, destination, speed * Time.deltaTime);
-        t.position = new Vector3(newPos.x, newPos.y, t.position.z); 
+        t.position = new Vector3(newPos.x, newPos.y, t.position.z);
 
-        // Rotar hacia la dirección del movimiento
-        Vector2 direction = destination - currentPos;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        t.rotation = Quaternion.Slerp(t.rotation, Quaternion.Euler(0, 0, angle), 5f * Time.deltaTime);
+        // Flip en eje X según dirección
+        if (destination.x < currentPos.x)
+            spriteRenderer.flipX = true;
+        else if (destination.x > currentPos.x)
+            spriteRenderer.flipX = false;
 
-        // Cambiar de destino si está cerca o fuera de límites
-        if (Vector2.Distance(currentPos, destination) < 0.1f || IsNearBounds(currentPos))
+        // Cambiar destino solo si ha pasado suficiente tiempo
+        bool reachedDestination = Vector2.Distance(currentPos, destination) < 0.1f;
+        bool nearBounds = IsNearBounds(currentPos);
+
+        if ((reachedDestination || nearBounds) && timeSinceLastDirectionChange >= minDirectionChangeInterval)
         {
             SetNewDestination();
+            timeSinceLastDirectionChange = 0f;
         }
     }
 
     private void SetNewDestination()
     {
-        var currentPos = fish.GetTransform().position;
         var min = boundsService.GetMinBounds();
         var max = boundsService.GetMaxBounds();
 
@@ -71,10 +82,9 @@ public class SwimState : IState
         var min = boundsService.GetMinBounds();
         var max = boundsService.GetMaxBounds();
 
-        float margin = 0.5f; // margen de seguridad para redireccionar antes de tocar
+        float margin = 0.5f;
 
         return position.x <= min.x + margin || position.x >= max.x - margin ||
                position.y <= min.y + margin || position.y >= max.y - margin;
     }
 }
-

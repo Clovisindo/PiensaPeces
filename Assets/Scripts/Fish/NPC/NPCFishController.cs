@@ -47,9 +47,6 @@ public class NPCFishController : BaseFishController
 
         stateMachine = new StateMachine();
         stateManager = new StateManager(stateMachine);
-        stateManager.ApplyState(new IdleState(this, stateMachine));
-
-        stateMachine.ChangeState(new SwimState(this, boundsService, stateMachine, speed));
         intentScheduler.StartEvaluatingPeriodically(10f);
     }
 
