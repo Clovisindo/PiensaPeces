@@ -8,14 +8,12 @@ namespace Assets.Scripts.Core
 {
     public class GameInitializer : MonoBehaviour
     {
-        [SerializeField] private Collider2D fishTankCollider;
+        //[SerializeField] private MeshCollider fishTankCollider;
+        [SerializeField] private FishTankMeshScaler fishTankScaler;
         [SerializeField] private PlayerFishController fishPlayer;
         [SerializeField] private FoodSpawnerController spawnerController;
         [SerializeField] private NPCFishPool npcFishPool;
-
         private FoodManagerService foodManagerService;
-
-        //[SerializeField] private NPCFishController[] npcFish;//todo implementar
 
         public EventBus<FoodEaten> foodEatentEventBus = new();
         public EventBus<FoodSpawned> FoodSpawnedEventBus = new();
@@ -23,8 +21,8 @@ namespace Assets.Scripts.Core
 
         void Awake()
         {
-            //var boundsService = new CameraBoundsService(Camera.main);
-            var boundsService = new FishTankBoundsService(fishTankCollider);
+            fishTankScaler.Init();
+            var boundsService = new FishTankBoundsService(fishTankScaler.GetCollider());
             foodManagerService = new FoodManagerService();
 
             npcFishPool.Init(boundsService);
