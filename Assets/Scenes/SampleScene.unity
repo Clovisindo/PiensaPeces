@@ -344,7 +344,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -849.5, y: -258.5}
+  m_AnchoredPosition: {x: -665.1, y: -304.7}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &465643322
@@ -976,7 +976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54a9c7e521d94f240be5e7789bfc3905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishTankCollider: {fileID: 1866592458}
+  fishTankScaler: {fileID: 2098052541}
   fishPlayer: {fileID: 1053646822}
   spawnerController: {fileID: 810252946}
   npcFishPool: {fileID: 347493655}
@@ -1517,12 +1517,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866592455}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.1014, z: 0}
-  m_LocalScale: {x: 2.9549782, y: 0.72844464, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2098052540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1866592458
 BoxCollider2D:
@@ -1567,7 +1567,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6, y: 3.38}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &2098052536
 GameObject:
@@ -1581,6 +1581,7 @@ GameObject:
   - component: {fileID: 2098052539}
   - component: {fileID: 2098052538}
   - component: {fileID: 2098052537}
+  - component: {fileID: 2098052541}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -1669,12 +1670,29 @@ Transform:
   m_GameObject: {fileID: 2098052536}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.75, z: 0}
-  m_LocalScale: {x: 18.940704, y: 4.838591, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1866592457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2098052541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098052536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf194894b10c1146a4c282d6c5684d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankHeightWorldUnits: 2
+  bottomMargin: 0.1
+  taskbarHeightPixels: 40
+  colliderWindow: {fileID: 1866592458}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1689,7 +1707,6 @@ SceneRoots:
   - {fileID: 1336644304}
   - {fileID: 1369701104}
   - {fileID: 747952708}
-  - {fileID: 1866592457}
   - {fileID: 610265896}
   - {fileID: 1053646823}
   - {fileID: 810252947}

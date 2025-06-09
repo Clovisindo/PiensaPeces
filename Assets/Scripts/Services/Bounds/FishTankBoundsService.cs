@@ -7,7 +7,7 @@ namespace Assets.Scripts.Services.Bounds
         private readonly Vector2 minBounds;
         private readonly Vector2 maxBounds;
 
-        public FishTankBoundsService(Collider2D fishTankCollider)
+        public FishTankBoundsService(MeshCollider fishTankCollider)
         {
             UnityEngine.Bounds bounds = fishTankCollider.bounds;
 
