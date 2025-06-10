@@ -46,8 +46,6 @@ public class FishTankMeshScaler : MonoBehaviour
         meshCollider.sharedMesh = null;
         meshCollider.sharedMesh = meshFilter.sharedMesh;
     }
-}
-
     private void AdjustCollider2D()
     {
         if (colliderWindow == null)
