@@ -55,3 +55,18 @@ MonoBehaviour:
   m_CopyDepthMode: 1
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &2938280498402874052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a350a8457f4f46342b55f85945c98e1e, type: 3}
+  m_Name: StencilMaskRenderFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  layerMask:
+    m_Bits: 64

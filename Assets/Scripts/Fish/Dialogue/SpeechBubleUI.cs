@@ -15,7 +15,14 @@
 
         public void Show(string text)
         {
-            dialogueText.text = text;
+            dialogueText.fontSize = 36f * 5; 
+            dialogueText.SetText(text);
+            dialogueText.ForceMeshUpdate();
+            Vector2 textSize = dialogueText.GetRenderedValues(false);
+            // Obtener el RectTransform del objeto que contiene el texto
+            RectTransform rectTransform = canvasGroup.GetComponent<RectTransform>();
+            // Ajustar el tamaño del rectángulo para que sea un poco más grande que el texto
+            rectTransform.sizeDelta = textSize + new Vector2(20f, 20f);
 
             if (displayRoutine != null)
                 StopCoroutine(displayRoutine);

@@ -39,11 +39,8 @@ namespace Assets.Scripts.States
         {
             var directions = new Vector2[]
             {
-            Vector2.down + Vector2.left,
-            Vector2.down + Vector2.right,
             Vector2.left,
             Vector2.right,
-            Vector2.down
             };
 
             return directions[Random.Range(0, directions.Length)].normalized;
