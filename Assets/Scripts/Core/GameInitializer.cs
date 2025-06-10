@@ -8,7 +8,6 @@ namespace Assets.Scripts.Core
 {
     public class GameInitializer : MonoBehaviour
     {
-        //[SerializeField] private MeshCollider fishTankCollider;
         [SerializeField] private FishTankMeshScaler fishTankScaler;
         [SerializeField] private PlayerFishController fishPlayer;
         [SerializeField] private FoodSpawnerController spawnerController;

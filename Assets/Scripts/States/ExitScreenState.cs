@@ -27,7 +27,7 @@ namespace Assets.Scripts.States
 
             if (context.Fish.IsOutOfBounds(context.Transform, context.BoundsService))
             {
-                context.Fish.NotifyExited(); 
+                context.Fish.NotifyExited();
             }
         }
 
@@ -37,7 +37,6 @@ namespace Assets.Scripts.States
 
         private Vector2 GetRandomExitDirection()
         {
-            // Quitamos direciones hacia arriba, por que corta el efecto de transparencia
             var directions = new Vector2[]
             {
             Vector2.down + Vector2.left,
