@@ -18,7 +18,6 @@ namespace Assets.Scripts.States
 
         public void Enter()
         {
-            // Salir en dirección aleatoria (por defecto hacia fuera de pantalla)
             exitDirection = GetRandomExitDirection();
         }
 
@@ -28,22 +27,18 @@ namespace Assets.Scripts.States
 
             if (context.Fish.IsOutOfBounds(context.Transform, context.BoundsService))
             {
-                context.Fish.NotifyExited(); // Notifica al pool
+                context.Fish.NotifyExited();
             }
         }
 
         public void Exit()
         {
-            // Nada que limpiar
         }
 
         private Vector2 GetRandomExitDirection()
         {
-            // Por ejemplo: diagonal hacia afuera
             var directions = new Vector2[]
             {
-            Vector2.up + Vector2.left,
-            Vector2.up + Vector2.right,
             Vector2.down + Vector2.left,
             Vector2.down + Vector2.right,
             Vector2.left,

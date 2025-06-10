@@ -1,11 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(MeshCollider), typeof(MeshFilter))]
 public class FishTankMeshScaler : MonoBehaviour
 {
     [SerializeField] private float tankHeightWorldUnits = 2f;
-    [SerializeField] private float bottomMargin = 0.5f;
     [SerializeField] private float taskbarHeightPixels = 40f; // Ajusta según necesites
     [SerializeField] private BoxCollider2D colliderWindow; // Asigna este en el inspector
 
@@ -55,29 +53,8 @@ public class FishTankMeshScaler : MonoBehaviour
             Debug.LogWarning("No BoxCollider2D assigned to FishTankMeshScaler.");
             return;
         }
-
         // El collider es hijo, así que solo ajustamos tamaño y offset, *NO la posición*
         colliderWindow.offset = Vector2.zero;
-
-        // Ajustamos el tamaño al ancho del Quad
         colliderWindow.size = new Vector2(1f, 1f); // LocalScale del padre * este size = tamaño final
-        colliderWindow.size = new Vector2(1f, 1f); // Siempre (1,1), usamos localScale del padre
     }
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        if (colliderWindow == null) return;
-
-        Gizmos.color = Color.cyan;
-
-        Vector3 colliderCenter = colliderWindow.transform.position + (Vector3)colliderWindow.offset;
-        Vector3 size = new Vector3(
-            colliderWindow.size.x * colliderWindow.transform.lossyScale.x,
-            colliderWindow.size.y * colliderWindow.transform.lossyScale.y,
-            0f
-        );
-        Gizmos.DrawWireCube(colliderCenter, size);
-    }
-#endif
 }
