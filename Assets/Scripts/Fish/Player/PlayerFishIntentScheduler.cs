@@ -24,7 +24,7 @@ namespace Assets.Scripts.Fish.Player
             this.applyIntent = applyIntent;
         }
 
-        public void StartEvaluatingPeriodically(float intervalSeconds = 1.0f)
+        public void StartEvaluatingPeriodically(float intervalSeconds)
         {
             Stop();
             routine = context.StartCoroutine(EvaluatePeriodically(intervalSeconds));

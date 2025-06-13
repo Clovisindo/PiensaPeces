@@ -1,5 +1,7 @@
 ﻿using Assets.Scripts.Components;
 using Assets.Scripts.Core;
+using Assets.Scripts.Events.EventBus;
+using Assets.Scripts.Events.Events;
 using Assets.Scripts.Fish;
 using Assets.Scripts.Fish.Dialogue;
 using Assets.Scripts.Fish.NPC;
@@ -19,10 +21,14 @@ public class NPCFishController : BaseFishController
     private ExitableFish exitFishComponent;
     private FishTalker talker;
 
+    //temporal
+    [SerializeField] FishConfig config;
+
     private float lifeTime;
     private float maxLifeTime;
-    public void Init(FishConfig config, NPCFishPool pool, IBoundsService boundsService)
+    public void Init(FishConfig config, NPCFishPool pool, IBoundsService boundsService, EventBus<SFXEvent> sfxEventBus)
     {
+        this.config = config;
         this.pool = pool;
         this.boundsService = boundsService;
 
@@ -36,7 +42,7 @@ public class NPCFishController : BaseFishController
         limiter?.Init(boundsService);
         
         talker = GetComponent<FishTalker>();
-        this.talker.Init(new NPCFishDialogueEvaluator());
+        this.talker.Init(new NPCFishDialogueEvaluator(), config, sfxEventBus);
 
         ai = new NPCFishAI(UnityEngine.Random.value);
         exitFishComponent = new ExitableFish();
@@ -47,7 +53,7 @@ public class NPCFishController : BaseFishController
 
         stateMachine = new StateMachine();
         stateManager = new StateManager(stateMachine);
-        intentScheduler.StartEvaluatingPeriodically(10f);
+        intentScheduler.StartEvaluatingPeriodically(config.intervalEvaluateIntent);
     }
 
     protected override void Update()
@@ -58,6 +64,7 @@ public class NPCFishController : BaseFishController
 
     public void NotifyExit()
     {
+        ResetFish();
         pool.RecycleFish(this);
     }
 
@@ -65,6 +72,7 @@ public class NPCFishController : BaseFishController
     {
         lifeTime = 0;
         limiter.enabled = true;
+        talker.ResetTalker();
         stateMachine.ChangeState(new SwimState(this, boundsService, stateMachine, speed));
     }
 

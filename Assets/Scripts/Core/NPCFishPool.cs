@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.Fish.NPC;
+﻿using Assets.Scripts.Events.EventBus;
+using Assets.Scripts.Events.Events;
+using Assets.Scripts.Fish.NPC;
 using Assets.Scripts.Services.Bounds;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,10 +20,12 @@ namespace Assets.Scripts.Core
 
         private Queue<NPCFishController> availableFish = new();
         private List<NPCFishController> activeFish = new();
+        private EventBus<SFXEvent> sfxEventBus;
 
-        public void Init(IBoundsService boundservice)
+        public void Init(IBoundsService boundservice, EventBus<SFXEvent> sfxEventBus)
         {
             this.boundsService = boundservice;
+            this.sfxEventBus = sfxEventBus;
         }
 
         private void Start()
@@ -50,7 +54,8 @@ namespace Assets.Scripts.Core
                 fish.gameObject.SetActive(true);
 
                 var config = GetRandomFishConfig();
-                fish.Init(config, this, boundsService);
+                config.Init();
+                fish.Init(config, this, boundsService, sfxEventBus);
                 fish.ResetFish();
 
                 activeFish.Add(fish);
@@ -70,6 +75,7 @@ namespace Assets.Scripts.Core
 
         public void RecycleFish(NPCFishController fish)
         {
+            fish.ResetFish();
             fish.gameObject.SetActive(false);
             activeFish.Remove(fish);
             availableFish.Enqueue(fish);

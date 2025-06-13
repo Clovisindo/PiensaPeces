@@ -9,4 +9,9 @@ namespace Assets.Scripts.Events.Events
         public GameObject food;
     }
     public struct HungryEvent: IEvent { }
+
+    public struct SFXEvent : IEvent
+    {
+        public AudioEmitterData sfxData;
+    }
 }

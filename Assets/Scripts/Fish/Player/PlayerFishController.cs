@@ -3,10 +3,13 @@ using Assets.Scripts.Core;
 using Assets.Scripts.Events.EventBus;
 using Assets.Scripts.Events.Events;
 using Assets.Scripts.Fish.Dialogue;
+using Assets.Scripts.Fish.NPC;
 using Assets.Scripts.Fish.Player;
 using Assets.Scripts.Services.Bounds;
 using Assets.Scripts.Services.FoodService;
 using Assets.Scripts.States;
+using System;
+using UnityEngine;
 
 public class PlayerFishController : BaseFishController
 {
@@ -17,11 +20,13 @@ public class PlayerFishController : BaseFishController
     private PlayerFishEventHandler eventHandler;
     private PlayerFishIntentScheduler intentScheduler;
     private FishTalker talker;
+    //temporal
+    [SerializeField] FishConfig config;
 
-
-    internal void Init(IBoundsService boundsService, FoodManagerService foodManagerService, EventBus<FoodEaten> foodEatentEventBus,
-        EventBus<FoodSpawned> foodSpawnedEventBus, EventBus<HungryEvent> hungryEventBus)
+    internal void Init(FishConfig playerConfig, IBoundsService boundsService, FoodManagerService foodManagerService, SFXManager sFXManager, EventBus<FoodEaten> foodEatentEventBus,
+        EventBus<FoodSpawned> foodSpawnedEventBus, EventBus<HungryEvent> hungryEventBus, EventBus<SFXEvent> sfxEventBus)
     {
+        this.config = playerConfig;
         limiter = GetComponent<TransformLimiter>();
         hungerComponent = GetComponent<HungerComponent>();
         talker = GetComponent<FishTalker>();
@@ -33,10 +38,10 @@ public class PlayerFishController : BaseFishController
         this.boundsService = boundsService;
         limiter.Init(boundsService);
         this.hungerComponent.Init(hungryEventBus);
-        this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent));
+        this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent), playerConfig, sfxEventBus);
         ai = new PlayerFishAI(transform, hungerComponent, foodManagerService);
         intentScheduler = new PlayerFishIntentScheduler(this, ai.EvaluateIntent, ApplyIntent);
-        eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus);
+        eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, sFXManager, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus, sfxEventBus);
         eventHandler.RegisterEvents();
     }
 

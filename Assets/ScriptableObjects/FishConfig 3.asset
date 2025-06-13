@@ -16,3 +16,4 @@ MonoBehaviour:
   speed: 1
   maxLifetime: 10
   swimProbability: 0.5
+  sftTalk: {fileID: 11400000, guid: 8a0c93859d7b2974b8efad998c12adaa, type: 2}
