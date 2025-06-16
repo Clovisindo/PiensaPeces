@@ -18,18 +18,19 @@ namespace Assets.Scripts.Fish.Dialogue
         [SerializeField] private string playerDialogueCsvPath;
         [SerializeField] private string npcDialogueCsvPath;
         [SerializeField] private float minSpeakInterval;
-        private float nextSpeakTime = 0f;
-        private float intervalEvaluateIntent;
-
+        [SerializeField] private float maxSpeakInterval;
         [SerializeField] private GameObject speechBubblePrefab;
         [SerializeField] private Transform bubbleAnchor;
 
         private EventBus<SFXEvent> eventBus;
         AudioEmitterData talkingSFX;
-        private float lastSpeakTime;
         private List<FishDialogueLine> dialogueLines;
         private IDialogueEvaluator evaluator;
         private SpeechBubbleUI activeBubble;
+
+        private float elapsedTime = 0f;
+        private float nextSpeakDelay = 0f;
+
 
         private const string pathData = "Dialogues/";
 
@@ -38,6 +39,8 @@ namespace Assets.Scripts.Fish.Dialogue
             this.eventBus = sfxEventBus;
             this.talkingSFX = config.sftTalk;
             this.minSpeakInterval = config.intervalTalking;
+            this.maxSpeakInterval = config.intervalTalking * 1.5f;
+            nextSpeakDelay = UnityEngine.Random.Range(minSpeakInterval, maxSpeakInterval);
             string pathDialoge = evaluator switch
             {
                 PlayerFishDialogueEvaluator => playerDialogueCsvPath,
@@ -55,14 +58,50 @@ namespace Assets.Scripts.Fish.Dialogue
                 dialogueLines = DialogueLoaderCsv.Load(csvAsset.text);
             }
             this.evaluator = evaluator;
-            this.intervalEvaluateIntent = config.intervalEvaluateIntent;
-            nextSpeakTime = intervalEvaluateIntent; 
             ResetTalker();
+        }
+
+        
+
+        private void Update()
+        {
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime < nextSpeakDelay) return;
+            var validLines = dialogueLines.Where(line => evaluator.Evaluate(line.Condition)).ToList();
+            if (validLines.Count == 0) return;
+
+            var selectedLine = validLines[UnityEngine.Random.Range(0, validLines.Count)];
+            Speak(selectedLine.Text, talkingSFX);
+            ResetTimer();
+        }
+
+        private bool CheckActiveBuble()
+        {
+            activeBubble = gameObject.GetComponentInChildren<SpeechBubbleUI>();
+            if (activeBubble != null)
+            {
+                ResetTimer();
+                Debug.LogWarning("Ya hay una burbuja activa y se iba a hablar.");
+                return true;
+            }
+            else return false;
+        }
+
+        private void Speak(string text, AudioEmitterData audioData)
+        {
+            if(CheckActiveBuble())return;
+            if (speechBubblePrefab != null && bubbleAnchor != null)
+            {
+                var bubble = Instantiate(speechBubblePrefab, bubbleAnchor.position, Quaternion.identity, null);
+                bubble.transform.SetParent(bubbleAnchor.transform);
+                bubble.GetComponent<SpeechBubbleUI>().Show(text);
+                eventBus.Raise(new SFXEvent { sfxData = audioData});
+            }
         }
 
         public void ResetTalker()
         {
-            nextSpeakTime = intervalEvaluateIntent;
+            nextSpeakDelay = UnityEngine.Random.Range(minSpeakInterval, maxSpeakInterval);
             activeBubble = gameObject.GetComponentInChildren<SpeechBubbleUI>();
             if (activeBubble != null)
             {
@@ -71,34 +110,11 @@ namespace Assets.Scripts.Fish.Dialogue
             }
         }
 
-        private void Update()
+        private void ResetTimer()
         {
-            if (Time.time < nextSpeakTime) return;
-
-            var validLines = dialogueLines.Where(line => evaluator.Evaluate(line.Condition)).ToList();
-            if (validLines.Count == 0) return;
-
-            activeBubble = gameObject.GetComponentInChildren<SpeechBubbleUI>();
-            if (activeBubble != null)
-            {
-                Debug.LogWarning("Ya hay una burbuja activa y se iba a hablar.");
-                return;
-            }
-
-            var selectedLine = validLines[UnityEngine.Random.Range(0, validLines.Count)];
-            Speak(selectedLine.Text, talkingSFX);
-            nextSpeakTime = Time.time + minSpeakInterval;
-        }
-
-        private void Speak(string text, AudioEmitterData audioData)
-        {
-            if (speechBubblePrefab != null && bubbleAnchor != null)
-            {
-                var bubble = Instantiate(speechBubblePrefab, bubbleAnchor.position, Quaternion.identity, null);
-                bubble.transform.SetParent(bubbleAnchor.transform);
-                bubble.GetComponent<SpeechBubbleUI>().Show(text);
-                eventBus.Raise(new SFXEvent { sfxData = audioData});
-            }
+            elapsedTime = 0f;
+            nextSpeakDelay = UnityEngine.Random.Range(minSpeakInterval, maxSpeakInterval);
+            Debug.Log($"[FishTalker] Próximo diálogo en: {nextSpeakDelay} segundos.");
         }
     }
 

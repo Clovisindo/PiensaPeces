@@ -24,7 +24,7 @@ public class SwimState : IState
 
     public void Enter()
     {
-        Debug.Log("Entering swim state.");
+        //Debug.Log("Entering swim state.");
         SetNewDestination();
         timeSinceLastDirectionChange = 0f;
     }
@@ -37,7 +37,7 @@ public class SwimState : IState
 
     public void Exit()
     {
-        Debug.Log("Exiting swim state.");
+        //Debug.Log("Exiting swim state.");
     }
 
     private void SwimMovement()

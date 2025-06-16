@@ -1382,7 +1382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  talkingSFX: {fileID: 11400000, guid: cc1d04e72be908f49af989cd9058a013, type: 2}
+  config: {fileID: 0}
 --- !u!4 &1053646823
 Transform:
   m_ObjectHideFlags: 0
@@ -1526,6 +1526,7 @@ MonoBehaviour:
   playerDialogueCsvPath: FishDialogue_player
   npcDialogueCsvPath: 
   minSpeakInterval: 5
+  maxSpeakInterval: 0
   speechBubblePrefab: {fileID: 1451446149019317547, guid: 82dcabd0eedf5ba4c86fa4d8b5d7c7d3, type: 3}
   bubbleAnchor: {fileID: 1054908527}
 --- !u!1 &1054908526

@@ -17,7 +17,7 @@ namespace Assets.Scripts.States
 
         public void Enter()
         {
-            Debug.Log("Entering idle state.");
+            //Debug.Log("Entering idle state.");
         }
 
         public void Update()
@@ -26,7 +26,7 @@ namespace Assets.Scripts.States
 
         public void Exit() 
         {
-            Debug.Log("Exiting idle state.");
+            //Debug.Log("Exiting idle state.");
         }
     }
 }
