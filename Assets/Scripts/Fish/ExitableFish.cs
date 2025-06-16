@@ -24,7 +24,6 @@ namespace Assets.Scripts.Fish
 
         public bool IsOutOfBounds(Transform transform, IBoundsService boundsService)
         {
-            // Aquí tu lógica de detección de salida (ej: usando BoundsService)
             return !boundsService.IsInsideBounds(transform.position);
         }
 

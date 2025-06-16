@@ -40,7 +40,7 @@ namespace Assets.Scripts.Fish.Dialogue
             this.talkingSFX = config.sftTalk;
             this.minSpeakInterval = config.intervalTalking;
             this.maxSpeakInterval = config.intervalTalking * 1.5f;
-            nextSpeakDelay = UnityEngine.Random.Range(minSpeakInterval, maxSpeakInterval);
+            nextSpeakDelay = UnityEngine.Random.Range(minSpeakInterval, maxSpeakInterval) * Global.Instance.GAME_SPEED;
             string pathDialoge = evaluator switch
             {
                 PlayerFishDialogueEvaluator => playerDialogueCsvPath,

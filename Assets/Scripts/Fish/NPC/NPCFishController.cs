@@ -17,18 +17,14 @@ public class NPCFishController : BaseFishController
     private IBoundsService boundsService;
     private TransformLimiter limiter;
     private NPCFishAI ai;
-    private PlayerFishIntentScheduler intentScheduler;
+    private IFishIntentScheduler intentScheduler;
     private ExitableFish exitFishComponent;
     private FishTalker talker;
-
-    //temporal
-    [SerializeField] FishConfig config;
 
     private float lifeTime;
     private float maxLifeTime;
     public void Init(FishConfig config, NPCFishPool pool, IBoundsService boundsService, EventBus<SFXEvent> sfxEventBus)
     {
-        this.config = config;
         this.pool = pool;
         this.boundsService = boundsService;
 
@@ -44,16 +40,16 @@ public class NPCFishController : BaseFishController
         talker = GetComponent<FishTalker>();
         this.talker.Init(new NPCFishDialogueEvaluator(), config, sfxEventBus);
 
-        ai = new NPCFishAI(UnityEngine.Random.value);
+        ai = new NPCFishAI(Random.value);
         exitFishComponent = new ExitableFish();
         exitFishComponent.Init(this, pool);
-        intentScheduler = new PlayerFishIntentScheduler(this, ai.EvaluateIntent, ApplyIntent);
+        intentScheduler = new NPCFishIntentScheduler(this, config, ai.EvaluateIntent, ApplyIntent);
         this.maxLifeTime = config.maxLifetime;
         this.speed = config.speed;
 
         stateMachine = new StateMachine();
         stateManager = new StateManager(stateMachine);
-        intentScheduler.StartEvaluatingPeriodically(config.intervalEvaluateIntent);
+        intentScheduler.StartEvaluatingPeriodically();
     }
 
     protected override void Update()

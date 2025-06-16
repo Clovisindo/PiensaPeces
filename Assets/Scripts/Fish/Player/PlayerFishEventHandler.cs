@@ -7,7 +7,7 @@ namespace Assets.Scripts.Fish.Player
 {
     public class PlayerFishEventHandler
     {
-        private readonly PlayerFishIntentScheduler intentScheduler;
+        private readonly IFishIntentScheduler intentScheduler;
         private readonly HungerComponent hungerComponent;
         private readonly SFXManager sFXManager;
 
@@ -18,10 +18,10 @@ namespace Assets.Scripts.Fish.Player
         private EventBinding<FoodEaten> foodEatenBinding;
         private EventBinding<FoodSpawned> foodSpawnedBinding;
         private EventBinding<HungryEvent> hungryBinding;
-        private EventBinding<SFXEvent> sfxBiding;
+        private EventBinding<SFXEvent> sfxBinding;
 
         public PlayerFishEventHandler(
-            PlayerFishIntentScheduler fishIntentScheduler,
+            IFishIntentScheduler fishIntentScheduler,
             HungerComponent hungerComponent,
             SFXManager sFXManager,
             IEventBus<FoodEaten> foodEatenBus,
@@ -43,12 +43,12 @@ namespace Assets.Scripts.Fish.Player
             foodEatenBinding = new EventBinding<FoodEaten>(OnFoodEaten);
             foodSpawnedBinding = new EventBinding<FoodSpawned>(OnFoodSpawned);
             hungryBinding = new EventBinding<HungryEvent>(OnHungry);
-            sfxBiding = new EventBinding<SFXEvent>(OnSFXInvoke);
+            sfxBinding = new EventBinding<SFXEvent>(OnSFXInvoke);
 
             foodEatenBus.Register(foodEatenBinding);
             foodSpawnedBus.Register(foodSpawnedBinding);
             hungryBus.Register(hungryBinding);
-            sfxBus.Register(sfxBiding);
+            sfxBus.Register(sfxBinding);
         }
 
         public void DeregisterEvents()
@@ -56,7 +56,7 @@ namespace Assets.Scripts.Fish.Player
             foodEatenBus?.Deregister(foodEatenBinding);
             foodSpawnedBus?.Deregister(foodSpawnedBinding);
             hungryBus?.Deregister(hungryBinding);
-            sfxBus?.Deregister(sfxBiding);
+            sfxBus?.Deregister(sfxBinding);
         }
 
         private void OnFoodEaten()
@@ -76,7 +76,7 @@ namespace Assets.Scripts.Fish.Player
 
         private void OnHungry(HungryEvent e)
         {
-            intentScheduler.StartEvaluatingPeriodically(UnityEngine.Random.Range(0.5f, 3f));
+            intentScheduler.StartEvaluatingPeriodically();
         }
 
         private void OnSFXInvoke(SFXEvent e)

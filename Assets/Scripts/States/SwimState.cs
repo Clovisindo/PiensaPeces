@@ -11,7 +11,7 @@ public class SwimState : IState
     private Vector2 destination;
 
     private float timeSinceLastDirectionChange = 0f;
-    private const float minDirectionChangeInterval = 1.0f; // Segundos mínimo entre cambios
+    private const float minDirectionChangeInterval = 1.0f; 
 
     public SwimState(BaseFishController fish, IBoundsService boundsService, StateMachine stateMachine, float speed)
     {

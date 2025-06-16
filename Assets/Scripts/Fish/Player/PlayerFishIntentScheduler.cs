@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Fish.Player
 {
+    using Assets.Scripts.Fish.NPC;
     using System;
     using System.Collections;
+    using Unity.VisualScripting.FullSerializer;
     using UnityEngine;
 
     public class PlayerFishIntentScheduler : IFishIntentScheduler
@@ -16,18 +18,20 @@ namespace Assets.Scripts.Fish.Player
         private readonly Func<FishIntent> evaluateIntent;
         private readonly Action<FishIntent> applyIntent;
         private Coroutine routine;
+        private FishConfig config;
 
-        public PlayerFishIntentScheduler(MonoBehaviour context, Func<FishIntent> evaluateIntent, Action<FishIntent> applyIntent)
+        public PlayerFishIntentScheduler(MonoBehaviour context, FishConfig config, Func<FishIntent> evaluateIntent, Action<FishIntent> applyIntent)
         {
             this.context = context;
+            this.config = config;
             this.evaluateIntent = evaluateIntent;
             this.applyIntent = applyIntent;
         }
 
-        public void StartEvaluatingPeriodically(float intervalSeconds)
+        public void StartEvaluatingPeriodically()
         {
             Stop();
-            routine = context.StartCoroutine(EvaluatePeriodically(intervalSeconds));
+            routine = context.StartCoroutine(EvaluatePeriodically());
         }
 
         public void EvaluateNow()
@@ -44,11 +48,11 @@ namespace Assets.Scripts.Fish.Player
             }
         }
 
-        private IEnumerator EvaluatePeriodically(float intervalSeconds)
+        private IEnumerator EvaluatePeriodically()
         {
             while (true)
             {
-                yield return new WaitForSeconds(intervalSeconds);
+                yield return new WaitForSeconds(config.intervalEvaluateIntent);
                 applyIntent(evaluateIntent());
             }
         }

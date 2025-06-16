@@ -2,6 +2,7 @@
 using Assets.Scripts.Core;
 using Assets.Scripts.Events.EventBus;
 using Assets.Scripts.Events.Events;
+using Assets.Scripts.Fish;
 using Assets.Scripts.Fish.Dialogue;
 using Assets.Scripts.Fish.NPC;
 using Assets.Scripts.Fish.Player;
@@ -18,7 +19,7 @@ public class PlayerFishController : BaseFishController
     private TransformLimiter limiter;
     private PlayerFishAI ai;
     private PlayerFishEventHandler eventHandler;
-    private PlayerFishIntentScheduler intentScheduler;
+    private IFishIntentScheduler intentScheduler;
     private FishTalker talker;
     //temporal
     [SerializeField] FishConfig config;
@@ -40,7 +41,7 @@ public class PlayerFishController : BaseFishController
         this.hungerComponent.Init(hungryEventBus);
         this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent), playerConfig, sfxEventBus);
         ai = new PlayerFishAI(transform, hungerComponent, foodManagerService);
-        intentScheduler = new PlayerFishIntentScheduler(this, ai.EvaluateIntent, ApplyIntent);
+        intentScheduler = new PlayerFishIntentScheduler(this, config, ai.EvaluateIntent, ApplyIntent);
         eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, sFXManager, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus, sfxEventBus);
         eventHandler.RegisterEvents();
     }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Scripts.Core;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Fish.NPC
@@ -22,8 +19,9 @@ namespace Assets.Scripts.Fish.NPC
 
         public void Init()
         {
-            intervalEvaluateIntent = UnityEngine.Random.Range(5f, 10f);
-            intervalTalking = UnityEngine.Random.Range(10f, 25f);
+            maxLifetime = maxLifetime * Global.Instance.GAME_SPEED;
+            intervalEvaluateIntent = UnityEngine.Random.Range(5f, 10f) * Global.Instance.GAME_SPEED;
+            intervalTalking = UnityEngine.Random.Range(10f, 25f) * Global.Instance.GAME_SPEED;
         }
     }
 }
