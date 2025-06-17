@@ -32,6 +32,12 @@ public class PlayerFishController : BaseFishController
         hungerComponent = GetComponent<HungerComponent>();
         talker = GetComponent<FishTalker>();
 
+        var renderer = GetComponent<SpriteRenderer>();
+        if (renderer != null && config.fishSprite != null)
+        {
+            renderer.sprite = config.fishSprite;
+        }
+
         stateMachine = new StateMachine();
         stateManager = new StateManager(stateMachine);
         stateManager.ApplyState(new IdleState(this, stateMachine));

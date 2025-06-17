@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.85882354, g: 0.08627449, b: 0.7629537, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   playerDialogueCsvPath: FishDialogue_player
   npcDialogueCsvPath: FishDialogue_NPC
   minSpeakInterval: 5
+  maxSpeakInterval: 0
   speechBubblePrefab: {fileID: 1451446149019317547, guid: 82dcabd0eedf5ba4c86fa4d8b5d7c7d3, type: 3}
   bubbleAnchor: {fileID: 660646149417735559}
 --- !u!1 &8215187576986453647

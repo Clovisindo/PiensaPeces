@@ -1426,7 +1426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  config: {fileID: 0}
+  config: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
 --- !u!4 &1053646823
 Transform:
   m_ObjectHideFlags: 0
@@ -1485,7 +1485,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.22590333, g: 0.8584906, b: 0.08503916, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
