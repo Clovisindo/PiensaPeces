@@ -4,6 +4,7 @@ using Assets.Scripts.Events.EventBus;
 using Assets.Scripts.Services.Bounds;
 using Assets.Scripts.Services.FoodService;
 using Assets.Scripts.Fish.NPC;
+using System;
 
 namespace Assets.Scripts.Core
 {
@@ -15,7 +16,9 @@ namespace Assets.Scripts.Core
         [SerializeField] private NPCFishPool npcFishPool;
         [SerializeField] private SFXManager sfxManager;
         [SerializeField] private FishConfig playerConfig;
+        [SerializeField] private String firstGameLaunch; //todo borrar
         private FoodManagerService foodManagerService;
+        private SaveSystem saveSystem;
 
         public EventBus<FoodEaten> foodEatentEventBus = new();
         public EventBus<FoodSpawned> FoodSpawnedEventBus = new();
@@ -24,6 +27,15 @@ namespace Assets.Scripts.Core
 
         void Awake()
         {
+            saveSystem = new SaveSystem();
+            saveSystem.SetFirstLaunchDate(Convert.ToDateTime(firstGameLaunch));
+            int daysPassed = saveSystem.GetDaysSinceFirstLaunch();
+            
+
+            Debug.Log($"Días desde la primera vez que se abrió el juego: {daysPassed}");
+
+            LoadGameData(daysPassed);
+
             fishTankScaler.Init();
             var boundsService = new FishTankBoundsService(fishTankScaler.GetCollider());
             foodManagerService = new FoodManagerService();
@@ -32,6 +44,18 @@ namespace Assets.Scripts.Core
             playerConfig.Init();
             fishPlayer.Init(playerConfig,boundsService, foodManagerService, sfxManager, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
             spawnerController.Init( boundsService,foodManagerService, foodEatentEventBus, FoodSpawnedEventBus);
+        }
+
+        private void LoadGameData(int daysPassed)
+        {
+            // Ejemplo: cargar peces diferentes según días
+            if (daysPassed >= 3)
+            {
+                // cargar peces especiales
+            }
+
+            // Ejemplo: cargar ScriptableObjects con condiciones
+            // myDialogueLoader.Load(dialoguesForDay[daysPassed]);
         }
     }
 }

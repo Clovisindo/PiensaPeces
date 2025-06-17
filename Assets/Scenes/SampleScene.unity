@@ -1242,6 +1242,7 @@ MonoBehaviour:
   npcFishPool: {fileID: 347493655}
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
+  firstGameLaunch: 2025-06-16
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0
