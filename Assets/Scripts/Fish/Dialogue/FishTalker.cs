@@ -114,7 +114,7 @@ namespace Assets.Scripts.Fish.Dialogue
         {
             elapsedTime = 0f;
             nextSpeakDelay = UnityEngine.Random.Range(minSpeakInterval, maxSpeakInterval);
-            Debug.Log($"[FishTalker] Próximo diálogo en: {nextSpeakDelay} segundos.");
+            //Debug.Log($"[FishTalker] Próximo diálogo en: {nextSpeakDelay} segundos.");
         }
     }
 

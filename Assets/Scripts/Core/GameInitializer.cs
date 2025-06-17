@@ -31,7 +31,7 @@ namespace Assets.Scripts.Core
             npcFishPool.Init(boundsService, sfxEventBus);
             playerConfig.Init();
             fishPlayer.Init(playerConfig,boundsService, foodManagerService, sfxManager, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
-            spawnerController.Init(foodManagerService, foodEatentEventBus, FoodSpawnedEventBus);
+            spawnerController.Init( boundsService,foodManagerService, foodEatentEventBus, FoodSpawnedEventBus);
         }
     }
 }
