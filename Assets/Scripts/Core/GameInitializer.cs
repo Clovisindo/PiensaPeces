@@ -5,11 +5,13 @@ using Assets.Scripts.Services.Bounds;
 using Assets.Scripts.Services.FoodService;
 using Assets.Scripts.Fish.NPC;
 using System;
+using Assets.Scripts.Services.Enviroment;
 
 namespace Assets.Scripts.Core
 {
     public class GameInitializer : MonoBehaviour
     {
+        [SerializeField] private EnviromentSystem enviromentSystem;
         [SerializeField] private FishTankMeshScaler fishTankScaler;
         [SerializeField] private PlayerFishController fishPlayer;
         [SerializeField] private FoodSpawnerController spawnerController;
@@ -36,6 +38,7 @@ namespace Assets.Scripts.Core
 
             LoadGameData(daysPassed);
 
+            enviromentSystem.LoadGroundByGameData(daysPassed);
             fishTankScaler.Init();
             var boundsService = new FishTankBoundsService(fishTankScaler.GetCollider());
             foodManagerService = new FoodManagerService();

@@ -32,7 +32,7 @@ namespace Assets.Scripts.Core
         public int GetDaysSinceFirstLaunch()
         {
             DateTime firstLaunch = GetFirstLaunchDate();
-            return (DateTime.Now - firstLaunch).Days;
+            return (DateTime.Now - firstLaunch).Days + 1;// dia 0 cuenta como dia 1
         }
 
         public void ResetFirstLaunch()
