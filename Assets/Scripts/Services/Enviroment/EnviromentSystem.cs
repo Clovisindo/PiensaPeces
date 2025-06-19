@@ -1,27 +1,44 @@
-﻿namespace Assets.Scripts.Services.Enviroment
-{
-    using System.Collections.Generic;
-    using UnityEngine;
+﻿using Assets.Scripts.Utilities;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
+namespace Assets.Scripts.Services.Enviroment
+{
     public class EnviromentSystem : MonoBehaviour
     {
         [SerializeField] private List<Transform> groundSpawnPositions;
-        [SerializeField] private List<GroundEnvironmentDayConfig> allDayConfigs;
+        [SerializeField] private List<GroundEnvironmentDayConfig> allGroundDayConfigs;
+        [SerializeField] private List<FishEnvDayConfig> allFishsDayConfigs;
 
-        public void LoadGroundByGameData(int daysPassed)
+        public LoadDataContext LoadGroundByGameData(int daysPassed)
         {
-            var config = allDayConfigs.Find(c => c.dayNumber == daysPassed);
+            var config = allGroundDayConfigs.Find(c => c.dayNumber == daysPassed);
 
             if (config == null)
             {
-                Debug.LogWarning($"No Ground Config found for day {daysPassed}");
-                return;
+                Debug.LogWarning($"No Ground Config found for day {daysPassed}, load last day data.");
+                config = allGroundDayConfigs.OrderByDescending(c => c.dayNumber).FirstOrDefault();
             }
 
-            LoadPrefabsByConfig(config.groundEnvConfigs);
+            InstantiatePrefabsByConfig(config.groundEnvConfigs);
+            var fishConfigCurrentDay = LoadFishConfigCurrentDay(allFishsDayConfigs, daysPassed);
+
+            return fishConfigCurrentDay;
         }
 
-        private void LoadPrefabsByConfig(List<GroundEnvConfig> configs)
+        private LoadDataContext LoadFishConfigCurrentDay(List<FishEnvDayConfig> configs, int daysPassed)
+        {
+            var fishConfigData = configs.Find(c => c.dayNumber == daysPassed);
+            if (fishConfigData == null)
+            {
+                Debug.LogWarning($"No Fish Config found for day {daysPassed}, load last day data.");
+                fishConfigData = configs.OrderByDescending(c => c.dayNumber).FirstOrDefault();
+            }
+            return new LoadDataContext (fishConfigData.fishEnvDayConfigs.ToArray());
+        }
+
+        private void InstantiatePrefabsByConfig(List<GroundEnvConfig> configs)
         {
             for (int i = 0; i < configs.Count && i < groundSpawnPositions.Count; i++)
             {
@@ -29,6 +46,7 @@
                 instance.GetComponent<SpriteRenderer>().sprite = configs[i].sprite;
             }
         }
+
     }
 }
 

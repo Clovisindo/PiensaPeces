@@ -36,29 +36,15 @@ namespace Assets.Scripts.Core
 
             Debug.Log($"Días desde la primera vez que se abrió el juego: {daysPassed}");
 
-            LoadGameData(daysPassed);
-
-            enviromentSystem.LoadGroundByGameData(daysPassed);
+            var loadContextData = enviromentSystem.LoadGroundByGameData(daysPassed);
             fishTankScaler.Init();
             var boundsService = new FishTankBoundsService(fishTankScaler.GetCollider());
             foodManagerService = new FoodManagerService();
 
-            npcFishPool.Init(boundsService, sfxEventBus);
+            npcFishPool.Init(boundsService, loadContextData.FishConfigsCurrentDay, sfxEventBus);
             playerConfig.Init();
             fishPlayer.Init(playerConfig,boundsService, foodManagerService, sfxManager, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
             spawnerController.Init( boundsService,foodManagerService, foodEatentEventBus, FoodSpawnedEventBus);
-        }
-
-        private void LoadGameData(int daysPassed)
-        {
-            // Ejemplo: cargar peces diferentes según días
-            if (daysPassed >= 3)
-            {
-                // cargar peces especiales
-            }
-
-            // Ejemplo: cargar ScriptableObjects con condiciones
-            // myDialogueLoader.Load(dialoguesForDay[daysPassed]);
         }
     }
 }

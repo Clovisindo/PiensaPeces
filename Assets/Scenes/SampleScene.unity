@@ -515,11 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcFishPrefab: {fileID: 3926834393726923840, guid: e716193aa2810934792adb65c6d0e99a, type: 3}
   poolSize: 10
-  fishConfigs:
-  - {fileID: 11400000, guid: a5cc08f775d55ff4ea50402e12b83679, type: 2}
-  - {fileID: 11400000, guid: 0215a1abfd0ab3f4dbb3e9802039d7af, type: 2}
-  - {fileID: 11400000, guid: 5089e249b5d851e4d9d8a767950f86d2, type: 2}
-  - {fileID: 11400000, guid: 8fd2a0e3cee0d3340bc0ac3ce24d2ddb, type: 2}
+  fishConfigs: []
 --- !u!4 &347493656
 Transform:
   m_ObjectHideFlags: 0
@@ -1253,7 +1249,7 @@ MonoBehaviour:
   npcFishPool: {fileID: 347493655}
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
-  firstGameLaunch: 2025-06-17
+  firstGameLaunch: 2025-06-19
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0
@@ -1440,9 +1436,12 @@ MonoBehaviour:
   - {fileID: 1505917087}
   - {fileID: 552018461}
   - {fileID: 1396390506}
-  allDayConfigs:
+  allGroundDayConfigs:
   - {fileID: 11400000, guid: c389ce2984f2e0c4c811d6d6ade65dc5, type: 2}
   - {fileID: 11400000, guid: a77808f8a1bf37644b11c1106d734e78, type: 2}
+  allFishsDayConfigs:
+  - {fileID: 11400000, guid: 9a03da778fbccaa48aaabb8005a6b2b7, type: 2}
+  - {fileID: 11400000, guid: 561cab613c0f09e4eba1a6ec0c36f417, type: 2}
 --- !u!4 &1028825764
 Transform:
   m_ObjectHideFlags: 0

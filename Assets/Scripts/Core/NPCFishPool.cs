@@ -22,9 +22,10 @@ namespace Assets.Scripts.Core
         private List<NPCFishController> activeFish = new();
         private EventBus<SFXEvent> sfxEventBus;
 
-        public void Init(IBoundsService boundservice, EventBus<SFXEvent> sfxEventBus)
+        public void Init(IBoundsService boundservice, FishConfig[] fishConfigs, EventBus<SFXEvent> sfxEventBus)
         {
             this.boundsService = boundservice;
+            this.fishConfigs = fishConfigs;
             this.sfxEventBus = sfxEventBus;
         }
 
