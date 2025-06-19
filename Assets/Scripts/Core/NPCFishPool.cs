@@ -14,6 +14,7 @@ namespace Assets.Scripts.Core
 
         [SerializeField] private NPCFishController npcFishPrefab;
         [SerializeField] private int poolSize = 1;
+        [SerializeField] private int daysPassed;
 
         [Header("Fish Configs")]
         [SerializeField] private FishConfig[] fishConfigs;
@@ -22,10 +23,11 @@ namespace Assets.Scripts.Core
         private List<NPCFishController> activeFish = new();
         private EventBus<SFXEvent> sfxEventBus;
 
-        public void Init(IBoundsService boundservice, FishConfig[] fishConfigs, EventBus<SFXEvent> sfxEventBus)
+        public void Init(IBoundsService boundservice, FishConfig[] fishConfigs, int daysPassed, EventBus<SFXEvent> sfxEventBus)
         {
             this.boundsService = boundservice;
             this.fishConfigs = fishConfigs;
+            this.daysPassed = daysPassed;
             this.sfxEventBus = sfxEventBus;
         }
 
@@ -56,7 +58,7 @@ namespace Assets.Scripts.Core
 
                 var config = GetRandomFishConfig();
                 config.Init();
-                fish.Init(config, this, boundsService, sfxEventBus);
+                fish.Init(config, this, boundsService, daysPassed, sfxEventBus);
                 fish.ResetFish();
 
                 activeFish.Add(fish);

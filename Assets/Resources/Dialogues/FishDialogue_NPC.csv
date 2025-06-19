@@ -2,3 +2,5 @@ ID;Text;Condition
 2;Qué día tan extraño;Time > 30
 3;¿Estoy soñando?;Random
 4;Nadando... estoy.;Always
+5;Nadando dia1.;Day1
+6;Nadando dia2.;Day2

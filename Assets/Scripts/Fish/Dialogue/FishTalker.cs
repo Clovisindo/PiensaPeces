@@ -1,14 +1,10 @@
-﻿using Assets.Scripts.Components;
-using Assets.Scripts.Core;
+﻿using Assets.Scripts.Core;
 using Assets.Scripts.Events.EventBus;
 using Assets.Scripts.Events.Events;
 using Assets.Scripts.Fish.NPC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace Assets.Scripts.Fish.Dialogue

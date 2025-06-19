@@ -515,6 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcFishPrefab: {fileID: 3926834393726923840, guid: e716193aa2810934792adb65c6d0e99a, type: 3}
   poolSize: 10
+  daysPassed: 0
   fishConfigs: []
 --- !u!4 &347493656
 Transform:
@@ -1249,7 +1250,7 @@ MonoBehaviour:
   npcFishPool: {fileID: 347493655}
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
-  firstGameLaunch: 2025-06-19
+  firstGameLaunch: 2025-06-18
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class NPCFishController : BaseFishController
 
     private float lifeTime;
     private float maxLifeTime;
-    public void Init(FishConfig config, NPCFishPool pool, IBoundsService boundsService, EventBus<SFXEvent> sfxEventBus)
+    public void Init(FishConfig config, NPCFishPool pool, IBoundsService boundsService, int daysPassed, EventBus<SFXEvent> sfxEventBus)
     {
         this.pool = pool;
         this.boundsService = boundsService;
@@ -38,7 +38,7 @@ public class NPCFishController : BaseFishController
         limiter?.Init(boundsService);
         
         talker = GetComponent<FishTalker>();
-        this.talker.Init(new NPCFishDialogueEvaluator(), config, sfxEventBus);
+        this.talker.Init(new NPCFishDialogueEvaluator(daysPassed), config, sfxEventBus);
 
         ai = new NPCFishAI(Random.value);
         exitFishComponent = new ExitableFish();

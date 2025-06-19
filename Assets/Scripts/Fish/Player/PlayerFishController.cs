@@ -24,8 +24,8 @@ public class PlayerFishController : BaseFishController
     //temporal
     [SerializeField] FishConfig config;
 
-    internal void Init(FishConfig playerConfig, IBoundsService boundsService, FoodManagerService foodManagerService, SFXManager sFXManager, EventBus<FoodEaten> foodEatentEventBus,
-        EventBus<FoodSpawned> foodSpawnedEventBus, EventBus<HungryEvent> hungryEventBus, EventBus<SFXEvent> sfxEventBus)
+    public void Init(FishConfig playerConfig, IBoundsService boundsService, FoodManagerService foodManagerService, SFXManager sFXManager,int daysPassed, 
+        EventBus<FoodEaten> foodEatentEventBus, EventBus<FoodSpawned> foodSpawnedEventBus, EventBus<HungryEvent> hungryEventBus, EventBus<SFXEvent> sfxEventBus)
     {
         this.config = playerConfig;
         limiter = GetComponent<TransformLimiter>();
@@ -45,7 +45,7 @@ public class PlayerFishController : BaseFishController
         this.boundsService = boundsService;
         limiter.Init(boundsService);
         this.hungerComponent.Init(hungryEventBus);
-        this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent), playerConfig, sfxEventBus);
+        this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent, daysPassed), playerConfig, sfxEventBus);
         ai = new PlayerFishAI(transform, hungerComponent, foodManagerService);
         intentScheduler = new PlayerFishIntentScheduler(this, config, ai.EvaluateIntent, ApplyIntent);
         eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, sFXManager, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus, sfxEventBus);

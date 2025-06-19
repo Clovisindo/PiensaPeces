@@ -5,8 +5,12 @@ namespace Assets.Scripts.Fish.Dialogue
     public class NPCFishDialogueEvaluator : IDialogueEvaluator
     {
         public float currentTime => Time.time;
+        private readonly int daysPassed;
 
-        public NPCFishDialogueEvaluator() { }
+        public NPCFishDialogueEvaluator(int daysPassed) 
+        {
+            this.daysPassed = daysPassed;
+        }
 
         public bool Evaluate(string condition)
         {
@@ -21,6 +25,10 @@ namespace Assets.Scripts.Fish.Dialogue
             }
             if (condition == "Random")
                 return Random.value < 0.1f; // 10% chance
+            if (condition == "Day1" && daysPassed == 1)
+                return true;
+            if (condition == "Day2" && daysPassed == 2)
+                return true;
 
             return false;
         }

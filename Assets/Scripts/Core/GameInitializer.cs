@@ -41,9 +41,9 @@ namespace Assets.Scripts.Core
             var boundsService = new FishTankBoundsService(fishTankScaler.GetCollider());
             foodManagerService = new FoodManagerService();
 
-            npcFishPool.Init(boundsService, loadContextData.FishConfigsCurrentDay, sfxEventBus);
+            npcFishPool.Init(boundsService, loadContextData.FishConfigsCurrentDay, daysPassed, sfxEventBus);
             playerConfig.Init();
-            fishPlayer.Init(playerConfig,boundsService, foodManagerService, sfxManager, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
+            fishPlayer.Init(playerConfig,boundsService, foodManagerService, sfxManager, daysPassed, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
             spawnerController.Init( boundsService,foodManagerService, foodEatentEventBus, FoodSpawnedEventBus);
         }
     }
