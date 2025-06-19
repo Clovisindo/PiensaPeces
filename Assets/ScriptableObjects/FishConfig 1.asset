@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ec4e9c20603ad458190345f05cf9e4, type: 3}
   m_Name: FishConfig 1
   m_EditorClassIdentifier: 
-  fishSprite: {fileID: 21300000, guid: ebc520c6f16441545bb323604885c181, type: 3}
+  fishSprite: {fileID: 21300000, guid: b140c0c5a9aa1c24b94290ee7d632193, type: 3}
   speed: 1
   maxLifetime: 10
   swimProbability: 0.5
-  intervalTalking: 0
-  intervalEvaluateIntent: 0
+  intervalTalking: 18.051126
+  intervalEvaluateIntent: 8.455947
   sftTalk: {fileID: 11400000, guid: 8a0c93859d7b2974b8efad998c12adaa, type: 2}
