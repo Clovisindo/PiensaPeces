@@ -1,12 +1,15 @@
-﻿using Assets.Scripts.Events.EventBus;
+﻿using Assets.Scripts.Events.Bindings;
+using Assets.Scripts.Events.EventBus;
 using Assets.Scripts.Events.Events;
 using System.Linq;
 using UnityEngine;
 
 public class SFXManager : MonoBehaviour
 {
-    public EventBus<SFXEvent> sfxEventBus;
     public AudioEmitterData[] soundEffects;
+
+    private IEventBus<SFXEvent> sfxBus;
+    private EventBinding<SFXEvent> sfxBinding;
     private void Awake()
     {
         foreach (AudioEmitterData s in soundEffects)
@@ -14,6 +17,15 @@ public class SFXManager : MonoBehaviour
             s.InstancePrefab = Instantiate(s.AudioSource, this.gameObject.transform);
         }
     }
+
+    public void Init(IEventBus<SFXEvent> sfxBus)
+    {
+        this.sfxBus = sfxBus;
+        sfxBinding = new EventBinding<SFXEvent>(OnSFXInvoke);
+        sfxBus.Register(sfxBinding);
+    }
+
+   
 
     private void PlaySFX(AudioEmitterData audio)
     {
@@ -31,7 +43,17 @@ public class SFXManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No se encuentra el audio de nombre" + audio.name + " en los recursos cargados.");
+            Debug.LogWarning("No se encuentra el audio de nombre" + audio.name + " en los recursos cargados.");
         }
+    }
+
+    private void OnSFXInvoke(SFXEvent e)
+    {
+        onPlaySFXPitched(e.sfxData);
+    }
+
+    private void OnDisable()
+    {
+        sfxBus?.Deregister(sfxBinding);
     }
 }

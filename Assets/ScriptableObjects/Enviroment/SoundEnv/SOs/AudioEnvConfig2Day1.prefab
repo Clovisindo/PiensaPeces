@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9106427289612318643}
   - component: {fileID: 8231369062499780812}
   m_Layer: 0
-  m_Name: PlayerFishTalkSFX
+  m_Name: AudioEnvConfig2Day1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,10 +42,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6204751493377618961, guid: c617b1f061aab274c9376e1ab6fe0588, type: 2}
-  m_audioClip: {fileID: 8300000, guid: a1278d0d3801e25499ca3e638f4bc553, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9b85c08462ac45a42a695282c88ac5c9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 0.90520257
+  m_Pitch: 0.9622452
   Loop: 0
   Mute: 0
   Spatialize: 0

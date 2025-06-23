@@ -122,6 +122,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &36836004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 36836006}
+  - component: {fileID: 36836005}
+  m_Layer: 0
+  m_Name: AudioEnviromentSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &36836005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36836004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6316a67b1d89ba409f66ac850077830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &36836006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36836004}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &87685984 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7707659681750625089, guid: 686f743687cfcb24aaec11a4e28a1d7d, type: 3}
@@ -1250,6 +1294,7 @@ MonoBehaviour:
   npcFishPool: {fileID: 347493655}
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
+  audioEnvSystem: {fileID: 36836005}
   firstGameLaunch: 2025-06-23
 --- !u!4 &862757931
 Transform:
@@ -1446,6 +1491,8 @@ MonoBehaviour:
   allFoodDayConfigs:
   - {fileID: 11400000, guid: ece924d3a1a8c0c4cb08e5133757a20c, type: 2}
   - {fileID: 11400000, guid: 6ba3e0ae4c3322e459242bae53e5d68c, type: 2}
+  allAudioDayConfigs:
+  - {fileID: 11400000, guid: be5bc1bc18213e542bac49caf4da300d, type: 2}
 --- !u!4 &1028825764
 Transform:
   m_ObjectHideFlags: 0
@@ -1866,6 +1913,8 @@ MonoBehaviour:
   soundEffects:
   - {fileID: 11400000, guid: 8a0c93859d7b2974b8efad998c12adaa, type: 2}
   - {fileID: 11400000, guid: cc1d04e72be908f49af989cd9058a013, type: 2}
+  - {fileID: 11400000, guid: 3e69a98af8331b74d957af9ca7713ccd, type: 2}
+  - {fileID: 11400000, guid: 1c13f23e0e0895b48973432816436a69, type: 2}
 --- !u!4 &1511659654
 Transform:
   m_ObjectHideFlags: 0
@@ -2430,6 +2479,7 @@ SceneRoots:
   - {fileID: 1728767959}
   - {fileID: 99079484}
   - {fileID: 2098052540}
+  - {fileID: 36836006}
   - {fileID: 1028825764}
   - {fileID: 1736410465}
   - {fileID: 519420032}

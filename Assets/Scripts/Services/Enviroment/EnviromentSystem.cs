@@ -11,6 +11,7 @@ namespace Assets.Scripts.Services.Enviroment
         [SerializeField] private List<GroundEnvironmentDayConfig> allGroundDayConfigs;
         [SerializeField] private List<FishEnvDayConfig> allFishsDayConfigs;
         [SerializeField] private List<FoodEnvDayConfig> allFoodDayConfigs;
+        [SerializeField] private List<AudioEnvDayConfig> allAudioDayConfigs;
         private LoadDataContext.Builder loadDataContextBuilder;
 
         public LoadDataContext LoadGroundByGameData(int daysPassed)
@@ -28,6 +29,7 @@ namespace Assets.Scripts.Services.Enviroment
             InstantiatePrefabsByConfig(config.groundEnvConfigs);
             LoadFoodConfigCurrentDay(allFoodDayConfigs, daysPassed);
             LoadFishConfigCurrentDay(allFishsDayConfigs, daysPassed);
+            LoadAudioConfigCurrentDay(allAudioDayConfigs, daysPassed);
             return loadDataContextBuilder.Build();
         }
 
@@ -55,6 +57,17 @@ namespace Assets.Scripts.Services.Enviroment
                 fishConfigData = configs.OrderByDescending(c => c.dayNumber).FirstOrDefault();
             }
             loadDataContextBuilder.WithFishConfigs(fishConfigData.fishEnvDayConfigs.ToArray());
+        }
+
+        private void LoadAudioConfigCurrentDay(List<AudioEnvDayConfig> configs, int daysPassed)
+        {
+            var audioConfigData = configs.Find(c => c.dayNumber == daysPassed);
+            if (audioConfigData == null)
+            {
+                Debug.LogWarning($"No Audio Config found for day {daysPassed}, load last day data.");
+                audioConfigData = configs.OrderByDescending(c => c.dayNumber).FirstOrDefault();
+            }
+            loadDataContextBuilder.WithAudioConfigs(audioConfigData.audioConfigs.ToArray());
         }
 
         private void InstantiatePrefabsByConfig(List<GroundEnvConfig> configs)

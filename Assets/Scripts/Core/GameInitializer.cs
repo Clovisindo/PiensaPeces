@@ -19,6 +19,7 @@ namespace Assets.Scripts.Core
         [SerializeField] private NPCFishPool npcFishPool;
         [SerializeField] private SFXManager sfxManager;
         [SerializeField] private FishConfig playerConfig;
+        [SerializeField] private AudioEnviromentSystem audioEnvSystem;
         [SerializeField] private String firstGameLaunch; //todo borrar
         private FoodManagerService foodManagerService;
         private SaveSystem saveSystem;
@@ -38,6 +39,10 @@ namespace Assets.Scripts.Core
             Debug.Log($"Días desde la primera vez que se abrió el juego: {daysPassed}");
 
             var loadContextData = enviromentSystem.LoadGroundByGameData(daysPassed);
+            sfxManager.Init(sfxEventBus);
+
+            audioEnvSystem.Initialize(loadContextData.AudioConfigsCurrentDay.ToList(), daysPassed, sfxEventBus);
+
             var foodForCurrentDay = loadContextData.FoodConfigsCurrentDay.ToArray();
             fishTankScaler.Init();
             var boundsService = new FishTankBoundsService(fishTankScaler.GetCollider());

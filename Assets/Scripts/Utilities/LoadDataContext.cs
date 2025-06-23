@@ -8,11 +8,13 @@ namespace Assets.Scripts.Utilities
     {
         public FishConfig[] FishConfigsCurrentDay { get; }
         public FoodEnvConfig[] FoodConfigsCurrentDay { get; }
+        public AudioEnvConfig[] AudioConfigsCurrentDay { get; }
 
-        private LoadDataContext(FishConfig[] fishConfigsCurrentDay, FoodEnvConfig[] foodConfigsCurrentDay)
+        private LoadDataContext(FishConfig[] fishConfigsCurrentDay, FoodEnvConfig[] foodConfigsCurrentDay, AudioEnvConfig[] audioConfigsCurrentDay)
         {
             FishConfigsCurrentDay = fishConfigsCurrentDay;
             FoodConfigsCurrentDay = foodConfigsCurrentDay;
+            AudioConfigsCurrentDay = audioConfigsCurrentDay;
         }
 
         // Builder interno
@@ -20,6 +22,7 @@ namespace Assets.Scripts.Utilities
         {
             private FishConfig[] _fishConfigsCurrentDay = Array.Empty<FishConfig>();
             private FoodEnvConfig[] _foodConfigsCurrentDay = Array.Empty<FoodEnvConfig>();
+            private AudioEnvConfig[] _audioConfigsCurrentDay = Array.Empty<AudioEnvConfig>();
 
             public Builder WithFishConfigs(FishConfig[] fishConfigs)
             {
@@ -33,9 +36,15 @@ namespace Assets.Scripts.Utilities
                 return this;
             }
 
+            public Builder WithAudioConfigs(AudioEnvConfig[] audioConfigs)
+            {
+                _audioConfigsCurrentDay = audioConfigs ?? Array.Empty<AudioEnvConfig>();
+                return this;
+            }
+
             public LoadDataContext Build()
             {
-                return new LoadDataContext(_fishConfigsCurrentDay, _foodConfigsCurrentDay);
+                return new LoadDataContext(_fishConfigsCurrentDay, _foodConfigsCurrentDay, _audioConfigsCurrentDay);
             }
         }
     }
