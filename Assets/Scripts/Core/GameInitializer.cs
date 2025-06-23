@@ -6,6 +6,7 @@ using Assets.Scripts.Services.FoodService;
 using Assets.Scripts.Fish.NPC;
 using System;
 using Assets.Scripts.Services.Enviroment;
+using System.Linq;
 
 namespace Assets.Scripts.Core
 {
@@ -37,6 +38,7 @@ namespace Assets.Scripts.Core
             Debug.Log($"Días desde la primera vez que se abrió el juego: {daysPassed}");
 
             var loadContextData = enviromentSystem.LoadGroundByGameData(daysPassed);
+            var foodForCurrentDay = loadContextData.FoodConfigsCurrentDay.ToArray();
             fishTankScaler.Init();
             var boundsService = new FishTankBoundsService(fishTankScaler.GetCollider());
             foodManagerService = new FoodManagerService();
@@ -44,7 +46,7 @@ namespace Assets.Scripts.Core
             npcFishPool.Init(boundsService, loadContextData.FishConfigsCurrentDay, daysPassed, sfxEventBus);
             playerConfig.Init();
             fishPlayer.Init(playerConfig,boundsService, foodManagerService, sfxManager, daysPassed, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
-            spawnerController.Init( boundsService,foodManagerService, foodEatentEventBus, FoodSpawnedEventBus);
+            spawnerController.Init( boundsService,foodManagerService, foodForCurrentDay, foodEatentEventBus, FoodSpawnedEventBus);
         }
     }
 }

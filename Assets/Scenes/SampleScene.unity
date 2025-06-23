@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34bbe44764b43424fba19927b5a7e8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrefab: {fileID: 1286301897233729352, guid: 2879ec217631141419e5b85936605046, type: 3}
+  foodConfigs: []
   foodFallSpeed: 0.2
 --- !u!4 &810252947
 Transform:
@@ -1250,7 +1250,7 @@ MonoBehaviour:
   npcFishPool: {fileID: 347493655}
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
-  firstGameLaunch: 2025-06-18
+  firstGameLaunch: 2025-06-23
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0
@@ -1443,6 +1443,9 @@ MonoBehaviour:
   allFishsDayConfigs:
   - {fileID: 11400000, guid: 9a03da778fbccaa48aaabb8005a6b2b7, type: 2}
   - {fileID: 11400000, guid: 561cab613c0f09e4eba1a6ec0c36f417, type: 2}
+  allFoodDayConfigs:
+  - {fileID: 11400000, guid: ece924d3a1a8c0c4cb08e5133757a20c, type: 2}
+  - {fileID: 11400000, guid: 6ba3e0ae4c3322e459242bae53e5d68c, type: 2}
 --- !u!4 &1028825764
 Transform:
   m_ObjectHideFlags: 0

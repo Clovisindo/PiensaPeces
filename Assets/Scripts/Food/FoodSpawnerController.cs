@@ -1,13 +1,14 @@
 using Assets.Scripts.Events.EventBus;
 using Assets.Scripts.Events.Events;
 using Assets.Scripts.Services.Bounds;
+using Assets.Scripts.Services.Enviroment;
 using Assets.Scripts.Services.FoodService;
 using System;
 using UnityEngine;
 
 public class FoodSpawnerController : MonoBehaviour
 {
-    [SerializeField] private GameObject foodPrefab;
+    [SerializeField] private FoodEnvConfig[] foodConfigs;
     [SerializeField] float foodFallSpeed = 1.0f;
     private IBoundsService boundsService;
     private FoodManagerService foodManagerService;
@@ -15,10 +16,11 @@ public class FoodSpawnerController : MonoBehaviour
     private IEventBus<FoodSpawned> foodSpawnedBus;
 
 
-    public void Init(IBoundsService boundsService, FoodManagerService foodManagerService, EventBus<FoodEaten> foodEatentEventBus, EventBus<FoodSpawned> foodSpawnedEventBus)
+    public void Init(IBoundsService boundsService, FoodManagerService foodManagerService, FoodEnvConfig[] foodPrefabs, EventBus<FoodEaten> foodEatentEventBus, EventBus<FoodSpawned> foodSpawnedEventBus)
     {
         this.boundsService = boundsService;
         this.foodManagerService = foodManagerService;
+        this.foodConfigs = foodPrefabs;
         this.foodEatentBus = foodEatentEventBus;
         this.foodSpawnedBus = foodSpawnedEventBus;
     }
@@ -31,8 +33,9 @@ public class FoodSpawnerController : MonoBehaviour
         float randomX = UnityEngine.Random.Range(min.x, max.x);
         Vector2 spawnPosition = new Vector2(randomX, max.y);
 
-        var food = Instantiate(foodPrefab, spawnPosition, Quaternion.identity);
-        food.GetComponent<Food>().Init(foodManagerService, foodFallSpeed, min.y, foodEatentBus);
+        var actualFoodConfig = foodConfigs[UnityEngine.Random.Range(0, foodConfigs.Length)];
+        var food = Instantiate(actualFoodConfig.prefab, spawnPosition, Quaternion.identity);
+        food.GetComponent<Food>().Init(foodManagerService, actualFoodConfig.sprite, foodFallSpeed, min.y, foodEatentBus);
 
         foodSpawnedBus.Raise(new FoodSpawned{food = food});
     }
