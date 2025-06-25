@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dayNumber: 2
   fishEnvDayConfigs:
+  - {fileID: 11400000, guid: 3e5f0f78f1de708428c1c1eaa98de64c, type: 2}
+  - {fileID: 11400000, guid: c4416df434415524f852ea67994fea89, type: 2}
+  - {fileID: 11400000, guid: ac10894e07eff694da15ffd2904a0cee, type: 2}
+  - {fileID: 11400000, guid: 3c53d4a91d48bcc478f2cf3f250ffafa, type: 2}
+  - {fileID: 11400000, guid: 6a599e7848abd1f489f1a786d57a0f60, type: 2}
+  - {fileID: 11400000, guid: 1cac109473132fa439dd2ae008a98608, type: 2}
   - {fileID: 11400000, guid: 5b6bfaf27951acc4ab444b4d446cd8a9, type: 2}
   - {fileID: 11400000, guid: 39dc33ce81d68724d8e4a546ead260b7, type: 2}
   - {fileID: 11400000, guid: 659b554f2bd45454eb48a156b18fb642, type: 2}

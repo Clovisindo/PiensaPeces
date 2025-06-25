@@ -48,7 +48,7 @@ public class PlayerFishController : BaseFishController
         this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent, daysPassed), playerConfig, sfxEventBus);
         ai = new PlayerFishAI(transform, hungerComponent, foodManagerService);
         intentScheduler = new PlayerFishIntentScheduler(this, config, ai.EvaluateIntent, ApplyIntent);
-        eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, sFXManager, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus, sfxEventBus);
+        eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, sFXManager, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus);
         eventHandler.RegisterEvents();
     }
 

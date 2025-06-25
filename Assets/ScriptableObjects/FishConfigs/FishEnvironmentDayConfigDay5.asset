@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8753745cb957e4f809c6f63d69ccfe, type: 3}
+  m_Name: FishEnvironmentDayConfigDay5
+  m_EditorClassIdentifier: 
+  dayNumber: 5
+  fishEnvDayConfigs:
+  - {fileID: 11400000, guid: 115cdb9bd30352d40a39fbe3ad8de853, type: 2}
+  - {fileID: 11400000, guid: da4236520f08c244c8edc1dadc2caf45, type: 2}
+  - {fileID: 11400000, guid: 137a372614393cd41894201bafad9865, type: 2}
+  - {fileID: 11400000, guid: 21ba2aa9e237c88489d7dfd616428deb, type: 2}
+  - {fileID: 11400000, guid: c82c8dbd0802b4a4f8c2b41efe456b14, type: 2}
+  - {fileID: 11400000, guid: 6d13a45fed8ae074b81462685defa6f2, type: 2}
+  - {fileID: 11400000, guid: 07b7fb9b5edb4c440b379a60cce481c1, type: 2}
+  - {fileID: 11400000, guid: 545b252fbd127464a8ad879865495e25, type: 2}
+  - {fileID: 11400000, guid: 3eb84b5823be8a7499f0f1757d3e988d, type: 2}
