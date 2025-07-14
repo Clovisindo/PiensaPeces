@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf0b37624b27804db1a584777a89808, type: 3}
+  m_Name: FoodEnvironmentDayConfigDay3
+  m_EditorClassIdentifier: 
+  dayNumber: 3
+  foodEnvConfigs:
+  - {fileID: 11400000, guid: af3dbc583a882a246b7bd3842acb8dea, type: 2}
+  - {fileID: 11400000, guid: c5ec56eed570f634fb0f248b4d8f308d, type: 2}
+  - {fileID: 11400000, guid: 846c657968ee2ac49b4bf17abf8ba410, type: 2}

@@ -1295,7 +1295,7 @@ MonoBehaviour:
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
   audioEnvSystem: {fileID: 36836005}
-  firstGameLaunch: 2025-06-19
+  firstGameLaunch: 2025-06-21
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0
@@ -1496,6 +1496,9 @@ MonoBehaviour:
   allFoodDayConfigs:
   - {fileID: 11400000, guid: ece924d3a1a8c0c4cb08e5133757a20c, type: 2}
   - {fileID: 11400000, guid: 6ba3e0ae4c3322e459242bae53e5d68c, type: 2}
+  - {fileID: 11400000, guid: 6556fa55cba2f8441a37744b18f1968b, type: 2}
+  - {fileID: 11400000, guid: 0cb59515e282d4847a11e20a0a72f197, type: 2}
+  - {fileID: 11400000, guid: 0a62151f90462364bae610d48f9e65d6, type: 2}
   allAudioDayConfigs:
   - {fileID: 11400000, guid: be5bc1bc18213e542bac49caf4da300d, type: 2}
 --- !u!4 &1028825764
