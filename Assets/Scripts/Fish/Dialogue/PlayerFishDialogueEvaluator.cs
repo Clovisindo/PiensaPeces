@@ -6,13 +6,11 @@ namespace Assets.Scripts.Fish.Dialogue
     public class PlayerFishDialogueEvaluator: IDialogueEvaluator
     {
         private readonly HungerComponent hungerComponent;
-        private readonly int daysPassed;
         public float currentTime => Time.time;
 
-        public PlayerFishDialogueEvaluator(HungerComponent hungerComponent, int daysPassed)
+        public PlayerFishDialogueEvaluator(HungerComponent hungerComponent)
         {
             this.hungerComponent = hungerComponent;
-            this.daysPassed = daysPassed;
         }
 
         public bool Evaluate(string condition)
@@ -32,10 +30,6 @@ namespace Assets.Scripts.Fish.Dialogue
 
             if (condition == "Random")
                 return Random.value < 0.1f; // 10% chance
-            if (condition == "Day1" && daysPassed == 1)
-                return true;
-            if (condition == "Day2" && daysPassed == 2)
-                return true;
 
             return false;
         }

@@ -30,7 +30,7 @@ namespace Assets.Scripts.Fish.Dialogue
 
         private const string pathData = "Dialogues/";
 
-        public void Init(IDialogueEvaluator evaluator, FishConfig config, EventBus<SFXEvent> sfxEventBus)
+        public void Init(IDialogueEvaluator evaluator, FishConfig config, EventBus<SFXEvent> sfxEventBus, int passedDays)
         {
             this.eventBus = sfxEventBus;
             this.talkingSFX = config.sftTalk;
@@ -43,21 +43,39 @@ namespace Assets.Scripts.Fish.Dialogue
                 NPCFishDialogueEvaluator => npcDialogueCsvPath,
                 _ => throw new ArgumentException("Unknown evaluator type")
             };
-            TextAsset csvAsset = Resources.Load<TextAsset>(pathData + pathDialoge);
+            LoadDialogueAssets(pathDialoge, passedDays);
+            this.evaluator = evaluator;
+            ResetTalker();
+        }
+
+        private void LoadDialogueAssets(string basePathDialog, int passedDays)
+        {
+            // Agregar sufijo de día al nombre del archivo
+            string pathDialogeWithDay = $"{basePathDialog}_day{passedDays}";
+
+            // Cargar CSV
+            TextAsset csvAsset = Resources.Load<TextAsset>(pathData + pathDialogeWithDay);
+
+
             if (csvAsset == null)
             {
-                Debug.LogError($"Dialogue CSV not found at Resources/{pathData + pathDialoge}");
+                Debug.LogWarning($"Dialogue CSV not found at Resources/{pathData + pathDialogeWithDay}, attempting fallback to default.");
+
+                // Fallback a base CSV si no existe el específico
+                csvAsset = Resources.Load<TextAsset>(pathData + basePathDialog);
+            }
+
+            if (csvAsset == null)
+            {
+                Debug.LogError($"Default dialogue CSV also not found at Resources/{pathData + basePathDialog}");
                 dialogueLines = new List<FishDialogueLine>();
             }
             else
             {
                 dialogueLines = DialogueLoaderCsv.Load(csvAsset.text);
             }
-            this.evaluator = evaluator;
-            ResetTalker();
         }
 
-        
 
         private void Update()
         {

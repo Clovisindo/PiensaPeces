@@ -1,0 +1,7 @@
+ID;Text;Condition
+1;Tengo hambre...;IsHungry
+2;Qué día tan bonito;Time > 30
+3;Estoy pensando en nada;Random
+4;Nadando por la vida.;Always
+5;Nadando dia1.;Day1
+6;Nadando dia2.;Day2

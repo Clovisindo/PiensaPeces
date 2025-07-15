@@ -38,7 +38,7 @@ public class NPCFishController : BaseFishController
         limiter?.Init(boundsService);
         
         talker = GetComponent<FishTalker>();
-        this.talker.Init(new NPCFishDialogueEvaluator(daysPassed), config, sfxEventBus);
+        this.talker.Init(new NPCFishDialogueEvaluator(), config, sfxEventBus, daysPassed);
 
         ai = new NPCFishAI(Random.value);
         exitFishComponent = new ExitableFish();

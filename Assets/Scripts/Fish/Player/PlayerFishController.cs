@@ -45,7 +45,7 @@ public class PlayerFishController : BaseFishController
         this.boundsService = boundsService;
         limiter.Init(boundsService);
         this.hungerComponent.Init(hungryEventBus);
-        this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent, daysPassed), playerConfig, sfxEventBus);
+        this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent), playerConfig, sfxEventBus, daysPassed);
         ai = new PlayerFishAI(transform, hungerComponent, foodManagerService);
         intentScheduler = new PlayerFishIntentScheduler(this, config, ai.EvaluateIntent, ApplyIntent);
         eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, sFXManager, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus);
