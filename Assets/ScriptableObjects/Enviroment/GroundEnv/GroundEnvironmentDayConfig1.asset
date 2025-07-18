@@ -15,9 +15,9 @@ MonoBehaviour:
   dayNumber: 1
   groundEnvConfigs:
   - {fileID: 11400000, guid: 3204adca76cdd4a43bb517c392e21846, type: 2}
+  - {fileID: 11400000, guid: fa80e5849022cb34eaca282a41f4011e, type: 2}
+  - {fileID: 11400000, guid: 1021b08cdd79726469bd421eaf0bdcf9, type: 2}
+  - {fileID: 11400000, guid: 0599dfa8c29d10c489b3fd635b7430f1, type: 2}
+  - {fileID: 11400000, guid: a6995e3a787ebfa4dac3272dac6d3110, type: 2}
   - {fileID: 11400000, guid: 3204adca76cdd4a43bb517c392e21846, type: 2}
-  - {fileID: 11400000, guid: 3204adca76cdd4a43bb517c392e21846, type: 2}
-  - {fileID: 11400000, guid: 3204adca76cdd4a43bb517c392e21846, type: 2}
-  - {fileID: 11400000, guid: 3204adca76cdd4a43bb517c392e21846, type: 2}
-  - {fileID: 11400000, guid: 3204adca76cdd4a43bb517c392e21846, type: 2}
-  - {fileID: 11400000, guid: 3204adca76cdd4a43bb517c392e21846, type: 2}
+  - {fileID: 11400000, guid: 1021b08cdd79726469bd421eaf0bdcf9, type: 2}

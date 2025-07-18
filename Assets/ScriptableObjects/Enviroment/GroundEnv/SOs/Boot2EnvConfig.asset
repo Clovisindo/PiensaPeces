@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5f0e600ecb52740ac51f1ff31fc3d8, type: 3}
+  m_Name: Boot2EnvConfig
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1573382387277624511, guid: 58ddd7defccfc404c992b596abfb2780, type: 3}
+  sprite: {fileID: -2087109339, guid: 4dc5880a67ff21d46902b3336ed955f6, type: 3}

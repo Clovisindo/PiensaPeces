@@ -510,7 +510,7 @@ RectTransform:
   m_GameObject: {fileID: 174100137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.67296, y: 0.67296, z: 0.67296}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 465643321}
@@ -1371,7 +1371,7 @@ MonoBehaviour:
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
   audioEnvSystem: {fileID: 36836005}
-  firstGameLaunch: 2025-07-15
+  firstGameLaunch: 2025-07-13
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0
@@ -1561,6 +1561,11 @@ MonoBehaviour:
   allGroundDayConfigs:
   - {fileID: 11400000, guid: c389ce2984f2e0c4c811d6d6ade65dc5, type: 2}
   - {fileID: 11400000, guid: a77808f8a1bf37644b11c1106d734e78, type: 2}
+  - {fileID: 11400000, guid: b2cea9e580132d840b39e362792d0f30, type: 2}
+  - {fileID: 11400000, guid: 1a3c10dc54a05d748b99613462f16559, type: 2}
+  - {fileID: 11400000, guid: b82b0455c5002c340b6b690214e73003, type: 2}
+  - {fileID: 11400000, guid: a2dc503b92d64c24c88367e26a758cb2, type: 2}
+  - {fileID: 11400000, guid: 8f39c02d7fbd30d468a5660bcd7ece20, type: 2}
   allFishsDayConfigs:
   - {fileID: 11400000, guid: 9a03da778fbccaa48aaabb8005a6b2b7, type: 2}
   - {fileID: 11400000, guid: 561cab613c0f09e4eba1a6ec0c36f417, type: 2}
@@ -1575,6 +1580,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6556fa55cba2f8441a37744b18f1968b, type: 2}
   - {fileID: 11400000, guid: 0cb59515e282d4847a11e20a0a72f197, type: 2}
   - {fileID: 11400000, guid: 0a62151f90462364bae610d48f9e65d6, type: 2}
+  - {fileID: 11400000, guid: fcc47dc34b1bd8741895115e8a1fd6fc, type: 2}
+  - {fileID: 11400000, guid: cdf6462d06ffd24469b767277b0ab235, type: 2}
   allAudioDayConfigs:
   - {fileID: 11400000, guid: be5bc1bc18213e542bac49caf4da300d, type: 2}
 --- !u!4 &1028825764

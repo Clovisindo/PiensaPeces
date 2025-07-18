@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9564b735d1a2d46add281ea976d81b, type: 3}
+  m_Name: GroundEnvironmentDayConfig3
+  m_EditorClassIdentifier: 
+  dayNumber: 3
+  groundEnvConfigs:
+  - {fileID: 11400000, guid: 90cfb6ca0b74e0540ae939a744bd71c9, type: 2}
+  - {fileID: 11400000, guid: 112963aaca8ef714aa93fa107abe6c9a, type: 2}
+  - {fileID: 11400000, guid: c1cf83ab71cb33f44b7c753d483a30b9, type: 2}
+  - {fileID: 11400000, guid: 0129ff9a470e45a4d8c17c4afe948d07, type: 2}
+  - {fileID: 11400000, guid: a356cebfdbeb0ec4ab6a5569147d2ad6, type: 2}
+  - {fileID: 11400000, guid: d02ef13c9f08c2a4d89cda7462db6e5b, type: 2}
+  - {fileID: 11400000, guid: b7d1c17e52a33104ebd1a5c8c89485ee, type: 2}
