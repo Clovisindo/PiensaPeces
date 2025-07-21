@@ -6,8 +6,8 @@ namespace Assets.Scripts.Core
     {
         public static Global Instance;
 
-        [SerializeField] public readonly float GAME_SPEED = 1.0f;
-        //[SerializeField] public readonly float GAME_SPEED = 30.0f;
+        //[SerializeField] public readonly float GAME_SPEED = 1.0f;
+        [SerializeField] public readonly float GAME_SPEED = 30.0f;
 
         private void Awake()
         {

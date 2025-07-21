@@ -3,7 +3,6 @@ ID;Text;Condition
 2;¿Habra comida por aqui?;IsHungry
 3;Ojala un poco de comida.;IsHungry
 4;Que dia tan BONITO;Time > 30
-5;¿Que ha sido ese ruido?;Time > 360
-6;Estoy pensando en nada;Random
-7;Nadando por la vida.;Always
-8;¿Ya ha llegado?;Always
+5;Estoy pensando en nada;Random
+6;Nadando por la vida.;Always
+7;¿Ya ha llegado?;Always

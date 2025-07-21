@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41aec99651bd4c441983c9df6b41f803, type: 3}
-  m_Name: AudioSFXData2day1
+  m_Script: {fileID: 11500000, guid: 120cdaf00a85d7e4a850904d629ff7e3, type: 3}
+  m_Name: AudioEnvironmentConfigDay3
   m_EditorClassIdentifier: 
-  AudioName: FootStep
-  audioSource: {fileID: 8231369062499780812, guid: 7f6c9f62ddb685942a5bb95457fadef3, type: 3}
-  instancePrefab: {fileID: 0}
+  dayNumber: 3
+  audioConfigs:
+  - {fileID: 11400000, guid: 775969933f1366a4ba8c3bd57e066b59, type: 2}
+  - {fileID: 11400000, guid: 8fbcda5df875ab44da75a5d8be9b6805, type: 2}

@@ -1243,7 +1243,7 @@ MonoBehaviour:
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
   audioEnvSystem: {fileID: 36836005}
-  firstGameLaunch: 2025-07-12
+  firstGameLaunch: 2025-07-21
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0
@@ -1456,6 +1456,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cdf6462d06ffd24469b767277b0ab235, type: 2}
   allAudioDayConfigs:
   - {fileID: 11400000, guid: be5bc1bc18213e542bac49caf4da300d, type: 2}
+  - {fileID: 11400000, guid: 1c6a73bce1349004dbcc2e89a114b9b1, type: 2}
+  - {fileID: 11400000, guid: 09b006c84bfb3aa4fa790238f146f866, type: 2}
+  - {fileID: 11400000, guid: f0fce2690708c6946ace22d12e487e89, type: 2}
 --- !u!4 &1028825764
 Transform:
   m_ObjectHideFlags: 0
@@ -1676,6 +1679,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc1d04e72be908f49af989cd9058a013, type: 2}
   - {fileID: 11400000, guid: 3e69a98af8331b74d957af9ca7713ccd, type: 2}
   - {fileID: 11400000, guid: 1c13f23e0e0895b48973432816436a69, type: 2}
+  - {fileID: 11400000, guid: 5070a440eeb4c814092957f370ccbf37, type: 2}
+  - {fileID: 11400000, guid: d68908a9500e24b4f8d047774f56c7c7, type: 2}
+  - {fileID: 11400000, guid: 999d63b256a98604588f395a4ff0aa58, type: 2}
+  - {fileID: 11400000, guid: d33ae0f0970f3ba4899818cb4a76c08b, type: 2}
 --- !u!4 &1511659654
 Transform:
   m_ObjectHideFlags: 0
