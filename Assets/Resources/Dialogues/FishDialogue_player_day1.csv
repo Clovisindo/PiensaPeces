@@ -1,8 +1,8 @@
 ID;Text;Condition
 1;Tengo hambre...;IsHungry
 2;¿Habra comida por aqui?;IsHungry
-3;Ojala un poco de comida.;IsHungry
+3;Ojala un poco de comida;IsHungry
 4;Que dia tan BONITO;Time > 30
 5;Estoy pensando en nada;Random
-6;Nadando por la vida.;Always
+6;Nadando por la vida;Always
 7;¿Ya ha llegado?;Always

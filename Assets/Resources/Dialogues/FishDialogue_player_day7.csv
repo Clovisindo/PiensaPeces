@@ -1,7 +1,7 @@
 ID;Text;Condition
-1;Siempre estaremos conectados.;Time > 30
-2;la muerte no puede separarnos.;Time > 60
-3;Te echo de menos todos los dias.;Always
-4;Ojala volver a esos dias.;Always
-5;A veces te veo llegar para darme de comer.;Always
-6;A veces te escucho llegar al volver a casa.;Always
+1;Siempre estaremos conectados;Time > 30
+2;la muerte no puede separarnos;Time > 60
+3;Te echo de menos todos los dias;Always
+4;Ojala volver a esos dias;Always
+5;A veces te veo llegar para darme de comer;Always
+6;A veces te escucho llegar al volver a casa;Always

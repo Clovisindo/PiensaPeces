@@ -24,11 +24,14 @@ public class FollowTargetState : IState
 
     public void Update()
     {
+        var t = fish.GetTransform();
+        Vector2 currentPos = t.position;
+
         if (target == null) return;
         // Flip en eje X según dirección
-        if (target.position.x < 0)
+        if (target.position.x < currentPos.x)
             spriteRenderer.flipX = true;
-        else if (target.position.x > 0)
+        else if (target.position.x > currentPos.x)
             spriteRenderer.flipX = false;
 
         var pos = fish.GetTransform().position;

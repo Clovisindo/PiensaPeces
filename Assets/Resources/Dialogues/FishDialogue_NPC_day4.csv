@@ -1,13 +1,13 @@
 ID;Text;Condition
-1;Que dia tan extraño...;Time > 30
+1;Que dia tan raro...;Time > 30
 2;¿Me ha saludado ese pez?;Time > 60
 3;¿Conozco a ese pez?;Time > 120
 4;¿Que dia es hoy?;Random
-5;Pollock.;Random
+5;Pollock;Random
 6;¿Que dia es hoy?;Random
 7;¿Estoy soñando?;Random
-8;Nadando... estoy.;Always
-9;Hola.;Always
-10;Buenas noches.;Always
-11;BONITO dia.;Always
-12;Parece que no pase el tiempo.;Always
+8;Nadando... estoy;Always
+9;Hola;Always
+10;Buenas noches;Always
+11;BONITO dia;Always
+12;Parece que no pase el tiempo;Always

@@ -1,19 +1,19 @@
 ID;Text;Condition
 1;Tengo hambre...;IsHungry
 2;¿Habra comida por aquí?;IsHungry
-3;Ojala un poco de comida.;IsHungry
+3;Ojala un poco de comida;IsHungry
 4;Que dia tan BONITO;Time > 30
-5;No me suenan estos peces.;Time > 60
+5;No me suenan estos peces;Time > 60
 6;¿Donde estan mis amigos?;Time > 120
 7;¿Estoy soñando?;Time > 360
-8;Ojala vuelva pronto.;Time > 360
+8;Ojala vuelva pronto;Time > 360
 9;¿Que ha sido ese ruido?;Time > 360
 10;Estoy pensando en nada;Random
 11;Antes estaba en otro sitio...;Random
 12;Me he olvidado de algo...;Random
 13;No recuerdo de donde vengo...;Random
-14;Nadando por la vida.;Always
-15;Este sitio me resulta familiar... y a la vez no.;Always
+14;Nadando por la vida;Always
+15;Este sitio me resulta familiar... y a la vez no;Always
 16;¿No habia algo antes ahi fuera?;Always
 17;¿Ya ha llegado?;Always
 18;Cuánto mas tendre que esperarle...;Always

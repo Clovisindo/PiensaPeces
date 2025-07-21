@@ -1,8 +1,8 @@
 ID;Text;Condition
-1;Que dia tan extraño...;Time > 30
-2;Pollock.;Random
-3;Cuantos colores.;Random
-4;Cuanta comida.;Random
-5;Hola.;Always
-6;Buenas noches.;Always
-7;BONITO dia.;Always
+1;Que dia tan raro...;Time > 30
+2;Pollock;Random
+3;Cuantos colores;Random
+4;Cuanta comida;Random
+5;Hola;Always
+6;Buenas noches;Always
+7;BONITO dia;Always
