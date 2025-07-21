@@ -1,0 +1,6 @@
+ID;Text;Condition
+1;Tengo hambre...;IsHungry
+2;No se donde estoy;Time > 30
+3;No se como he llegado aqui.;Time > 60
+4;¿Que ha pasado?;Random
+5;Cuánto mas tendre que esperarle...;Always

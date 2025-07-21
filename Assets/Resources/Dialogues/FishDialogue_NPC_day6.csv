@@ -1,0 +1,4 @@
+ID;Text;Condition
+1;Que desanimado le veo;Time > 30
+2;¿Que le pasa al pececito?;Random
+3;Que dia mas raro.;Always

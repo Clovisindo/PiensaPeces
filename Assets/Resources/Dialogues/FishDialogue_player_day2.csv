@@ -1,7 +1,8 @@
 ID;Text;Condition
-1;Tengo hambre...;IsHungry
-2;Qué día tan bonito;Time > 30
-3;Estoy pensando en nada;Random
-4;Nadando por la vida.;Always
-5;Nadando dia1.;Day1
-6;Nadando dia2.;Day2
+1;¿Habra comida por aqui?;IsHungry
+2;Que dia tan BONITO;Time > 30
+3;No me suenan estos peces.;Time > 60
+4;¿Que ha sido ese ruido?;Time > 360
+5;Estoy pensando en nada;Random
+6;Antes estaba en otro sitio...;Random
+7;Nadando por la vida.;Always
