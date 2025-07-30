@@ -1,14 +1,11 @@
-﻿using Assets.Scripts.Events.Bindings;
-using Assets.Scripts.Events.EventBus;
-using Assets.Scripts.Events.Events;
-using Assets.Scripts.Services.Enviroment;
-using Assets.Scripts.Utilities;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using Game.Events;
+using Game.Utilities;
+using Game.Data;
 
-namespace Assets.Scripts.Core
+namespace Game.Core
 {
     public class AudioEnviromentSystem : MonoBehaviour
     {
@@ -31,9 +28,6 @@ namespace Assets.Scripts.Core
 
             StartCoroutine(CheckAudioConditionsCoroutine(60));
         }
-
-        public void OnFishFed() => fishFedCount++;// ToDo: no implementado
-
 
         public void Update()
         {

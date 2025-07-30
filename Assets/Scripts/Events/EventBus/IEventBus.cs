@@ -1,7 +1,4 @@
-﻿using Assets.Scripts.Events.Bindings;
-using Assets.Scripts.Events.Events;
-
-namespace Assets.Scripts.Events.EventBus
+﻿namespace Game.Events
 {
     public interface IEventBus<T> where T : IEvent
     {

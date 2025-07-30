@@ -1,9 +1,8 @@
-﻿using Assets.Scripts.Events.EventBus;
-using Assets.Scripts.Events.Events;
+﻿using Game.Events;
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Components
+namespace Game.Fishes
 {
     public class HungerComponent : MonoBehaviour
     {

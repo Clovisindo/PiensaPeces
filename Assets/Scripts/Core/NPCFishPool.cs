@@ -1,12 +1,12 @@
-﻿using Assets.Scripts.Events.EventBus;
-using Assets.Scripts.Events.Events;
-using Assets.Scripts.Fish.NPC;
-using Assets.Scripts.Services.Bounds;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Game.Services;
+using Game.Fishes;
+using Game.Events;
+using Game.Data;
 
-namespace Assets.Scripts.Core
+namespace Game.Core
 {
     public class NPCFishPool : MonoBehaviour
     {

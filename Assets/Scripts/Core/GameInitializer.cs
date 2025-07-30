@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
-using Assets.Scripts.Events.Events;
-using Assets.Scripts.Events.EventBus;
-using Assets.Scripts.Services.Bounds;
-using Assets.Scripts.Services.FoodService;
-using Assets.Scripts.Fish.NPC;
 using System;
-using Assets.Scripts.Services.Enviroment;
 using System.Linq;
+using Game.Services;
+using Game.UI;
+using Game.Fishes;
+using Game.FishFood;
+using Game.Events;
 
-namespace Assets.Scripts.Core
+namespace Game.Core
 {
     public class GameInitializer : MonoBehaviour
     {

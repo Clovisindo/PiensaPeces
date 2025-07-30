@@ -1,9 +1,8 @@
-﻿using Assets.Scripts.Core;
-using Assets.Scripts.Services.Bounds;
+﻿using Game.Services;
 using UnityEngine;
 
-namespace Assets.Scripts.Fish
-{
+namespace Game.Fishes
+{ 
     public interface IExitableFish
     {
         void MoveInDirection(Transform transform, Vector2 direction, float speed);

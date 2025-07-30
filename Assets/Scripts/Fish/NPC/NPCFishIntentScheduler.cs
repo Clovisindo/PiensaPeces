@@ -1,9 +1,8 @@
-﻿using Assets.Scripts.Fish.Player;
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Fish.NPC
+namespace Game.Fishes
 {
     public class NPCFishIntentScheduler : IFishIntentScheduler
     {

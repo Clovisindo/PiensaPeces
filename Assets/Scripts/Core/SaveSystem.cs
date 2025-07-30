@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Core
+namespace Game.Core
 {
     public class SaveSystem
     {

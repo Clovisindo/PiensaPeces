@@ -1,6 +1,9 @@
-public interface IState
+namespace Game.Core
 {
-    void Enter();
-    void Update();
-    void Exit();
+    public interface IState
+    {
+        void Enter();
+        void Update();
+        void Exit();
+    }
 }

@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Utilities;
+﻿using Game.Data;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.Services.Enviroment
+namespace Game.Services 
 {
     public class EnviromentSystem : MonoBehaviour
     {

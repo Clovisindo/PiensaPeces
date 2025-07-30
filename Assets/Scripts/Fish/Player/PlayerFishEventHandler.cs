@@ -1,9 +1,7 @@
-﻿using Assets.Scripts.Components;
-using Assets.Scripts.Events.Bindings;
-using Assets.Scripts.Events.EventBus;
-using Assets.Scripts.Events.Events;
+﻿using Game.Events;
+using Game.Services;
 
-namespace Assets.Scripts.Fish.Player
+namespace Game.Fishes
 {
     public class PlayerFishEventHandler
     {

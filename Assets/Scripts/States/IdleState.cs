@@ -1,9 +1,10 @@
 ﻿
 
-using UnityEngine;
+using Game.Core;
+using Game.Fishes;
 
-namespace Assets.Scripts.States
-{
+namespace Game.States
+{ 
     public class IdleState : IState
     {
         private readonly BaseFishController fish;

@@ -1,9 +1,7 @@
-﻿using Assets.Scripts.Events.Bindings;
-using Assets.Scripts.Events.Events;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Events.EventBus
+namespace Game.Events
 {
     public class EventBus<T> : IEventBus<T> where T : IEvent
     {

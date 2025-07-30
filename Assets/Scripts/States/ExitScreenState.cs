@@ -1,10 +1,8 @@
-﻿using Assets.Scripts.Core;
-using Assets.Scripts.Fish;
-using Assets.Scripts.Services.Bounds;
-using Assets.Scripts.Utilities;
+﻿using Game.Core;
+using Game.Utilities;
 using UnityEngine;
 
-namespace Assets.Scripts.States
+namespace Game.States
 {
     public class ExitScreenState : IState
     {

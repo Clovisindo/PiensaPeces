@@ -1,8 +1,8 @@
-﻿using Assets.Scripts.Fish.Dialogue;
+﻿using Game.Data;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Assets.Scripts.Core
+namespace Game.Core
 {
     public class DialogueLoaderCsv
     {

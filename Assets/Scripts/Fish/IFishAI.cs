@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.Fish.Player;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Fish
+namespace Game.Fishes
 {
     public interface IFishAI
     {

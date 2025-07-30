@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Assets.Scripts.Fish
+namespace Game.Fishes
 {
     public interface IFishIntentScheduler
     {

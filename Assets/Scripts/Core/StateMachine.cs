@@ -1,15 +1,18 @@
 ﻿using System;
 
-public class StateMachine
+namespace Game.Core
 {
-    public IState currentState {get;private set;}
-
-    public void ChangeState(IState newState)
+    public class StateMachine
     {
-        currentState?.Exit();
-        currentState = newState;
-        currentState.Enter();
-    }
+        public IState currentState { get; private set; }
 
-    public void Update() => currentState?.Update();
+        public void ChangeState(IState newState)
+        {
+            currentState?.Exit();
+            currentState = newState;
+            currentState.Enter();
+        }
+
+        public void Update() => currentState?.Update();
+    }
 }

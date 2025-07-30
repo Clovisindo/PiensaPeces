@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.Services.FoodService
+namespace Game.FishFood
 {
     public class FoodManagerService
     {
