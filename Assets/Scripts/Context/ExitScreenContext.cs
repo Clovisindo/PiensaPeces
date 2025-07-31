@@ -1,21 +1,21 @@
-﻿using Game.Fishes;
+﻿using Game.FishLogic;
 using Game.Services;
 using UnityEngine;
 
-namespace Game.States 
+namespace Game.Context 
 {
     public class ExitScreenContext
     {
         public Transform Transform { get; }
         public IBoundsService BoundsService { get; }
-        public IExitableFish Fish { get; }
+        public IExitable ExitBehavior { get; }
         public float Speed { get; }
 
-        public ExitScreenContext(Transform transform, IBoundsService boundsService, IExitableFish fish, float speed)
+        public ExitScreenContext(Transform transform, IBoundsService boundsService, IExitable exitBehavior, float speed)
         {
             Transform = transform;
             BoundsService = boundsService;
-            Fish = fish;
+            ExitBehavior = exitBehavior;
             Speed = speed;
         }
     }

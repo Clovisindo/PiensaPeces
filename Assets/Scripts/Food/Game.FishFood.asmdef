@@ -1,3 +1,18 @@
 {
-	"name": "Game.FishFood"
+    "name": "Game.FishFood",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d6e6b3929d2cb4d4aa62d9ea2360c649",
+        "GUID:2bcb658447ff47840ba0cec99d13ba60",
+        "GUID:6879af18806279244a0c97ab9585737b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

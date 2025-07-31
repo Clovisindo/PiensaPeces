@@ -1,10 +1,11 @@
-﻿using Game.Services;
+﻿using Game.FishLogic;
+using Game.Services;
 using UnityEngine;
 
 
 namespace Game.Fishes
 {
-    internal class ExitableFish : IExitableFish
+    public class ExitableFish : IExitable
     {
         private NPCFishController controller;
         private NPCFishPool pool;

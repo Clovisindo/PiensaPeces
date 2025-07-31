@@ -1,3 +1,21 @@
 {
-	"name": "Game.States"
+    "name": "Game.States",
+    "rootNamespace": "",
+    "references": [
+        "GUID:30d43c2ef1e812e41815bfe7bc671898",
+        "GUID:2bcb658447ff47840ba0cec99d13ba60",
+        "GUID:6879af18806279244a0c97ab9585737b",
+        "GUID:6c2f96a66a4c93847b737c1ff7df0e1e",
+        "GUID:2d0ec80755554774980e6ce7724dc844",
+        "GUID:056da8f58f1e17c47981889b0ee11e07"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

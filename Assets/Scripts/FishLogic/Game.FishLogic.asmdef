@@ -1,8 +1,8 @@
 {
-    "name": "Game.Events",
+    "name": "Game.FishLogic",
     "rootNamespace": "",
     "references": [
-        "GUID:6879af18806279244a0c97ab9585737b"
+        "GUID:2bcb658447ff47840ba0cec99d13ba60"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Game.Events;
 using Game.Services;
+using Game.Data;
 
 namespace Game.FishFood
 {

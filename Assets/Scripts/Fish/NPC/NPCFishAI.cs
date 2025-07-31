@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Fish.Player;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Fishes
 {

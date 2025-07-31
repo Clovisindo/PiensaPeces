@@ -2,11 +2,11 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Game.Services;
-using Game.Fishes;
 using Game.Events;
 using Game.Data;
+using Game.FishLogic;
 
-namespace Game.Core
+namespace Game.Fishes
 {
     public class NPCFishPool : MonoBehaviour
     {
@@ -16,6 +16,8 @@ namespace Game.Core
         [SerializeField] private int poolSize = 1;
         [SerializeField] private int daysPassed;
 
+        private IFishStateFactory FishStateFactory;
+
         [Header("Fish Configs")]
         [SerializeField] private FishConfig[] fishConfigs;
 
@@ -23,8 +25,9 @@ namespace Game.Core
         private List<NPCFishController> activeFish = new();
         private EventBus<SFXEvent> sfxEventBus;
 
-        public void Init(IBoundsService boundservice, FishConfig[] fishConfigs, int daysPassed, EventBus<SFXEvent> sfxEventBus)
+        public void Init(IBoundsService boundservice, IFishStateFactory fishStateFactory, FishConfig[] fishConfigs, int daysPassed, EventBus<SFXEvent> sfxEventBus)
         {
+            this.FishStateFactory = fishStateFactory;
             this.boundsService = boundservice;
             this.fishConfigs = fishConfigs;
             this.daysPassed = daysPassed;
@@ -58,7 +61,7 @@ namespace Game.Core
 
                 var config = GetRandomFishConfig();
                 config.Init();
-                fish.Init(config, this, boundsService, daysPassed, sfxEventBus);
+                fish.Init(config, this, FishStateFactory, boundsService, daysPassed, sfxEventBus);
                 fish.ResetFish();
 
                 activeFish.Add(fish);

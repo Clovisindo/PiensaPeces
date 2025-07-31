@@ -1,6 +1,11 @@
 ﻿using Game.Components;
+using Game.Context;
+using Game.Core;
+using Game.Data;
 using Game.Events;
+using Game.FishLogic;
 using Game.Services;
+using Game.StateMachineManager;
 using UnityEngine;
 
 namespace Game.Fishes
@@ -15,13 +20,15 @@ namespace Game.Fishes
         private IFishIntentScheduler intentScheduler;
         private ExitableFish exitFishComponent;
         private FishTalker talker;
+        private IFishStateFactory FishStateFactory;
 
         private float lifeTime;
         private float maxLifeTime;
-        public void Init(FishConfig config, NPCFishPool pool, IBoundsService boundsService, int daysPassed, EventBus<SFXEvent> sfxEventBus)
+        public void Init(FishConfig config, NPCFishPool pool, IFishStateFactory fishFactory, IBoundsService boundsService, int daysPassed, EventBus<SFXEvent> sfxEventBus)
         {
             this.pool = pool;
             this.boundsService = boundsService;
+            this.FishStateFactory = fishFactory;
 
             var renderer = GetComponent<SpriteRenderer>();
             if (renderer != null && config.fishSprite != null)
@@ -64,7 +71,7 @@ namespace Game.Fishes
             lifeTime = 0;
             limiter.enabled = true;
             talker.ResetTalker();
-            stateMachine.ChangeState(new SwimState(this, boundsService, stateMachine, speed));
+            stateMachine.ChangeState(FishStateFactory.CreateSwimState(this, boundsService, speed));
         }
 
         private bool LifeTimeBehaviour()
@@ -80,8 +87,9 @@ namespace Game.Fishes
         {
             if (LifeTimeBehaviour())
             {
-                var exitContext = new ExitScreenContext(transform, boundsService, exitFishComponent, speed);
-                stateManager.ApplyState(new ExitScreenState(exitContext));
+                //var exitContext = new ExitScreenContext(transform, boundsService, this.exitFishComponent, speed);
+                //stateManager.ApplyState(new ExitScreenState(exitContext));
+                stateManager.ApplyState(FishStateFactory.CreateExitState(transform, boundsService, this.exitFishComponent, speed));
                 intentScheduler.Stop();
                 limiter.enabled = false;
             }
@@ -90,11 +98,13 @@ namespace Game.Fishes
                 switch (intent)
                 {
                     case FishIntent.SwimRandomly:
-                        stateManager.ApplyState(new SwimState(this, boundsService, stateMachine, speed));
+                        //stateManager.ApplyState(new SwimState(this, boundsService, speed));
+                        stateManager.ApplyState(FishStateFactory.CreateSwimState(this,boundsService,speed));
                         break;
                     case FishIntent.Idle:
                     default:
-                        stateManager.ApplyState(new IdleState(this, stateMachine));
+                        //stateManager.ApplyState(new IdleState(this));
+                        stateManager.ApplyState(FishStateFactory.CreateIdleState(this));
                         break;
                 }
             }

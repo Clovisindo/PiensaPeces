@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.StateMachineManager;
+using UnityEngine;
 
 namespace Game.Core
 {

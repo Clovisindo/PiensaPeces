@@ -1,5 +1,11 @@
-﻿using Game.Events;
-using System;
+﻿using Game.Components;
+using Game.Core;
+using Game.Data;
+using Game.Events;
+using Game.FishFood;
+using Game.FishLogic;
+using Game.Services;
+using Game.StateMachineManager;
 using UnityEngine;
 
 namespace Game.Fishes
@@ -13,13 +19,15 @@ namespace Game.Fishes
         private PlayerFishEventHandler eventHandler;
         private IFishIntentScheduler intentScheduler;
         private FishTalker talker;
+        private IFishStateFactory FishStateFactory;
         //temporal
         [SerializeField] FishConfig config;
 
-        public void Init(FishConfig playerConfig, IBoundsService boundsService, FoodManagerService foodManagerService, SFXManager sFXManager, int daysPassed,
+        public void Init(FishConfig playerConfig, IFishStateFactory fishFactory, IBoundsService boundsService, FoodManagerService foodManagerService, SFXManager sFXManager, int daysPassed,
             EventBus<FoodEaten> foodEatentEventBus, EventBus<FoodSpawned> foodSpawnedEventBus, EventBus<HungryEvent> hungryEventBus, EventBus<SFXEvent> sfxEventBus)
         {
             this.config = playerConfig;
+            this.FishStateFactory = fishFactory;
             limiter = GetComponent<TransformLimiter>();
             hungerComponent = GetComponent<HungerComponent>();
             talker = GetComponent<FishTalker>();
@@ -32,7 +40,8 @@ namespace Game.Fishes
 
             stateMachine = new StateMachine();
             stateManager = new StateManager(stateMachine);
-            stateManager.ApplyState(new IdleState(this, stateMachine));
+            //stateManager.ApplyState(new IdleState(this));
+            stateManager.ApplyState(FishStateFactory.CreateIdleState(this));
 
             this.boundsService = boundsService;
             limiter.Init(boundsService);
@@ -59,16 +68,17 @@ namespace Game.Fishes
             switch (intent)
             {
                 case FishIntent.SwimRandomly:
-                    stateManager.ApplyState(new SwimState(this, boundsService, stateMachine, speed));
+                    //stateManager.ApplyState(new SwimState(this, boundsService, speed));
+                    stateManager.ApplyState(FishStateFactory.CreateSwimState(this, boundsService, speed));
                     break;
                 case FishIntent.FollowFood:
                     var target = ai.GetTargetFood();
                     if (target != null)
-                        stateManager.ApplyState(new FollowTargetState(this, stateMachine, speed, target));
+                        stateManager.ApplyState(FishStateFactory.CreateFollowState(this, speed, target));
                     break;
                 case FishIntent.Idle:
                 default:
-                    stateManager.ApplyState(new IdleState(this, stateMachine));
+                    stateManager.ApplyState(FishStateFactory.CreateIdleState(this));
                     break;
             }
         }

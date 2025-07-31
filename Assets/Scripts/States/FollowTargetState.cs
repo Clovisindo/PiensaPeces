@@ -1,24 +1,22 @@
-﻿using Game.Core;
-using Game.Fishes;
+﻿using Game.FishLogic;
+using Game.StateMachineManager;
 using UnityEngine;
 
 namespace Game.States
 {
     public class FollowTargetState : IState
     {
-        private readonly BaseFishController fish;
-        private readonly StateMachine stateMachine;
+        private readonly IFish fish;
         private readonly float speed;
         private readonly Transform target;
         private SpriteRenderer spriteRenderer;
 
-        public FollowTargetState(BaseFishController fish, StateMachine stateMachine, float speed, Transform target)
+        public FollowTargetState(IFish fish, float speed, Transform target)
         {
             this.fish = fish;
-            this.stateMachine = stateMachine;
             this.speed = speed;
             this.target = target;
-            this.spriteRenderer = fish.GetComponent<SpriteRenderer>();
+            this.spriteRenderer = fish.GetSpriteRenderer();
         }
 
         public void Enter()

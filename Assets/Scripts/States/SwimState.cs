@@ -1,6 +1,6 @@
-﻿using Game.Core;
-using Game.Fishes;
+﻿using Game.FishLogic;
 using Game.Services;
+using Game.StateMachineManager;
 using UnityEngine;
 
 
@@ -8,9 +8,8 @@ namespace Game.States
 {
     public class SwimState : IState
     {
-        private readonly BaseFishController fish;
+        private readonly IFish fish;
         private readonly IBoundsService boundsService;
-        private readonly StateMachine stateMachine;
         private readonly float speed;
         private readonly SpriteRenderer spriteRenderer;
         private Vector2 destination;
@@ -18,13 +17,12 @@ namespace Game.States
         private float timeSinceLastDirectionChange = 0f;
         private const float minDirectionChangeInterval = 1.0f;
 
-        public SwimState(BaseFishController fish, IBoundsService boundsService, StateMachine stateMachine, float speed)
+        public SwimState(IFish fish, IBoundsService boundsService,  float speed)
         {
             this.fish = fish;
             this.boundsService = boundsService;
-            this.stateMachine = stateMachine;
             this.speed = speed;
-            this.spriteRenderer = fish.GetComponent<SpriteRenderer>();
+            this.spriteRenderer = fish.GetSpriteRenderer();
         }
 
         public void Enter()

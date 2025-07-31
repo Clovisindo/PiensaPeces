@@ -6,8 +6,11 @@ using Game.UI;
 using Game.Fishes;
 using Game.FishFood;
 using Game.Events;
+using Game.Data;
+using Game.Core;
+using Game.States;
 
-namespace Game.Core
+namespace Game.Runtime
 {
     public class GameInitializer : MonoBehaviour
     {
@@ -47,9 +50,9 @@ namespace Game.Core
             var boundsService = new FishTankBoundsService(fishTankScaler.GetCollider());
             foodManagerService = new FoodManagerService();
 
-            npcFishPool.Init(boundsService, loadContextData.FishConfigsCurrentDay, daysPassed, sfxEventBus);
+            npcFishPool.Init(boundsService, new FishStateFactory(), loadContextData.FishConfigsCurrentDay, daysPassed, sfxEventBus);
             playerConfig.Init();
-            fishPlayer.Init(playerConfig,boundsService, foodManagerService, sfxManager, daysPassed, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
+            fishPlayer.Init(playerConfig, new FishStateFactory(), boundsService, foodManagerService, sfxManager, daysPassed, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
             spawnerController.Init( boundsService,foodManagerService, foodForCurrentDay, foodEatentEventBus, FoodSpawnedEventBus);
         }
     }

@@ -1,5 +1,5 @@
-﻿using Game.Core;
-using Game.Utilities;
+﻿using Game.Context;
+using Game.StateMachineManager;
 using UnityEngine;
 
 namespace Game.States
@@ -21,11 +21,11 @@ namespace Game.States
 
         public void Update()
         {
-            context.Fish.MoveInDirection(context.Transform ,exitDirection, context.Speed);
+            context.ExitBehavior.MoveInDirection(context.Transform ,exitDirection, context.Speed);
 
-            if (context.Fish.IsOutOfBounds(context.Transform, context.BoundsService))
+            if (context.ExitBehavior.IsOutOfBounds(context.Transform, context.BoundsService))
             {
-                context.Fish.NotifyExited();
+                context.ExitBehavior.NotifyExited();
             }
         }
 
