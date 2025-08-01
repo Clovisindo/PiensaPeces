@@ -8,7 +8,7 @@ namespace Game.States
 {
     public class FishStateFactory : IFishStateFactory
     {
-        public IState CreateSwimState(IFish fish, IBoundsService boundsService, float speed) => new SwimState(fish, fish.GetBoundsService(), speed);
+        public IState CreateSwimState(IFish fish, IBoundsService boundsService, float speed) => new SwimState(fish, boundsService, speed);
 
         public IState CreateIdleState(IFish fish) => new IdleState(fish);
 

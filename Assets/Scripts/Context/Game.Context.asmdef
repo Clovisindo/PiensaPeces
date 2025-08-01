@@ -2,7 +2,6 @@
     "name": "Game.Context",
     "rootNamespace": "",
     "references": [
-        "GUID:ad6b3821427bbcd408991bf3e75452d4",
         "GUID:2bcb658447ff47840ba0cec99d13ba60",
         "GUID:2d0ec80755554774980e6ce7724dc844"
     ],

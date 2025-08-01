@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d5f0e600ecb52740ac51f1ff31fc3d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bbe558a831815943ac2e53ce87df987, type: 3}
   m_Name: BottleEnvConfig
   m_EditorClassIdentifier: 
   prefab: {fileID: 1573382387277624511, guid: 58ddd7defccfc404c992b596abfb2780, type: 3}

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8753745cb957e4f809c6f63d69ccfe, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d369f1c3b5a7a84faa1d043f5b2e88c, type: 3}
   m_Name: FishEnvironmentDayConfigDay4
   m_EditorClassIdentifier: 
   dayNumber: 4

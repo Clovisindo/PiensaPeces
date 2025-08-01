@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2627550ec8cabde4d8c65f5f226f62ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b27b323bc0fac24390b6ef8b1cdac8e, type: 3}
   m_Name: Day 5 FoodEnvConfig 2
   m_EditorClassIdentifier: 
   prefab: {fileID: 1286301897233729352, guid: 2879ec217631141419e5b85936605046, type: 3}

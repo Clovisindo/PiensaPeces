@@ -197,7 +197,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 99079482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2de5d1903c06d96439ae65193b69194c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8b0b17e7b19ad44b14a1c2e556ebce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &99079484
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 347493654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e888e8bd81873c41af21ff306752ac7, type: 3}
+  m_Script: {fileID: 11500000, guid: 341c37d4559a84f43be142f061edfe8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   npcFishPrefab: {fileID: 3926834393726923840, guid: e716193aa2810934792adb65c6d0e99a, type: 3}
@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 862757929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54a9c7e521d94f240be5e7789bfc3905, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d9f3434820b78e49a28005591de254f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enviromentSystem: {fileID: 1028825763}
@@ -1243,7 +1243,7 @@ MonoBehaviour:
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
   audioEnvSystem: {fileID: 36836005}
-  firstGameLaunch: 2025-07-21
+  firstGameLaunch: 2025-08-01
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0
@@ -2251,6 +2251,10 @@ PrefabInstance:
     - target: {fileID: 1046748502190211816, guid: 1f5380c337946e8439f34eead9a387b1, type: 3}
       propertyPath: m_Name
       value: PlayerFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 3596425384113811399, guid: 1f5380c337946e8439f34eead9a387b1, type: 3}
+      propertyPath: maxSpeakInterval
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8049125113445960094, guid: 1f5380c337946e8439f34eead9a387b1, type: 3}
       propertyPath: m_LocalPosition.x

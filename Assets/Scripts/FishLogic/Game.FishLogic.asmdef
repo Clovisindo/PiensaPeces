@@ -2,7 +2,8 @@
     "name": "Game.FishLogic",
     "rootNamespace": "",
     "references": [
-        "GUID:2bcb658447ff47840ba0cec99d13ba60"
+        "GUID:2bcb658447ff47840ba0cec99d13ba60",
+        "GUID:6c2f96a66a4c93847b737c1ff7df0e1e"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

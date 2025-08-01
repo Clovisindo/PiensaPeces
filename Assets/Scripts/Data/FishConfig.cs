@@ -19,7 +19,7 @@ namespace Game.Data
 
         public void Init()
         {
-            maxLifetime = maxLifetime * Global.Instance.GAME_SPEED * 0.5f;
+            maxLifetime = UnityEngine.Random.Range(5f, 30f) * Global.Instance.GAME_SPEED * 0.5f;
             speed = UnityEngine.Random.Range(0.3f, 1.2f);
             intervalEvaluateIntent = UnityEngine.Random.Range(5f, 10f) * Global.Instance.GAME_SPEED * 0.5f;
             intervalTalking = UnityEngine.Random.Range(10f, 25f) * Global.Instance.GAME_SPEED;
