@@ -1,9 +1,9 @@
-﻿namespace Assets.Scripts.Fish.Dialogue
-{
-    using System.Collections;
-    using TMPro;
-    using UnityEngine;
+﻿using System.Collections;
+using TMPro;
+using UnityEngine;
 
+namespace Game.Fishes
+{
     public class SpeechBubbleUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI dialogueText;

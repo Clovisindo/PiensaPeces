@@ -1,31 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuManager : MonoBehaviour
+namespace Game.UI
 {
-    public GameObject pauseScreen;
-
-    void Update()
+    public class MenuManager : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseUnpause();
-        }
-    }
+        public GameObject pauseScreen;
 
-    public void PauseUnpause()
-    {
-        if (pauseScreen.activeSelf == false)
+        void Update()
         {
-            pauseScreen.SetActive(true);
-            Time.timeScale = 0f;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                PauseUnpause();
+            }
         }
-        else
-        {
 
-            pauseScreen.SetActive(false);
-            Time.timeScale = 1f;
+        public void PauseUnpause()
+        {
+            if (pauseScreen.activeSelf == false)
+            {
+                pauseScreen.SetActive(true);
+                Time.timeScale = 0f;
+            }
+            else
+            {
+
+                pauseScreen.SetActive(false);
+                Time.timeScale = 1f;
+            }
         }
     }
 }

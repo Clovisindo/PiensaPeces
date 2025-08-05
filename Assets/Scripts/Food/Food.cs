@@ -1,40 +1,40 @@
-using Assets.Scripts.Events.EventBus;
-using Assets.Scripts.Events.Events;
-using Assets.Scripts.Food;
-using Assets.Scripts.Services.FoodService;
+using Game.Events;
 using UnityEngine;
 
-public class Food : MonoBehaviour
+namespace Game.FishFood
 {
-    [SerializeField] FoodFallBehaviour foodFallBehaviour;
-    
-    private FoodManagerService foodManager;
-    private IEventBus<FoodEaten> foodEatentBus;
-
-    public void Init(FoodManagerService foodManager,Sprite foodSprite , float foodFallSpeed, float minY,  IEventBus<FoodEaten> foodEatentBus)
+    public class Food : MonoBehaviour
     {
-        this.foodManager = foodManager;
-        this.foodEatentBus = foodEatentBus;
+        [SerializeField] FoodFallBehaviour foodFallBehaviour;
 
-        this.GetComponent<SpriteRenderer>().sprite = foodSprite;
+        private FoodManagerService foodManager;
+        private IEventBus<FoodEaten> foodEatentBus;
 
-        foodManager.RegisterFood(gameObject);
-        foodFallBehaviour.Init(foodFallSpeed, minY);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Colisión con: " + other.name);
-        if (other.CompareTag("PlayerFish"))
+        public void Init(FoodManagerService foodManager, Sprite foodSprite, float foodFallSpeed, float minY, IEventBus<FoodEaten> foodEatentBus)
         {
-            foodEatentBus.Raise(new FoodEaten());
-            foodManager.UnregisterFood(gameObject);
-            Destroy(gameObject);
-        }
-    }
+            this.foodManager = foodManager;
+            this.foodEatentBus = foodEatentBus;
 
-    private void OnDestroy()
-    {
-        foodManager?.UnregisterFood(gameObject); 
+            this.GetComponent<SpriteRenderer>().sprite = foodSprite;
+
+            foodManager.RegisterFood(gameObject);
+            foodFallBehaviour.Init(foodFallSpeed, minY);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Debug.Log("Colisión con: " + other.name);
+            if (other.CompareTag("PlayerFish"))
+            {
+                foodEatentBus.Raise(new FoodEaten());
+                foodManager.UnregisterFood(gameObject);
+                Destroy(gameObject);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foodManager?.UnregisterFood(gameObject);
+        }
     }
 }

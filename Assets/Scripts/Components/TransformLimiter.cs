@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using Assets.Scripts.Services.Bounds;
+using Game.Services;
 
-namespace Assets.Scripts.Components
+namespace Game.Components
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class TransformLimiter : MonoBehaviour

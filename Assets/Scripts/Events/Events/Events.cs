@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.Services.Enviroment;
+﻿using Game.Data;
 using UnityEngine;
 
-namespace Assets.Scripts.Events.Events
+namespace Game.Events
 {
     public interface IEvent{ }
     public struct FoodEaten : IEvent { }

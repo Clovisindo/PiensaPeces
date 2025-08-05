@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ec4e9c20603ad458190345f05cf9e4, type: 3}
+  m_Script: {fileID: 11500000, guid: f320ebb91afaa6f45a05794d0cd573ea, type: 3}
   m_Name: day7 FishConfig rare 5
   m_EditorClassIdentifier: 
   fishSprite: {fileID: 21300000, guid: ba8e924441b056c4ca1a27ef4569d91d, type: 3}

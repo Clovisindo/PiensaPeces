@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Fish.Dialogue
+﻿namespace Game.Fishes
 {
     public interface IDialogueEvaluator
     {

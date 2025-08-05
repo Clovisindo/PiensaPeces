@@ -1,10 +1,8 @@
-﻿using Assets.Scripts.Core;
-using Assets.Scripts.Fish;
-using Assets.Scripts.Services.Bounds;
-using Assets.Scripts.Utilities;
+﻿using Game.Context;
+using Game.StateMachineManager;
 using UnityEngine;
 
-namespace Assets.Scripts.States
+namespace Game.States
 {
     public class ExitScreenState : IState
     {
@@ -23,11 +21,11 @@ namespace Assets.Scripts.States
 
         public void Update()
         {
-            context.Fish.MoveInDirection(context.Transform ,exitDirection, context.Speed);
+            context.ExitBehavior.MoveInDirection(context.Transform ,exitDirection, context.Speed);
 
-            if (context.Fish.IsOutOfBounds(context.Transform, context.BoundsService))
+            if (context.ExitBehavior.IsOutOfBounds(context.Transform, context.BoundsService))
             {
-                context.Fish.NotifyExited();
+                context.ExitBehavior.NotifyExited();
             }
         }
 

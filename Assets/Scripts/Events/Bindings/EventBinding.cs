@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.Events.Events;
-using System;
+﻿using System;
 
-namespace Assets.Scripts.Events.Bindings
+namespace Game.Events
 {
     internal interface IEventBinding<T>
     {

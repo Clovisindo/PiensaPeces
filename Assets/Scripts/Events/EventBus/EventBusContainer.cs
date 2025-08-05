@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.Events.Events;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Events.EventBus
+namespace Game.Events
 {
     public class EventBusContainer : MonoBehaviour
     {

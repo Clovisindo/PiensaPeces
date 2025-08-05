@@ -1,0 +1,16 @@
+{
+    "name": "Game.Events",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6879af18806279244a0c97ab9585737b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,46 +1,49 @@
-﻿using UnityEngine;
+﻿using Game.FishLogic;
+using Game.StateMachineManager;
+using UnityEngine;
 
-public class FollowTargetState : IState
+namespace Game.States
 {
-    private readonly BaseFishController fish;
-    private readonly StateMachine stateMachine;
-    private readonly float speed;
-    private readonly Transform target;
-    private SpriteRenderer spriteRenderer;
-
-    public FollowTargetState(BaseFishController fish, StateMachine stateMachine, float speed, Transform target)
+    public class FollowTargetState : IState
     {
-        this.fish = fish;
-        this.stateMachine = stateMachine;
-        this.speed = speed;
-        this.target = target;
-        this.spriteRenderer = fish.GetComponent<SpriteRenderer>();
-    }
+        private readonly IFish fish;
+        private readonly float speed;
+        private readonly Transform target;
+        private SpriteRenderer spriteRenderer;
 
-    public void Enter() 
-    {
-        Debug.Log("Entering Follow Target state.");
-    }
+        public FollowTargetState(IFish fish, float speed, Transform target)
+        {
+            this.fish = fish;
+            this.speed = speed;
+            this.target = target;
+            this.spriteRenderer = fish.GetSpriteRenderer();
+        }
 
-    public void Update()
-    {
-        var t = fish.GetTransform();
-        Vector2 currentPos = t.position;
+        public void Enter()
+        {
+            Debug.Log("Entering Follow Target state.");
+        }
 
-        if (target == null) return;
-        // Flip en eje X según dirección
-        if (target.position.x < currentPos.x)
-            spriteRenderer.flipX = true;
-        else if (target.position.x > currentPos.x)
-            spriteRenderer.flipX = false;
+        public void Update()
+        {
+            var t = fish.GetTransform();
+            Vector2 currentPos = t.position;
 
-        var pos = fish.GetTransform().position;
-        fish.GetTransform().position = Vector3.MoveTowards(pos, target.position, speed * Time.deltaTime);
-    }
+            if (target == null) return;
+            // Flip en eje X según dirección
+            if (target.position.x < currentPos.x)
+                spriteRenderer.flipX = true;
+            else if (target.position.x > currentPos.x)
+                spriteRenderer.flipX = false;
 
-    public void Exit() 
-    {
-        Debug.Log("Exiting Follow Target state.");
+            var pos = fish.GetTransform().position;
+            fish.GetTransform().position = Vector3.MoveTowards(pos, target.position, speed * Time.deltaTime);
+        }
+
+        public void Exit()
+        {
+            Debug.Log("Exiting Follow Target state.");
+        }
     }
 }
 

@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.Components;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Fish.Dialogue
+namespace Game.Fishes
 {
     public class PlayerFishDialogueEvaluator: IDialogueEvaluator
     {

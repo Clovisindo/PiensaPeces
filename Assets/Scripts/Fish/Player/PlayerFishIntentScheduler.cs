@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Game.Data;
+using System;
+using System.Collections;
+using UnityEngine;
 
-namespace Assets.Scripts.Fish.Player
+namespace Game.Fishes
 {
-    using Assets.Scripts.Fish.NPC;
-    using System;
-    using System.Collections;
-    using Unity.VisualScripting.FullSerializer;
-    using UnityEngine;
-
     public class PlayerFishIntentScheduler : IFishIntentScheduler
     {
         private readonly MonoBehaviour context;

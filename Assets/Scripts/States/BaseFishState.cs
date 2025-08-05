@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class BaseFishState : MonoBehaviour
+namespace Game.States
 {
-    public void Enter()
+    public class BaseFishState : MonoBehaviour
     {
-        Debug.Log("Entering base fish state.");
-    }
+        public void Enter()
+        {
+            Debug.Log("Entering base fish state.");
+        }
 
 
-    public void Exit()
-    {
-        Debug.Log("Exiting base fish state.");
+        public void Exit()
+        {
+            Debug.Log("Exiting base fish state.");
+        }
     }
 }

@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.Fish.Player;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.Fish.NPC
+namespace Game.Fishes
 {
     public class NPCFishAI : IFishAI
     {

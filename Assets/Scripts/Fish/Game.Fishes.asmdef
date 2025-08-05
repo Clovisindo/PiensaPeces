@@ -1,0 +1,26 @@
+{
+    "name": "Game.Fishes",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6879af18806279244a0c97ab9585737b",
+        "GUID:d6e6b3929d2cb4d4aa62d9ea2360c649",
+        "GUID:8857484bba3259e4ab75d04f18e65b9e",
+        "GUID:2bcb658447ff47840ba0cec99d13ba60",
+        "GUID:e514e5196689cfc42a7e5a532bc3727a",
+        "GUID:056da8f58f1e17c47981889b0ee11e07",
+        "GUID:74218cc8c8bd895469350864ec52d10a",
+        "GUID:6c2f96a66a4c93847b737c1ff7df0e1e",
+        "GUID:2d0ec80755554774980e6ce7724dc844",
+        "GUID:30d43c2ef1e812e41815bfe7bc671898",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

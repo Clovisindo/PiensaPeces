@@ -1,8 +1,7 @@
-﻿using Assets.Scripts.Components;
-using Assets.Scripts.Services.FoodService;
+﻿using Game.FishFood;
 using UnityEngine;
 
-namespace Assets.Scripts.Fish.Player
+namespace Game.Fishes
 {
     public enum FishIntent
     {

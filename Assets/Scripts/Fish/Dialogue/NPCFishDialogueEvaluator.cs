@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Fish.Dialogue
+namespace Game.Fishes
 {
     public class NPCFishDialogueEvaluator : IDialogueEvaluator
     {

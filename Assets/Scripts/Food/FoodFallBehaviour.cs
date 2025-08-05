@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Food
+namespace Game.FishFood
 {
     public class FoodFallBehaviour : MonoBehaviour
     {

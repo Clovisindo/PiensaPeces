@@ -1,17 +1,26 @@
-﻿using Assets.Scripts.Core;
-using Assets.Scripts.States;
+﻿using Game.Core;
+using Game.FishLogic;
+using Game.Services;
+using Game.StateMachineManager;
 using UnityEngine;
 
-public abstract class BaseFishController : MonoBehaviour
+namespace Game.Fishes
 {
-    protected StateMachine stateMachine;
-    protected StateManager stateManager;
-    [SerializeField] protected float speed;
-
-    protected virtual void Update()
+    public abstract class BaseFishController : MonoBehaviour, IFish
     {
-        stateMachine.Update();
-    }
+        protected StateMachine stateMachine;
+        protected StateManager stateManager;
+        [SerializeField] protected float speed;
 
-    public Transform GetTransform() => transform;
+        protected virtual void Update()
+        {
+            stateMachine.Update();
+        }
+
+        public Transform GetTransform() => transform;
+
+        public SpriteRenderer GetSpriteRenderer() => GetComponent<SpriteRenderer>();
+
+        public IBoundsService GetBoundsService() => GetComponent<IBoundsService>();
+    }
 }

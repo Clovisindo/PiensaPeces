@@ -1,18 +1,15 @@
-﻿
+﻿using Game.FishLogic;
+using Game.StateMachineManager;
 
-using UnityEngine;
-
-namespace Assets.Scripts.States
-{
+namespace Game.States
+{ 
     public class IdleState : IState
     {
-        private readonly BaseFishController fish;
-        private readonly StateMachine stateMachine;
+        private readonly IFish fish;
 
-        public IdleState(BaseFishController fish, StateMachine stateMachine)
+        public IdleState(IFish fish)
         {
             this.fish = fish;
-            this.stateMachine = stateMachine;
         }
 
         public void Enter()

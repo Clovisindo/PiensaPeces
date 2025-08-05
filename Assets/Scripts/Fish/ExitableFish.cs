@@ -1,11 +1,11 @@
-﻿using Assets.Scripts.Core;
-using Assets.Scripts.Services.Bounds;
+﻿using Game.FishLogic;
+using Game.Services;
 using UnityEngine;
 
 
-namespace Assets.Scripts.Fish
+namespace Game.Fishes
 {
-    internal class ExitableFish : IExitableFish
+    public class ExitableFish : IExitable
     {
         private NPCFishController controller;
         private NPCFishPool pool;

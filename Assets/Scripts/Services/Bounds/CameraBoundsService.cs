@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Services.Bounds
+namespace Game.Services
 {
     public class CameraBoundsService : IBoundsService
     {

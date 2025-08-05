@@ -1,13 +1,13 @@
-﻿using Assets.Scripts.Core;
-using Assets.Scripts.Events.EventBus;
-using Assets.Scripts.Events.Events;
-using Assets.Scripts.Fish.NPC;
+﻿using Game.Core;
+using Game.Data;
+using Game.Events;
+using Game.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.Fish.Dialogue
+namespace Game.Fishes
 {
     public class FishTalker : MonoBehaviour
     {

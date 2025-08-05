@@ -1,11 +1,15 @@
+using Game.FishFood;
 using UnityEngine;
 
-public class SpawnFoodButton : MonoBehaviour
+namespace Game.UI
 {
-    [SerializeField] private FoodSpawnerController spawner;
-
-    public void OnClick()
+    public class SpawnFoodButton : MonoBehaviour
     {
-        spawner.SpawnFood();
+        [SerializeField] private FoodSpawnerController spawner;
+
+        public void OnClick()
+        {
+            spawner.SpawnFood();
+        }
     }
 }

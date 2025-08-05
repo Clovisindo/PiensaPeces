@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Utilities
+﻿namespace Game.Utilities
 {
     public enum AudioTriggerCondition
     {
@@ -7,5 +7,4 @@
         FishFedTimes,
         CustomEvent
     }
-
 }
