@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Tests
+namespace Game.Core.Tests
 {
     public static class ScriptableObjectTestFactory
     {

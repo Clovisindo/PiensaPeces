@@ -1,4 +1,3 @@
-using Game.Core;
 using Game.Data;
 using Game.Events;
 using Game.Utilities;
@@ -7,7 +6,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Tests
+namespace Game.Core.Tests
 {
     public class AudioEnviromentEvaluatorTests
     {

@@ -1,14 +1,14 @@
-﻿using UnityEngine;
-using System;
-using System.Linq;
-using Game.Services;
-using Game.UI;
+﻿using Game.Core;
+using Game.Data;
+using Game.Events;
 using Game.Fishes;
 using Game.FishFood;
-using Game.Events;
-using Game.Data;
-using Game.Core;
+using Game.Services;
 using Game.States;
+using Game.UI;
+using System;
+using System.Linq;
+using UnityEngine;
 
 namespace Game.Runtime
 {
@@ -33,11 +33,17 @@ namespace Game.Runtime
 
         void Awake()
         {
-            saveSystem = new SaveSystem();
-            saveSystem.SetFirstLaunchDate(Convert.ToDateTime(firstGameLaunch));
+            saveSystem = new SaveSystem(new WriteFileStorage());
+            saveSystem.SetFirstLaunchDate(Convert.ToDateTime(firstGameLaunch));// borrar debug
+            //if (saveSystem.IsFirstLaunch())//ToDo: se puede borrar esto cuando terminemos pruebas
+            //{
+            //    Debug.Log($"Primera vez que se abre el juego.");
+            //}
+            //else
+            //{
+            //    Debug.Log($"YA SE HABIA ABIERTO EL JUEGO.");
+            //}
             int daysPassed = saveSystem.GetDaysSinceFirstLaunch();
-            
-
             Debug.Log($"Días desde la primera vez que se abrió el juego: {daysPassed}");
 
             var loadContextData = enviromentSystem.LoadGroundByGameData(daysPassed);
@@ -53,7 +59,7 @@ namespace Game.Runtime
             npcFishPool.Init(boundsService, new FishStateFactory(), loadContextData.FishConfigsCurrentDay, daysPassed, sfxEventBus);
             playerConfig.Init();
             fishPlayer.Init(playerConfig, new FishStateFactory(), boundsService, foodManagerService, sfxManager, daysPassed, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
-            spawnerController.Init( boundsService,foodManagerService, foodForCurrentDay, foodEatentEventBus, FoodSpawnedEventBus);
+            spawnerController.Init(boundsService, foodManagerService, foodForCurrentDay, foodEatentEventBus, FoodSpawnedEventBus);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Game.StateMachineManager
 {
-    public class StateMachine
+    public class StateMachine:IStateMachine
     {
         public IState currentState { get; private set; }
 

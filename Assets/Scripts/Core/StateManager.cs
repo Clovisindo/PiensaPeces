@@ -5,9 +5,9 @@ namespace Game.Core
 {
     public class StateManager
     {
-        private readonly StateMachine stateMachine;
+        private readonly IStateMachine stateMachine;
 
-        public StateManager(StateMachine stateMachine)
+        public StateManager(IStateMachine stateMachine)
         {
             this.stateMachine = stateMachine;
         }

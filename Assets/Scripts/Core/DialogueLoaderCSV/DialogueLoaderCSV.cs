@@ -6,7 +6,6 @@ namespace Game.Core
 {
     public class DialogueLoaderCsv
     {
-
         public static List<FishDialogueLine> Load(string csvText)
         {
             var lines = new List<FishDialogueLine>();
@@ -15,8 +14,8 @@ namespace Game.Core
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    var parts = line.Split(';'); // o ',' según tu CSV
-                    if (parts.Length >= 2)
+                    var parts = line.Split(';');
+                    if (parts.Length >= 2 && !string.IsNullOrEmpty(parts[0]) && !string.IsNullOrEmpty(parts[1]))
                     {
                         lines.Add(new FishDialogueLine
                         {

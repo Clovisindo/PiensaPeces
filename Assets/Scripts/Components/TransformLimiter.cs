@@ -24,13 +24,15 @@ namespace Game.Components
             if (boundsService == null) return;
 
             var pos = transform.position;
-            var min = boundsService.GetMinBounds();
-            var max = boundsService.GetMaxBounds();
 
-            pos.x = Mathf.Clamp(pos.x, min.x + halfWidth, max.x - halfWidth);
-            pos.y = Mathf.Clamp(pos.y, min.y + halfHeight, max.y - halfHeight);
+            var clampPosition = TransformLimiterLogic.ClampPosition(
+                pos,
+                boundsService.GetMinBounds(),
+                boundsService.GetMaxBounds(),
+                halfWidth,
+                halfHeight);
 
-            transform.position = pos;
+            transform.position = clampPosition;
         }
     }
 }

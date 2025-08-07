@@ -8,7 +8,7 @@ namespace Game.Fishes
 {
     public abstract class BaseFishController : MonoBehaviour, IFish
     {
-        protected StateMachine stateMachine;
+        protected IStateMachine stateMachine;
         protected StateManager stateManager;
         [SerializeField] protected float speed;
 
