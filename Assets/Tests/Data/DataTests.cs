@@ -1,3 +1,6 @@
+using Assets.Tests.Data.Mocks;
+using Game.Context;
+using Game.Services;
 using Game.Utilities;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -144,6 +147,21 @@ namespace Game.Data.Tests
 
             Assert.AreEqual(GROUND_DAYS, config.dayNumber);
             Assert.IsNotNull(config.groundEnvConfigs);
+        }
+
+        [Test]
+        public void ExitScreenContext_Should_Have_Correct_Values()
+        {
+            var gameObject = new GameObject();
+            var mockBoundService = new MockBoundService();
+            var mockExitableFIsh = new MockExitable();
+
+            var fishExitScreenContext = new ExitScreenContext(gameObject.transform,mockBoundService, mockExitableFIsh, FISH_SPEED);
+
+            Assert.AreEqual(FISH_SPEED, fishExitScreenContext.Speed);
+            Assert.IsNotNull(fishExitScreenContext.Transform);
+            Assert.IsNotNull(fishExitScreenContext.BoundsService);
+            Assert.IsNotNull(fishExitScreenContext.ExitBehavior);
         }
 
         [Test]
