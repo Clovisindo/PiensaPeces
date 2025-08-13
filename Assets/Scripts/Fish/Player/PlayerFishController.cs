@@ -40,7 +40,6 @@ namespace Game.Fishes
 
             stateMachine = new StateMachine();
             stateManager = new StateManager(stateMachine);
-            //stateManager.ApplyState(new IdleState(this));
             stateManager.ApplyState(FishStateFactory.CreateIdleState(this));
 
             this.boundsService = boundsService;
@@ -68,7 +67,6 @@ namespace Game.Fishes
             switch (intent)
             {
                 case FishIntent.SwimRandomly:
-                    //stateManager.ApplyState(new SwimState(this, boundsService, speed));
                     stateManager.ApplyState(FishStateFactory.CreateSwimState(this, boundsService, speed));
                     break;
                 case FishIntent.FollowFood:

@@ -21,7 +21,8 @@ namespace Game.Services
 
         public bool IsInsideBounds(Vector2 position)
         {
-            throw new System.NotImplementedException();
+            return position.x >= minBounds.x && position.x <= maxBounds.x &&
+                   position.y >= minBounds.y && position.y <= maxBounds.y;
         }
     }
 }

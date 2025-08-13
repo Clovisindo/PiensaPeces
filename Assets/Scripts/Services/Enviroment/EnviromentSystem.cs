@@ -1,36 +1,61 @@
 ﻿using Game.Data;
+using Game.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using ILogger = Game.Utilities.ILogger;
 
 namespace Game.Services 
 {
     public class EnviromentSystem : MonoBehaviour
     {
+        [Header("Unity Editor Config")]
         [SerializeField] private List<Transform> groundSpawnPositions;
         [SerializeField] private List<GroundEnvironmentDayConfig> allGroundDayConfigs;
         [SerializeField] private List<FishEnvDayConfig> allFishsDayConfigs;
         [SerializeField] private List<FoodEnvDayConfig> allFoodDayConfigs;
         [SerializeField] private List<AudioEnvDayConfig> allAudioDayConfigs;
-        private LoadDataContext.Builder loadDataContextBuilder;
+        private IEnviromentLoader enviromentLoader;
+        private ILogger _logger;
 
-        public LoadDataContext LoadGroundByGameData(int daysPassed)
+        /// <summary>
+        /// Inyección de dependencias para tests o inicializaciones manuales.
+        /// </summary>
+        public void Initialize(
+            List<Transform> groundSpawnPositions,
+            List<GroundEnvironmentDayConfig> groundConfigs,
+            List<FishEnvDayConfig> fishConfigs,
+            List<FoodEnvDayConfig> foodConfigs,
+            List<AudioEnvDayConfig> audioConfigs,
+            IEnviromentLoader loader,
+            ILogger logger
+        )
         {
-            loadDataContextBuilder = new LoadDataContext.Builder();
-            var config = allGroundDayConfigs.Find(c => c.dayNumber == daysPassed);
+            this.groundSpawnPositions = groundSpawnPositions;
+            this.allGroundDayConfigs = groundConfigs;
+            this.allFishsDayConfigs = fishConfigs;
+            this.allFoodDayConfigs = foodConfigs;
+            this.allAudioDayConfigs = audioConfigs;
+            this.enviromentLoader = loader;
+            this._logger = logger;
+        }
 
-            if (config == null)
-            {
-                Debug.LogWarning($"No Ground Config found for day {daysPassed}, load last day data.");
-                config = allGroundDayConfigs.OrderByDescending(c => c.dayNumber).FirstOrDefault();
-            }
+        public void SetLoaderService(IEnviromentLoader loaderService)
+        {
+            _logger ??= new UnityLogger();
+            this.enviromentLoader = loaderService;
+        }
 
+        public LoadDataContext LoadEnviromentData(int daysPassed)
+        {
+            var result = enviromentLoader.Load(allGroundDayConfigs, allFishsDayConfigs, allFoodDayConfigs, allAudioDayConfigs, daysPassed);
 
-            InstantiatePrefabsByConfig(config.groundEnvConfigs);
+            if (result.SelectedGroundConfig?.groundEnvConfigs != null)
+                InstantiatePrefabsByConfig(result.SelectedGroundConfig.groundEnvConfigs);
             LoadFoodConfigCurrentDay(allFoodDayConfigs, daysPassed);
             LoadFishConfigCurrentDay(allFishsDayConfigs, daysPassed);
             LoadAudioConfigCurrentDay(allAudioDayConfigs, daysPassed);
-            return loadDataContextBuilder.Build();
+            return result.Context;
         }
 
         private void LoadFoodConfigCurrentDay( List<FoodEnvDayConfig> configs, int daysPassed)
@@ -45,7 +70,6 @@ namespace Game.Services
             {
                 config.prefab.GetComponent<SpriteRenderer>().sprite = config.sprite;
             }
-            loadDataContextBuilder.WithFoodConfigs(foodConfigData.foodEnvConfigs.ToArray());
         }
 
         private void LoadFishConfigCurrentDay(List<FishEnvDayConfig> configs, int daysPassed)
@@ -56,7 +80,6 @@ namespace Game.Services
                 Debug.LogWarning($"No Fish Config found for day {daysPassed}, load last day data.");
                 fishConfigData = configs.OrderByDescending(c => c.dayNumber).FirstOrDefault();
             }
-            loadDataContextBuilder.WithFishConfigs(fishConfigData.fishEnvDayConfigs.ToArray());
         }
 
         private void LoadAudioConfigCurrentDay(List<AudioEnvDayConfig> configs, int daysPassed)
@@ -67,7 +90,6 @@ namespace Game.Services
                 Debug.LogWarning($"No Audio Config found for day {daysPassed}, load last day data.");
                 audioConfigData = configs.OrderByDescending(c => c.dayNumber).FirstOrDefault();
             }
-            loadDataContextBuilder.WithAudioConfigs(audioConfigData.audioConfigs.ToArray());
         }
 
         private void InstantiatePrefabsByConfig(List<GroundEnvConfig> configs)

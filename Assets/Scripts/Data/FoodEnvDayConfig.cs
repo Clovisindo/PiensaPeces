@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Game.Data
 {
     [CreateAssetMenu(fileName = "FoodEnvironmentDayConfig", menuName = "Environment/Food Day Config")]
-    public class FoodEnvDayConfig : ScriptableObject
+    public class FoodEnvDayConfig : EnvDayConfigBase
     {
-        public int dayNumber;
+        //public int dayNumber;
         public List<FoodEnvConfig> foodEnvConfigs;
     }
 }

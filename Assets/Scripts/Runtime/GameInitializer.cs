@@ -6,6 +6,7 @@ using Game.FishFood;
 using Game.Services;
 using Game.States;
 using Game.UI;
+using Game.Utilities;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -46,7 +47,8 @@ namespace Game.Runtime
             int daysPassed = saveSystem.GetDaysSinceFirstLaunch();
             Debug.Log($"Días desde la primera vez que se abrió el juego: {daysPassed}");
 
-            var loadContextData = enviromentSystem.LoadGroundByGameData(daysPassed);
+            enviromentSystem.SetLoaderService(new EnviromentLoader(new UnityLogger()));
+            var loadContextData = enviromentSystem.LoadEnviromentData(daysPassed);
             sfxManager.Init(sfxEventBus);
 
             audioEnvSystem.Initialize(loadContextData.AudioConfigsCurrentDay.ToList(), daysPassed, sfxEventBus);

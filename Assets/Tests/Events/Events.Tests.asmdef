@@ -1,14 +1,8 @@
 {
-    "name": "EditModeTest",
+    "name": "Event.Tests",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "Game.Events",
-        "Game.Data",
-        "Game.Utilities",
-        "Game.Core",
-        "Game.Components"
+        "GUID:d6e6b3929d2cb4d4aa62d9ea2360c649"
     ],
     "includePlatforms": [
         "Editor"

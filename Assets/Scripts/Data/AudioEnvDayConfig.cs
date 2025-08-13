@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Game.Data
 {
     [CreateAssetMenu(fileName = "AudioEnvironmentDayConfig", menuName = "Environment/Audio Day Config")]
-    public class AudioEnvDayConfig : ScriptableObject
+    public class AudioEnvDayConfig : EnvDayConfigBase
     {
-        public int dayNumber;
+        //public int dayNumber;
         public List<AudioEnvConfig> audioConfigs;
     }
 }

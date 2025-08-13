@@ -2,7 +2,7 @@
 using Game.Services;
 using UnityEngine;
 
-namespace Assets.Tests.Data.Mocks
+namespace Game.Data.Tests
 {
     internal class MockExitable : IExitable
     {

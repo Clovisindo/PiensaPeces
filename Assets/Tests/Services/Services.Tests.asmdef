@@ -1,12 +1,10 @@
 {
-    "name": "Data.Tests",
+    "name": "Services.Tests",
     "rootNamespace": "",
     "references": [
-        "GUID:6879af18806279244a0c97ab9585737b",
         "GUID:8857484bba3259e4ab75d04f18e65b9e",
-        "GUID:30d43c2ef1e812e41815bfe7bc671898",
-        "GUID:2d0ec80755554774980e6ce7724dc844",
-        "GUID:2bcb658447ff47840ba0cec99d13ba60"
+        "GUID:2bcb658447ff47840ba0cec99d13ba60",
+        "GUID:6879af18806279244a0c97ab9585737b"
     ],
     "includePlatforms": [
         "Editor"

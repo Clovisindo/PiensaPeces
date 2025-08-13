@@ -1,7 +1,7 @@
 ﻿using Game.Services;
 using UnityEngine;
 
-namespace Assets.Tests.Data.Mocks
+namespace Game.Data.Tests
 {
     public class MockBoundService : IBoundsService
     {

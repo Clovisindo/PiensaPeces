@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Event.Tests")]
 
 namespace Game.Events
 {
+
     internal interface IEventBinding<T>
     {
         public Action<T> OnEvent { get; set; }
