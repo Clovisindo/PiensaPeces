@@ -26,6 +26,7 @@ namespace Game.Runtime
         [SerializeField] private String firstGameLaunch; //todo borrar
         private FoodManagerService foodManagerService;
         private SaveSystem saveSystem;
+        private Utilities.ILogger logger;
 
         public EventBus<FoodEaten> foodEatentEventBus = new();
         public EventBus<FoodSpawned> FoodSpawnedEventBus = new();
@@ -34,6 +35,7 @@ namespace Game.Runtime
 
         void Awake()
         {
+            logger = new UnityLogger();
             saveSystem = new SaveSystem(new WriteFileStorage());
             saveSystem.SetFirstLaunchDate(Convert.ToDateTime(firstGameLaunch));// borrar debug
             //if (saveSystem.IsFirstLaunch())//ToDo: se puede borrar esto cuando terminemos pruebas
@@ -47,9 +49,9 @@ namespace Game.Runtime
             int daysPassed = saveSystem.GetDaysSinceFirstLaunch();
             Debug.Log($"Días desde la primera vez que se abrió el juego: {daysPassed}");
 
-            enviromentSystem.SetLoaderService(new EnviromentLoader(new UnityLogger()));
+            enviromentSystem.SetLoaderService(new EnviromentLoader(logger));
             var loadContextData = enviromentSystem.LoadEnviromentData(daysPassed);
-            sfxManager.Init(sfxEventBus);
+            sfxManager.Init(new SFXPlayer(logger), sfxEventBus);
 
             audioEnvSystem.Initialize(loadContextData.AudioConfigsCurrentDay.ToList(), daysPassed, sfxEventBus);
 

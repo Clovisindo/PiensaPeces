@@ -7,11 +7,11 @@ namespace Game.Data
     public class AudioEmitterData : ScriptableObject
     {
         [SerializeField] String audioName;
-        [SerializeField] AudioSource audioSource;
+        [SerializeField] IAudioSourceWrapper audioSource;
         [SerializeField] AudioSource instancePrefab;// es necesario instanciar en la escena los prefabs de audioSource para funcionar
 
         public string AudioName { get => audioName; set => audioName = value; }
-        public AudioSource AudioSource { get => audioSource; set => audioSource = value; }
+        public IAudioSourceWrapper AudioSource { get => audioSource; set => audioSource = value; }
         public AudioSource InstancePrefab { get => instancePrefab; set => instancePrefab = value; }
     }
 }
