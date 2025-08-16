@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41aec99651bd4c441983c9df6b41f803, type: 3}
   m_Name: NPCFishTalkData
   m_EditorClassIdentifier: 
-  AudioName: npc fish talk 01
-  audioSource: {fileID: 8231369062499780812, guid: 4239dc7581a40484f849d38ad5741162, type: 3}
+  audioName: npcTalk
+  source: {fileID: 8231369062499780812, guid: 4239dc7581a40484f849d38ad5741162, type: 3}
   instancePrefab: {fileID: 0}

@@ -10,11 +10,20 @@ namespace Game.Services
         private ISFXPlayer player;
         private IEventBus<SFXEvent> sfxBus;
         private EventBinding<SFXEvent> sfxBinding;
+
         private void Awake()
+        {
+            if (soundEffects == null) { return; }
+            InitSoundEffects();
+        }
+
+        public void InitSoundEffects()
         {
             foreach (AudioEmitterData s in soundEffects)
             {
-                s.InstancePrefab = Instantiate(s.AudioSource.audioSource, this.gameObject.transform);
+                s.AudioSourceWrapper = new UnityAudioSourceWrapper(s.Source);
+                s.InstancePrefab = Instantiate(s.AudioSourceWrapper.audioSource, this.gameObject.transform);
+                s.InstancePrefabWrapper = new UnityAudioSourceWrapper(s.InstancePrefab);
             }
         }
 

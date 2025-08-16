@@ -17,15 +17,15 @@ namespace Game.Services
         }
         public void PlayPitched(AudioEmitterData[] audioEffects, AudioEmitterData requested, float pitchMin, float pitchMax)
         {
-            var current = audioEffects.FirstOrDefault(s => s.name == requested.name);
+            var current = audioEffects.FirstOrDefault(s => s.AudioName == requested.AudioName);
             if (current == null)
             {
-                logger.LogWarning("No se encuentra el audio de nombre " +  requested.name);
+                logger.LogWarning("No se encuentra el audio de nombre " +  requested.AudioName);
                 return;
             }
-            current.AudioSource.pitch = randomRange(pitchMin, pitchMax);
-            current.InstancePrefab.Stop();
-            current.InstancePrefab.Play();
+            current.AudioSourceWrapper.pitch = randomRange(pitchMin, pitchMax);
+            current.InstancePrefabWrapper.Stop();
+            current.InstancePrefabWrapper.Play();
         }
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41aec99651bd4c441983c9df6b41f803, type: 3}
   m_Name: AudioSFXDay4Data2
   m_EditorClassIdentifier: 
-  AudioName: DeskSFX1
-  audioSource: {fileID: 8231369062499780812, guid: 9cc43b63a7deef246861d9361e07c96d, type: 3}
+  audioName: DeskSFX2
+  source: {fileID: 8231369062499780812, guid: 9cc43b63a7deef246861d9361e07c96d, type: 3}
   instancePrefab: {fileID: 0}

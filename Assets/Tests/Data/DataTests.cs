@@ -29,11 +29,11 @@ namespace Game.Data.Tests
             config.AudioName = AUDIO_NAME;
             var gameObject = new GameObject("TestAudioSource");
             var audioSource = gameObject.AddComponent<AudioSource>();
-            config.AudioSource = new UnityAudioSourceWrapper(audioSource);
+            config.AudioSourceWrapper = new UnityAudioSourceWrapper(audioSource);
             config.InstancePrefab = audioSource;
 
             Assert.AreEqual(AUDIO_NAME, config.AudioName);
-            Assert.IsNotNull(config.AudioSource);
+            Assert.IsNotNull(config.AudioSourceWrapper);
             Assert.IsNotNull(config.InstancePrefab);
         }
 

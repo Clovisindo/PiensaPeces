@@ -7,8 +7,8 @@ namespace Game.Events
     {
         private readonly HashSet<IEventBinding<T>> bindings = new HashSet<IEventBinding<T>>();
 
-        public void Register(EventBinding<T> binding) => bindings.Add(binding);
-        public void Deregister(EventBinding<T> binding) => bindings.Remove(binding);
+        public void Register(IEventBinding<T> binding) => bindings.Add(binding);
+        public void Deregister(IEventBinding<T> binding) => bindings.Remove(binding);
         public void Raise(T gameEvent)
         {
             foreach (var binding in bindings)

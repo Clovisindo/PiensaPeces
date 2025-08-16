@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41aec99651bd4c441983c9df6b41f803, type: 3}
   m_Name: AudioSFXDay2Data1
   m_EditorClassIdentifier: 
-  AudioName: DoorOpen
-  audioSource: {fileID: 8231369062499780812, guid: 1b5eab50cc7eae845a8285fe0e9a515a, type: 3}
+  audioName: DoorOpen
+  source: {fileID: 8231369062499780812, guid: 1b5eab50cc7eae845a8285fe0e9a515a, type: 3}
   instancePrefab: {fileID: 0}

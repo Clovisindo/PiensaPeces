@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41aec99651bd4c441983c9df6b41f803, type: 3}
   m_Name: AudioSFXday1Data2
   m_EditorClassIdentifier: 
-  AudioName: FootStep
-  audioSource: {fileID: 8231369062499780812, guid: 7f6c9f62ddb685942a5bb95457fadef3, type: 3}
+  audioName: FootStep
+  source: {fileID: 8231369062499780812, guid: 7f6c9f62ddb685942a5bb95457fadef3, type: 3}
   instancePrefab: {fileID: 0}
