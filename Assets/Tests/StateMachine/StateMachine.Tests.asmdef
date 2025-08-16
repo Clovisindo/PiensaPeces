@@ -1,0 +1,23 @@
+{
+    "name": "StateMachine.Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6c2f96a66a4c93847b737c1ff7df0e1e"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "NSubstitute.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

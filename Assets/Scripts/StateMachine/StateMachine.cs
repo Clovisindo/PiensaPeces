@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Game.StateMachineManager
+﻿namespace Game.StateMachineManager
 {
     public class StateMachine:IStateMachine
     {
