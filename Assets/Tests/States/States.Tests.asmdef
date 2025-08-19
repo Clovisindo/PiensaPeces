@@ -1,0 +1,25 @@
+{
+    "name": "States.Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2bcb658447ff47840ba0cec99d13ba60",
+        "GUID:2d0ec80755554774980e6ce7724dc844",
+        "GUID:6f7c4429bd927b24eb748cbe3281db6c"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "NSubstitute.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

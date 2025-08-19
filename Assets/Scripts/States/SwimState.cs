@@ -1,6 +1,7 @@
 ﻿using Game.FishLogic;
 using Game.Services;
 using Game.StateMachineManager;
+using System;
 using UnityEngine;
 
 
@@ -10,19 +11,23 @@ namespace Game.States
     {
         private readonly IFish fish;
         private readonly IBoundsService boundsService;
+        private readonly ITimeService timeService;
         private readonly float speed;
         private readonly SpriteRenderer spriteRenderer;
         private Vector2 destination;
+        private readonly Func<float, float, float> randomRange;
 
         private float timeSinceLastDirectionChange = 0f;
         private const float minDirectionChangeInterval = 1.0f;
 
-        public SwimState(IFish fish, IBoundsService boundsService,  float speed)
+        public SwimState(IFish fish, IBoundsService boundsService, ITimeService timeService,  float speed, Func<float,float,float> randomRange = null)
         {
             this.fish = fish;
             this.boundsService = boundsService;
+            this.timeService = timeService;
             this.speed = speed;
             this.spriteRenderer = fish.GetSpriteRenderer();
+            this.randomRange = randomRange ?? UnityEngine.Random.Range;
         }
 
         public void Enter()
@@ -34,7 +39,7 @@ namespace Game.States
 
         public void Update()
         {
-            timeSinceLastDirectionChange += Time.deltaTime;
+            timeSinceLastDirectionChange += timeService.DeltaTime;
             SwimMovement();
         }
 
@@ -49,7 +54,7 @@ namespace Game.States
             Vector2 currentPos = t.position;
 
             // Mover hacia el destino
-            Vector2 newPos = Vector2.MoveTowards(currentPos, destination, speed * Time.deltaTime);
+            Vector2 newPos = Vector2.MoveTowards(currentPos, destination, speed * timeService.DeltaTime);
             t.position = new Vector3(newPos.x, newPos.y, t.position.z);
 
             // Flip en eje X según dirección
@@ -74,8 +79,9 @@ namespace Game.States
             var min = boundsService.GetMinBounds();
             var max = boundsService.GetMaxBounds();
 
-            float x = Random.Range(min.x + 0.5f, max.x - 0.5f);
-            float y = Random.Range(min.y + 0.5f, max.y - 0.5f);
+
+            float x = randomRange(min.x + 0.5f, max.x - 0.5f);
+            float y = randomRange(min.y + 0.5f, max.y - 0.5f);
 
             destination = new Vector2(x, y);
         }

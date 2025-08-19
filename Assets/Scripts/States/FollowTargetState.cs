@@ -1,4 +1,5 @@
 ﻿using Game.FishLogic;
+using Game.Services;
 using Game.StateMachineManager;
 using UnityEngine;
 
@@ -10,10 +11,12 @@ namespace Game.States
         private readonly float speed;
         private readonly Transform target;
         private SpriteRenderer spriteRenderer;
+        private readonly ITimeService timeService;
 
-        public FollowTargetState(IFish fish, float speed, Transform target)
+        public FollowTargetState(IFish fish, ITimeService timeService, float speed, Transform target)
         {
             this.fish = fish;
+            this.timeService = timeService;
             this.speed = speed;
             this.target = target;
             this.spriteRenderer = fish.GetSpriteRenderer();
@@ -37,7 +40,7 @@ namespace Game.States
                 spriteRenderer.flipX = false;
 
             var pos = fish.GetTransform().position;
-            fish.GetTransform().position = Vector3.MoveTowards(pos, target.position, speed * Time.deltaTime);
+            fish.GetTransform().position = Vector3.MoveTowards(pos, target.position, speed * timeService.DeltaTime);
         }
 
         public void Exit()

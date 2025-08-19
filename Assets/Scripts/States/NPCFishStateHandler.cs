@@ -2,6 +2,7 @@
 using Game.Services;
 using Game.Core;
 using Game.FishLogic;
+using Assets.Scripts.Services.TimeService;
 
 namespace Game.States
 {
@@ -24,30 +25,9 @@ namespace Game.States
             ApplySwimState(); // Estado inicial
         }
 
-        //public void ApplyIntent(FishIntent intent, bool forceExit)
-        //{
-        //    if (forceExit)
-        //    {
-        //        var exitContext = new ExitScreenContext(fish.GetTransform(), boundsService, fish.GetComponent<IExitableFish>(), speed);
-        //        stateManager.ApplyState(new ExitScreenState(exitContext));
-        //        return;
-        //    }
-
-        //    switch (intent)
-        //    {
-        //        case FishIntent.SwimRandomly:
-        //            ApplySwimState();
-        //            break;
-        //        case FishIntent.Idle:
-        //        default:
-        //            stateManager.ApplyState(new IdleState(fish));
-        //            break;
-        //    }
-        //}
-
         private void ApplySwimState()
         {
-            stateManager.ApplyState(new SwimState(fish, boundsService, speed));
+            stateManager.ApplyState(new SwimState(fish, boundsService, new UnityTimeService(), speed));
         }
     }
 }
