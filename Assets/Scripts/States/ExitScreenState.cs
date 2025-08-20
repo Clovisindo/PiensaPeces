@@ -1,5 +1,6 @@
 ﻿using Game.Context;
 using Game.StateMachineManager;
+using System;
 using UnityEngine;
 
 namespace Game.States
@@ -7,11 +8,13 @@ namespace Game.States
     public class ExitScreenState : IState
     {
         private readonly ExitScreenContext context;
+        private readonly Func<int, int, int> randomRange;
         private Vector2 exitDirection;
 
-        public ExitScreenState(ExitScreenContext exitContext)
+        public ExitScreenState(ExitScreenContext exitContext, Func<int, int, int> randomRange = null)
         {
             this.context = exitContext;
+            this.randomRange = randomRange ?? UnityEngine.Random.Range;
         }
 
         public void Enter()
@@ -41,7 +44,7 @@ namespace Game.States
             Vector2.right,
             };
 
-            return directions[Random.Range(0, directions.Length)].normalized;
+            return directions[randomRange(0, directions.Length)].normalized;
         }
     }
 }

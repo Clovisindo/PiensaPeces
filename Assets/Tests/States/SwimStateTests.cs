@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Game.States.Tests
 {
-    public class StatesTests
+    public class SwimStateTests
     {
         private IFish fish;
         private IBoundsService bounds;
@@ -119,7 +119,6 @@ namespace Game.States.Tests
             }
         }
 
-
         [Test]
         public void ChangeDestination_WhenReachedAndTimeEnough_ShouldInvokeRandomAgain()
         {
@@ -142,6 +141,7 @@ namespace Game.States.Tests
 
             Assert.Greater(randomCalls, 2, "Update() should call random again when destination is reached.");
         }
+
         /// <summary>
         /// Este test no funciona si se modifica el valor de intervalo a menos de los establecido aqui
         /// </summary>
