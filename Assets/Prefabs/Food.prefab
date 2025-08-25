@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93d691321934854db403259c575ca30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodFallBehaviour: {fileID: 8091505427450737424}
 --- !u!58 &1340241949883357528
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -125,7 +124,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 507561524, guid: 4dc5880a67ff21d46902b3336ed955f6, type: 3}
+  m_Sprite: {fileID: 166131015, guid: 4dc5880a67ff21d46902b3336ed955f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

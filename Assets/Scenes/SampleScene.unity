@@ -587,7 +587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b39d7ac32063c543818d0cf44cf23bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseScreen: {fileID: 757438157}
 --- !u!4 &281459325
 Transform:
   m_ObjectHideFlags: 0
@@ -1243,7 +1242,7 @@ MonoBehaviour:
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
   audioEnvSystem: {fileID: 36836005}
-  firstGameLaunch: 2025-08-12
+  firstGameLaunch: 2025-08-20
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0

@@ -1,0 +1,26 @@
+{
+    "name": "FishFood.PlayModeTests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:27619889b8ba8c24980f49ee34dbb44a",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:6879af18806279244a0c97ab9585737b",
+        "GUID:d6e6b3929d2cb4d4aa62d9ea2360c649",
+        "GUID:74218cc8c8bd895469350864ec52d10a",
+        "GUID:2bcb658447ff47840ba0cec99d13ba60"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "NSubstitute.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

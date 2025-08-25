@@ -1,0 +1,26 @@
+{
+    "name": "FishFood.Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d6e6b3929d2cb4d4aa62d9ea2360c649",
+        "GUID:2bcb658447ff47840ba0cec99d13ba60",
+        "GUID:6879af18806279244a0c97ab9585737b",
+        "GUID:74218cc8c8bd895469350864ec52d10a"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "NSubstitute.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,11 +1,13 @@
 using Game.Events;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
+[assembly: InternalsVisibleTo("FishFood.Tests")]
 namespace Game.FishFood
 {
     public class Food : MonoBehaviour
     {
-        [SerializeField] FoodFallBehaviour foodFallBehaviour;
+        FoodFallBehaviour foodFallBehaviour;
 
         private FoodManagerService foodManager;
         private IEventBus<FoodEaten> foodEatentBus;
@@ -18,6 +20,7 @@ namespace Game.FishFood
             this.GetComponent<SpriteRenderer>().sprite = foodSprite;
 
             foodManager.RegisterFood(gameObject);
+            foodFallBehaviour = this.gameObject.GetComponent<FoodFallBehaviour>();
             foodFallBehaviour.Init(foodFallSpeed, minY);
         }
 
@@ -26,10 +29,20 @@ namespace Game.FishFood
             Debug.Log("Colisión con: " + other.name);
             if (other.CompareTag("PlayerFish"))
             {
-                foodEatentBus.Raise(new FoodEaten());
-                foodManager.UnregisterFood(gameObject);
+                HandleCollisionWithPlayer();
                 Destroy(gameObject);
             }
+        }
+
+        /// <summary>
+        /// Ejemplo de como se haria "mal" aplicando internal y visibilidad en assembly, en vez de extraer todo
+        /// a una clase con solo logica y testear, pero como aqui solo es un metodo, dejamos esto
+        /// de ejemplo para comparar
+        /// </summary>
+        internal void HandleCollisionWithPlayer()
+        {
+            foodEatentBus.Raise(new FoodEaten());
+            foodManager.UnregisterFood(gameObject);
         }
 
         private void OnDestroy()

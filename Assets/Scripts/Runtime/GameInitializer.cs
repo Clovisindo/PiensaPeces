@@ -63,6 +63,7 @@ namespace Game.Runtime
             npcFishPool.Init(boundsService, new FishStateFactory(), loadContextData.FishConfigsCurrentDay, daysPassed, sfxEventBus);
             playerConfig.Init();
             fishPlayer.Init(playerConfig, new FishStateFactory(), boundsService, foodManagerService, sfxManager, daysPassed, foodEatentEventBus, FoodSpawnedEventBus, hungryEventBus, sfxEventBus);
+            spawnerController = new FoodSpawnerController();
             spawnerController.Init(boundsService, foodManagerService, foodForCurrentDay, foodEatentEventBus, FoodSpawnedEventBus);
         }
     }
