@@ -1,8 +1,9 @@
-﻿using Game.Core;
+﻿using Assets.Scripts.Fish.Dialogue;
+using Game.Core;
 using Game.Data;
 using Game.Events;
+using Game.Services;
 using Game.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Game.Fishes
 {
     public class FishTalker : MonoBehaviour
     {
+        [Header("Editor Configuration")]
         [SerializeField] private string playerDialogueCsvPath;
         [SerializeField] private string npcDialogueCsvPath;
         [SerializeField] private float minSpeakInterval;
@@ -18,56 +20,75 @@ namespace Game.Fishes
         [SerializeField] private GameObject speechBubblePrefab;
         [SerializeField] private Transform bubbleAnchor;
 
-        private EventBus<SFXEvent> eventBus;
+        private FishTalkerDependencies Dependencies;
         AudioEmitterData talkingSFX;
         private List<FishDialogueLine> dialogueLines;
-        private IDialogueEvaluator evaluator;
         private SpeechBubbleUI activeBubble;
 
         private float elapsedTime = 0f;
         private float nextSpeakDelay = 0f;
+        private const string rootPathData = "Dialogues/";
+        private bool isInitialized = false;
 
-
-        private const string pathData = "Dialogues/";
-
-        public void Init(IDialogueEvaluator evaluator, FishConfig config, EventBus<SFXEvent> sfxEventBus, int passedDays)
+        public void Init(FishTalkerDependencies dependencies)
         {
-            this.eventBus = sfxEventBus;
-            this.talkingSFX = config.sftTalk;
-            this.minSpeakInterval = config.intervalTalking;
-            this.maxSpeakInterval = config.intervalTalking * 1.5f;
-            nextSpeakDelay = UnityEngine.Random.Range(minSpeakInterval, maxSpeakInterval) * Global.Instance.GAME_SPEED;
-            string pathDialoge = evaluator switch
-            {
-                PlayerFishDialogueEvaluator => playerDialogueCsvPath,
-                NPCFishDialogueEvaluator => npcDialogueCsvPath,
-                _ => throw new ArgumentException("Unknown evaluator type")
-            };
-            LoadDialogueAssets(pathDialoge, passedDays);
-            this.evaluator = evaluator;
-            ResetTalker();
+            InitInternal(dependencies, speechBubblePrefab, bubbleAnchor, minSpeakInterval, minSpeakInterval * 1.5f);
         }
 
-        private void LoadDialogueAssets(string basePathDialog, int passedDays)
+        public void InitForTesting(FishTalkerDependencies dependencies,
+            GameObject bublePrefab,
+            Transform anchor,
+            string playerPath = "player_dialogue",
+            string npcPatch = "npc_dialogue",
+            float minInterval = 1.0f,
+            float maxInterval = 2.0f)
+        {
+            playerDialogueCsvPath = playerPath;
+            npcDialogueCsvPath = npcPatch;
+            InitInternal(dependencies, bublePrefab, anchor, minInterval, maxInterval);
+        }
+
+        private void InitInternal(FishTalkerDependencies dependencies,
+            GameObject bublePrefab,
+            Transform anchor,
+            float minInterval,
+            float maxInterval)
+        {
+            Dependencies = dependencies;
+            speechBubblePrefab = bublePrefab;
+            bubbleAnchor = anchor;
+            talkingSFX = Dependencies.Config.sftTalk;
+            minSpeakInterval = minInterval;
+            maxSpeakInterval = maxInterval;
+            nextSpeakDelay = Dependencies.RandomService.Range(minSpeakInterval, maxSpeakInterval) * Dependencies.Global.GameSpeed;
+            
+            string pathDialoge = Dependencies.PathResolver.Resolver(Dependencies.Evaluator, playerDialogueCsvPath, npcDialogueCsvPath);
+            LoadDialogueAssets(pathDialoge, Dependencies.PassedDays);
+            
+            ResetTalker();
+            isInitialized = true;
+        }
+
+        private void LoadDialogueAssets(string baseNameFile, int passedDays)
         {
             // Agregar sufijo de día al nombre del archivo
-            string pathDialogeWithDay = $"{basePathDialog}_day{passedDays}";
+            string pathDialogeWithDay = $"{baseNameFile}_day{passedDays}";
 
             // Cargar CSV
-            TextAsset csvAsset = Resources.Load<TextAsset>(pathData + pathDialogeWithDay);
+            TextAsset csvAsset = Dependencies.ResourceLoader.LoadText(rootPathData + pathDialogeWithDay);
 
 
             if (csvAsset == null)
             {
-                Debug.LogWarning($"Dialogue CSV not found at Resources/{pathData + pathDialogeWithDay}, attempting fallback to default.");
+                Debug.LogWarning($"Dialogue CSV not found at Resources/{rootPathData + pathDialogeWithDay}, attempting fallback to default.");
 
                 // Fallback a base CSV si no existe el específico
-                csvAsset = Resources.Load<TextAsset>(pathData + basePathDialog);
+                csvAsset = Dependencies.ResourceLoader.LoadText(rootPathData + baseNameFile);
             }
 
             if (csvAsset == null)
             {
-                Debug.LogError($"Default dialogue CSV also not found at Resources/{pathData + basePathDialog}");
+                Debug.LogWarning($"Default dialogue CSV also not found at Resources/{rootPathData + baseNameFile}");
                 dialogueLines = new List<FishDialogueLine>();
             }
             else
@@ -76,17 +97,31 @@ namespace Game.Fishes
             }
         }
 
-
         private void Update()
         {
-            elapsedTime += Time.deltaTime;
-            if (elapsedTime < nextSpeakDelay) return;
-            var validLines = dialogueLines.Where(line => evaluator.Evaluate(line.Condition)).ToList();
-            if (validLines.Count == 0) return;
+            // GUARD CLAUSE: No ejecutar si no está inicializado
+            if (!isInitialized || Dependencies == null)
+            {
+                return;
+            }
+            bool flowControl = Tick(Dependencies.TimeService.DeltaTime);
+            if (!flowControl)
+            {
+                return;
+            }
+        }
 
-            var selectedLine = validLines[UnityEngine.Random.Range(0, validLines.Count)];
+        public bool Tick( float deltaTime)
+        {
+            elapsedTime += deltaTime;
+            if (elapsedTime < nextSpeakDelay) return false;
+            var validLines = dialogueLines.Where(line => Dependencies.Evaluator.Evaluate(line.Condition)).ToList();
+            if (validLines.Count == 0) return false;
+
+            var selectedLine = validLines[Dependencies.RandomService.Range(0, validLines.Count)];
             Speak(selectedLine.Text, talkingSFX);
             ResetTimer();
+            return true;
         }
 
         private bool CheckActiveBuble()
@@ -106,20 +141,20 @@ namespace Game.Fishes
             if(CheckActiveBuble())return;
             if (speechBubblePrefab != null && bubbleAnchor != null)
             {
-                var bubble = Instantiate(speechBubblePrefab, bubbleAnchor.position, Quaternion.identity, null);
+                var bubble = Dependencies.GameObjectFactory.Instantiate(speechBubblePrefab, bubbleAnchor.position, Quaternion.identity, null);
                 bubble.transform.SetParent(bubbleAnchor.transform);
                 bubble.GetComponent<SpeechBubbleUI>().Show(text);
-                eventBus.Raise(new SFXEvent { sfxData = audioData});
+                Dependencies.EventBus.Raise(new SFXEvent { sfxData = audioData});
             }
         }
 
         public void ResetTalker()
         {
-            nextSpeakDelay = UnityEngine.Random.Range(minSpeakInterval, maxSpeakInterval);
+            nextSpeakDelay = Dependencies.RandomService.Range(minSpeakInterval, maxSpeakInterval);
             activeBubble = gameObject.GetComponentInChildren<SpeechBubbleUI>();
             if (activeBubble != null)
             {
-                Destroy(activeBubble.gameObject);
+                Dependencies.GameObjectFactory.Destroy(activeBubble.gameObject);
                 activeBubble = null;
             }
         }
@@ -127,9 +162,24 @@ namespace Game.Fishes
         private void ResetTimer()
         {
             elapsedTime = 0f;
-            nextSpeakDelay = UnityEngine.Random.Range(minSpeakInterval, maxSpeakInterval);
+            nextSpeakDelay = Dependencies.RandomService.Range(minSpeakInterval, maxSpeakInterval);
             //Debug.Log($"[FishTalker] Próximo diálogo en: {nextSpeakDelay} segundos.");
         }
+
+
+        #region testing
+        public bool IsValidConfiguration()
+        {
+            return speechBubblePrefab != null &&
+                   bubbleAnchor != null &&
+                   !string.IsNullOrEmpty(playerDialogueCsvPath) &&
+                   !string.IsNullOrEmpty(npcDialogueCsvPath);
+        }
+
+        // Getter para testing (solo lectura)
+        public bool HasActiveBubble => activeBubble != null;
+        public int DialogueLineCount => dialogueLines?.Count ?? 0;
+        #endregion
     }
 
 }

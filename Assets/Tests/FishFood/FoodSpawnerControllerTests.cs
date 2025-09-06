@@ -18,6 +18,7 @@ namespace Game.FishFood.Tests
         private FoodEnvConfig foodConfig;
         private IEventBus<FoodEaten> eatenBus;
         private IEventBus<FoodSpawned> spawnedBus;
+        Func<GameObject, Vector3, Quaternion, GameObject> fakeFactory;
 
 
         [SetUp]
@@ -31,8 +32,8 @@ namespace Game.FishFood.Tests
             fakeFood.AddComponent<FoodFallBehaviour>();
 
 
-            Func<GameObject, Vector3, Quaternion, GameObject> fakeFactory = (prefab, pos, rot) => fakeFood;
-            spawner = new FoodSpawnerController(fakeFactory);
+            fakeFactory = (prefab, pos, rot) => fakeFood;
+            spawner = new GameObject().AddComponent<FoodSpawnerController>();
 
             bounds = Substitute.For<IBoundsService>();
             bounds.GetMinBounds().Returns(Vector2.zero);
@@ -49,7 +50,7 @@ namespace Game.FishFood.Tests
         [Test]
         public void SpawnFood_ShouldRiseFoodSpawnedEvent()
         {
-            spawner.Init(bounds, foodManager, new[] { foodConfig }, eatenBus, spawnedBus);
+            spawner.Init(bounds, foodManager, new[] { foodConfig }, eatenBus, spawnedBus, fakeFactory);
 
             spawner.SpawnFood();
 

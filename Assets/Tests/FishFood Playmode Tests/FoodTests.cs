@@ -1,5 +1,4 @@
 using Game.Events;
-using Game.FishFood;
 using NSubstitute;
 using NUnit.Framework;
 using System.Collections;
@@ -10,22 +9,40 @@ namespace Game.FishFood.Tests
 {
     public class FoodTests
     {
+        private GameObject go;
+        private GameObject player;
+        private BoxCollider2D collider;
+        private SpriteRenderer sprite;
+        private Food food;
+        private FoodFallBehaviour fallFood;
+        private FoodManagerService foodManager;
+        private IEventBus<FoodEaten> bus;
+
+        [TearDown]
+        public void TearDown()
+        {
+            if (go != null)
+                Object.DestroyImmediate(go);
+            if (player != null)
+                Object.DestroyImmediate(player);
+        }
+
         [UnityTest]
         public IEnumerator Food_OnTriggerEnter_WithPlayerFish_ShouldDestroyFood()
         {
-            var go = new GameObject("Food");
-            var sprite = go.AddComponent<SpriteRenderer>();
+            go = new GameObject("Food");
+            sprite = go.AddComponent<SpriteRenderer>();
             go.AddComponent<FoodFallBehaviour>();
-            var food = go.AddComponent<Food>();
+            food = go.AddComponent<Food>();
 
-            var foodManager = Substitute.For<FoodManagerService>();
-            var bus = Substitute.For<IEventBus<FoodEaten>>();
+            foodManager = Substitute.For<FoodManagerService>();
+            bus = Substitute.For<IEventBus<FoodEaten>>();
 
             food.Init(foodManager, sprite.sprite, 1f, -5f, bus);
 
-            var player = new GameObject("PlayerFish");
+            player = new GameObject("PlayerFish");
             player.tag = "PlayerFish";
-            var collider = player.AddComponent<BoxCollider2D>();
+            collider = player.AddComponent<BoxCollider2D>();
 
             food.SendMessage("OnTriggerEnter2D", collider);
 
@@ -37,9 +54,9 @@ namespace Game.FishFood.Tests
         [UnityTest]
         public IEnumerator FoodFallBehaviour_WhenReachMinY_ThenDestroy()
         {
-            var go = new GameObject("Food");
-            var sprite = go.AddComponent<SpriteRenderer>();
-            var fallFood = go.AddComponent<FoodFallBehaviour>();
+            go = new GameObject("Food");
+            sprite = go.AddComponent<SpriteRenderer>();
+            fallFood = go.AddComponent<FoodFallBehaviour>();
 
             fallFood.Init(1f, -10f);
 

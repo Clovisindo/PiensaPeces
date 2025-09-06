@@ -1,4 +1,6 @@
-﻿using Game.Components;
+﻿using Assets.Scripts.Fish.Dialogue;
+using Assets.Scripts.Services.TimeService;
+using Game.Components;
 using Game.Context;
 using Game.Core;
 using Game.Data;
@@ -6,6 +8,7 @@ using Game.Events;
 using Game.FishLogic;
 using Game.Services;
 using Game.StateMachineManager;
+using Game.Utilities;
 using UnityEngine;
 
 namespace Game.Fishes
@@ -40,7 +43,15 @@ namespace Game.Fishes
             limiter?.Init(boundsService);
 
             talker = GetComponent<FishTalker>();
-            this.talker.Init(new NPCFishDialogueEvaluator(), config, sfxEventBus, daysPassed);
+            var dependenciesFishTalker = new FishTalkerDependencies(
+                new NPCFishDialogueEvaluator(),
+                new DialoguePathResolver(),
+                new UnityResourceLoader(),
+                new UnityGameObjectFactory(),
+                new UnityTimeService(),
+                new UnityGlobal(),
+                 sfxEventBus, config, daysPassed);
+            this.talker.Init(dependenciesFishTalker);
 
             ai = new NPCFishAI(Random.value);
             exitFishComponent = new ExitableFish();

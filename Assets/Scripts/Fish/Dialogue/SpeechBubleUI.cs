@@ -13,6 +13,12 @@ namespace Game.Fishes
 
         private Coroutine displayRoutine;
 
+        public void InitForTests()
+        {
+            dialogueText = gameObject.AddComponent<TextMeshProUGUI>();
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
         public void Show(string text)
         {
             dialogueText.fontSize = 36f * 5; 

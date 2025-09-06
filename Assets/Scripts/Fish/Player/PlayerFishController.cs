@@ -1,4 +1,6 @@
-﻿using Game.Components;
+﻿using Assets.Scripts.Fish.Dialogue;
+using Assets.Scripts.Services.TimeService;
+using Game.Components;
 using Game.Core;
 using Game.Data;
 using Game.Events;
@@ -6,6 +8,7 @@ using Game.FishFood;
 using Game.FishLogic;
 using Game.Services;
 using Game.StateMachineManager;
+using Game.Utilities;
 using UnityEngine;
 
 namespace Game.Fishes
@@ -45,7 +48,15 @@ namespace Game.Fishes
             this.boundsService = boundsService;
             limiter.Init(boundsService);
             this.hungerComponent.Init(hungryEventBus);
-            this.talker.Init(new PlayerFishDialogueEvaluator(hungerComponent), playerConfig, sfxEventBus, daysPassed);
+            var dependenciesFishTalker = new FishTalkerDependencies(
+                new PlayerFishDialogueEvaluator(hungerComponent),
+                new DialoguePathResolver(),
+                new UnityResourceLoader(),
+                new UnityGameObjectFactory(),
+                new UnityTimeService(),
+                new UnityGlobal(),
+                 sfxEventBus, config, daysPassed);
+            this.talker.Init(dependenciesFishTalker);
             ai = new PlayerFishAI(transform, hungerComponent, foodManagerService);
             intentScheduler = new PlayerFishIntentScheduler(this, config, ai.EvaluateIntent, ApplyIntent);
             eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, sFXManager, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus);

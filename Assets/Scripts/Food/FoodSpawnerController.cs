@@ -15,16 +15,19 @@ namespace Game.FishFood
         private IEventBus<FoodEaten> foodEatentBus;
         private IEventBus<FoodSpawned> foodSpawnedBus;
 
-        private readonly Func<GameObject, Vector3, Quaternion, GameObject> instantiate;
+        private Func<GameObject, Vector3, Quaternion, GameObject> instantiate;
 
-        public FoodSpawnerController(Func<GameObject, Vector3, Quaternion, GameObject> instantiate = null)
+ 
+
+        public void Init(IBoundsService boundsService,
+            FoodManagerService foodManagerService,
+            FoodEnvConfig[] foodPrefabs, 
+            IEventBus<FoodEaten> foodEatentEventBus,
+            IEventBus<FoodSpawned> foodSpawnedEventBus,
+            Func<GameObject, Vector3, Quaternion, GameObject> instantiate = null
+            )
         {
             this.instantiate = instantiate ?? GameObject.Instantiate;
-        }
-
-
-        public void Init(IBoundsService boundsService, FoodManagerService foodManagerService, FoodEnvConfig[] foodPrefabs, IEventBus<FoodEaten> foodEatentEventBus, IEventBus<FoodSpawned> foodSpawnedEventBus)
-        {
             this.boundsService = boundsService;
             this.foodManagerService = foodManagerService;
             this.foodConfigs = foodPrefabs;
