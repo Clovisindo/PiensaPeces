@@ -1,6 +1,6 @@
 ﻿using Game.FishLogic;
-using Game.Services;
 using Game.StateMachineManager;
+using Game.Utilities;
 using UnityEngine;
 
 namespace Game.States

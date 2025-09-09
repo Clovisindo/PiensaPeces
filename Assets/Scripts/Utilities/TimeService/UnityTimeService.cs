@@ -1,7 +1,6 @@
-﻿using Game.Services;
-using UnityDeltaTime = UnityEngine.Time;
+﻿using UnityDeltaTime = UnityEngine.Time;
 
-namespace Assets.Scripts.Services.TimeService
+namespace Game.Utilities
 {
     public class UnityTimeService : ITimeService
     {

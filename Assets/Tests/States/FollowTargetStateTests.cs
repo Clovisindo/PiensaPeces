@@ -1,5 +1,5 @@
 ﻿using Game.FishLogic;
-using Game.Services;
+using Game.Utilities;
 using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;

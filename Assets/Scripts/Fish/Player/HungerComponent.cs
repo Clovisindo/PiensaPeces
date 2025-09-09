@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace Game.Fishes
 {
-    public class HungerComponent : MonoBehaviour
+    public class HungerComponent : MonoBehaviour,IHungerComponent
     {
         [SerializeField] private float hungerDelay = 5f;
-        private bool isHungry;
 
-        public bool IsHungry => isHungry;
+        public bool IsHungry { get; private set; }
 
         private IEventBus<HungryEvent> hungryBus;
 
@@ -21,7 +20,7 @@ namespace Game.Fishes
 
         public void ResetHunger()
         {
-            isHungry = false;
+            IsHungry = false;
             StopAllCoroutines();
             StartCoroutine(HungerTimer());
         }
@@ -29,7 +28,7 @@ namespace Game.Fishes
         private IEnumerator HungerTimer()
         {
             yield return new WaitForSeconds(hungerDelay);
-            isHungry = true;
+            IsHungry = true;
             hungryBus?.Raise(new HungryEvent());
         }
     }

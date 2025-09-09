@@ -13,7 +13,7 @@ using Vector3 = UnityEngine.Vector3;
 namespace Game.Fishes.Tests
 {
 
-    public class FishTalkerTests : MonoBehaviour
+    public class FishTalkerTests 
     {
         private GameObject go;
         private FishTalker fishTalker;

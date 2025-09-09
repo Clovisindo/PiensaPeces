@@ -2,7 +2,7 @@
 using Game.Services;
 using Game.Core;
 using Game.FishLogic;
-using Assets.Scripts.Services.TimeService;
+using Game.Utilities;
 
 namespace Game.States
 {

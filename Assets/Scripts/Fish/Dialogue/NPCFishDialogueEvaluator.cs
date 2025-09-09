@@ -1,10 +1,18 @@
-﻿using UnityEngine;
+﻿using Game.Utilities;
 
 namespace Game.Fishes
 {
     public class NPCFishDialogueEvaluator : IDialogueEvaluator
     {
-        public float currentTime => Time.time;
+        private readonly ITimeService _timeService;
+        private readonly IRandomService _randomService;
+        public float currentTime => _timeService.Time;
+
+        public NPCFishDialogueEvaluator(ITimeService timeService = null, IRandomService randomService = null)
+        {
+            _timeService = timeService ?? new UnityTimeService();
+            _randomService = randomService ?? new UnityRandomService();
+        }
 
         public bool Evaluate(string condition)
         {
@@ -18,7 +26,7 @@ namespace Game.Fishes
                     return currentTime > minTime;
             }
             if (condition == "Random")
-                return Random.value < 0.1f; // 10% chance
+                return _randomService.Value < 0.1f; // 10% chance
             return false;
         }
     }

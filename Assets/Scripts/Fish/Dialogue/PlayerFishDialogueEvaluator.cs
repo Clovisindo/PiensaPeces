@@ -1,15 +1,20 @@
-﻿using UnityEngine;
+﻿using Game.Utilities;
+using UnityEngine;
 
 namespace Game.Fishes
 {
     public class PlayerFishDialogueEvaluator: IDialogueEvaluator
     {
-        private readonly HungerComponent hungerComponent;
-        public float currentTime => Time.time;
+        private readonly IHungerComponent _hungerComponent;
+        private readonly ITimeService _timeService;
+        private readonly IRandomService _randomService;
+        public float currentTime => _timeService.Time;
 
-        public PlayerFishDialogueEvaluator(HungerComponent hungerComponent)
+        public PlayerFishDialogueEvaluator(IHungerComponent hungerComponent, ITimeService timeService = null, IRandomService randomService = null)
         {
-            this.hungerComponent = hungerComponent;
+            _hungerComponent = hungerComponent;
+            _timeService = timeService ?? new UnityTimeService();
+            _randomService = randomService ?? new UnityRandomService();
         }
 
         public bool Evaluate(string condition)
@@ -25,10 +30,10 @@ namespace Game.Fishes
             }
 
             if (condition == "IsHungry")
-                return hungerComponent.IsHungry;
+                return _hungerComponent.IsHungry;
 
             if (condition == "Random")
-                return Random.value < 0.1f; // 10% chance
+                return _randomService.Value < 0.1f; // 10% chance
 
             return false;
         }

@@ -1,4 +1,4 @@
-﻿namespace Game.Services
+﻿namespace Game.Utilities
 {
     public interface ITimeService
     {

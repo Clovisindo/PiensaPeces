@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.Services.TimeService;
-using Game.Context;
+﻿using Game.Context;
 using Game.FishLogic;
 using Game.Services;
+using Game.Utilities;
 using Game.StateMachineManager;
 using UnityEngine;
 

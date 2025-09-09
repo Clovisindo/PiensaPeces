@@ -1,9 +1,8 @@
 using Game.FishLogic;
 using Game.Services;
+using Game.Utilities;
 using NSubstitute;
 using NUnit.Framework;
-using UnityEditor;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace Game.States.Tests
