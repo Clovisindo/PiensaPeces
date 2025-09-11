@@ -32,7 +32,7 @@ namespace Game.Fishes
 
         public void Init(FishTalkerDependencies dependencies)
         {
-            InitInternal(dependencies, speechBubblePrefab, bubbleAnchor, minSpeakInterval, minSpeakInterval * 1.5f);
+            InitInternal(dependencies, speechBubblePrefab, bubbleAnchor, dependencies.Config.intervalTalking, dependencies.Config.intervalTalking * 1.5f);
         }
 
         public void InitForTesting(FishTalkerDependencies dependencies,
@@ -58,9 +58,9 @@ namespace Game.Fishes
             speechBubblePrefab = bublePrefab;
             bubbleAnchor = anchor;
             talkingSFX = Dependencies.Config.sftTalk;
-            minSpeakInterval = minInterval;
-            maxSpeakInterval = maxInterval;
-            nextSpeakDelay = Dependencies.RandomService.Range(minSpeakInterval, maxSpeakInterval) * Dependencies.Global.GameSpeed;
+            minSpeakInterval = minInterval * Dependencies.Global.GameSpeed;
+            maxSpeakInterval = maxInterval * Dependencies.Global.GameSpeed;
+            nextSpeakDelay = Dependencies.RandomService.Range(minSpeakInterval, maxSpeakInterval);
             
             string pathDialoge = Dependencies.PathResolver.Resolver(Dependencies.Evaluator, playerDialogueCsvPath, npcDialogueCsvPath);
             LoadDialogueAssets(pathDialoge, Dependencies.PassedDays);
@@ -143,6 +143,7 @@ namespace Game.Fishes
             {
                 var bubble = Dependencies.GameObjectFactory.Instantiate(speechBubblePrefab, bubbleAnchor.position, Quaternion.identity, null);
                 bubble.transform.SetParent(bubbleAnchor.transform);
+                bubble.GetComponent<SpeechBubbleUI>().Initialize();
                 bubble.GetComponent<SpeechBubbleUI>().Show(text);
                 Dependencies.EventBus.Raise(new SFXEvent { sfxData = audioData});
             }
@@ -150,7 +151,7 @@ namespace Game.Fishes
 
         public void ResetTalker()
         {
-            nextSpeakDelay = Dependencies.RandomService.Range(minSpeakInterval, maxSpeakInterval);
+            nextSpeakDelay = Dependencies.RandomService.Range(minSpeakInterval, maxSpeakInterval) ;
             activeBubble = gameObject.GetComponentInChildren<SpeechBubbleUI>();
             if (activeBubble != null)
             {
