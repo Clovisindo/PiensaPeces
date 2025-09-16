@@ -12,10 +12,10 @@ namespace Game.Fishes
 
         public bool HasActiveCoroutine => _currentCoroutine != null;
 
-        public void StartDisplayCoroutine(IEnumerator routine)
+        public Coroutine StartDisplayCoroutine(IEnumerator routine)
         {
             StopCurrentDisplayCoroutine();
-            _currentCoroutine = _monoBehaviour.StartCoroutine(routine);
+            return _currentCoroutine = _monoBehaviour.StartCoroutine(routine);
         }
 
         public void StopCurrentDisplayCoroutine()

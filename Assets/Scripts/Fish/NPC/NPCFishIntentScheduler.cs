@@ -7,15 +7,16 @@ namespace Game.Fishes
 {
     public class NPCFishIntentScheduler : IFishIntentScheduler
     {
-        private readonly MonoBehaviour context;
         private readonly Func<FishIntent> evaluateIntent;
         private readonly Action<FishIntent> applyIntent;
-        private Coroutine routine;
+        private ICoroutineRunner _coroutineRunner;
+        private IYieldInstruction _yieldInstruction;
         private FishConfig config;
 
-        public NPCFishIntentScheduler(MonoBehaviour context, FishConfig config, Func<FishIntent> evaluateIntent, Action<FishIntent> applyIntent)
+        public NPCFishIntentScheduler(ICoroutineRunner coroutineRunner, IYieldInstruction yieldInstruction, FishConfig config, Func<FishIntent> evaluateIntent, Action<FishIntent> applyIntent)
         {
-            this.context = context;
+            this._coroutineRunner = coroutineRunner ?? throw new ArgumentNullException(nameof(coroutineRunner));
+            this._yieldInstruction = yieldInstruction ?? new UnityYieldInstruction();
             this.config = config;
             this.evaluateIntent = evaluateIntent;
             this.applyIntent = applyIntent;
@@ -23,7 +24,7 @@ namespace Game.Fishes
         public void StartEvaluatingPeriodically()
         {
             Stop();
-            routine = context.StartCoroutine(EvaluatePeriodically());
+            _coroutineRunner.StartDisplayCoroutine(EvaluatePeriodically());
         }
 
         public void EvaluateNow()
@@ -33,18 +34,15 @@ namespace Game.Fishes
 
         public void Stop()
         {
-            if (routine != null)
-            {
-                context.StopCoroutine(routine);
-                routine = null;
-            }
+           _coroutineRunner.StopCurrentDisplayCoroutine();
+           
         }
 
         private IEnumerator EvaluatePeriodically()
         {
             while (true)
             {
-                yield return new WaitForSeconds(config.intervalEvaluateIntent);
+                yield return _yieldInstruction.WaitForSeconds(config.intervalEvaluateIntent);
                 applyIntent(evaluateIntent());
             }
         }

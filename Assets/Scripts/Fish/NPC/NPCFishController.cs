@@ -54,7 +54,7 @@ namespace Game.Fishes
             ai = new NPCFishAI(Random.value);
             exitFishComponent = new ExitableFish();
             exitFishComponent.Init(this, pool);
-            intentScheduler = new NPCFishIntentScheduler(this, config, ai.EvaluateIntent, ApplyIntent);
+            intentScheduler = new NPCFishIntentScheduler(new UnityCoroutineRunner(this), new UnityYieldInstruction(), config, ai.EvaluateIntent, ApplyIntent);
             this.maxLifeTime = config.maxLifetime;
             this.speed = config.speed;
 
@@ -96,8 +96,6 @@ namespace Game.Fishes
         {
             if (LifeTimeBehaviour())
             {
-                //var exitContext = new ExitScreenContext(transform, boundsService, this.exitFishComponent, speed);
-                //stateManager.ApplyState(new ExitScreenState(exitContext));
                 stateManager.ApplyState(FishStateFactory.CreateExitState(transform, boundsService, this.exitFishComponent, speed));
                 intentScheduler.Stop();
                 limiter.enabled = false;
@@ -107,12 +105,10 @@ namespace Game.Fishes
                 switch (intent)
                 {
                     case FishIntent.SwimRandomly:
-                        //stateManager.ApplyState(new SwimState(this, boundsService, speed));
                         stateManager.ApplyState(FishStateFactory.CreateSwimState(this,boundsService,speed));
                         break;
                     case FishIntent.Idle:
                     default:
-                        //stateManager.ApplyState(new IdleState(this));
                         stateManager.ApplyState(FishStateFactory.CreateIdleState(this));
                         break;
                 }
