@@ -7,19 +7,19 @@ namespace Game.Fishes
 {
     public class NPCFishIntentScheduler : IFishIntentScheduler
     {
-        private readonly Func<FishIntent> evaluateIntent;
-        private readonly Action<FishIntent> applyIntent;
+        private readonly Func<FishIntent> _evaluateIntent;
+        private readonly Action<FishIntent> _applyIntent;
         private ICoroutineRunner _coroutineRunner;
         private IYieldInstruction _yieldInstruction;
-        private FishConfig config;
+        private FishConfig _config;
 
         public NPCFishIntentScheduler(ICoroutineRunner coroutineRunner, IYieldInstruction yieldInstruction, FishConfig config, Func<FishIntent> evaluateIntent, Action<FishIntent> applyIntent)
         {
-            this._coroutineRunner = coroutineRunner ?? throw new ArgumentNullException(nameof(coroutineRunner));
-            this._yieldInstruction = yieldInstruction ?? new UnityYieldInstruction();
-            this.config = config;
-            this.evaluateIntent = evaluateIntent;
-            this.applyIntent = applyIntent;
+            _coroutineRunner = coroutineRunner ?? throw new ArgumentNullException(nameof(coroutineRunner));
+            _yieldInstruction = yieldInstruction ?? new UnityYieldInstruction();
+            _config = config;
+            _evaluateIntent = evaluateIntent;
+            _applyIntent = applyIntent;
         }
         public void StartEvaluatingPeriodically()
         {
@@ -29,7 +29,7 @@ namespace Game.Fishes
 
         public void EvaluateNow()
         {
-            applyIntent(evaluateIntent());
+            _applyIntent(_evaluateIntent());
         }
 
         public void Stop()
@@ -42,8 +42,8 @@ namespace Game.Fishes
         {
             while (true)
             {
-                yield return _yieldInstruction.WaitForSeconds(config.intervalEvaluateIntent);
-                applyIntent(evaluateIntent());
+                yield return _yieldInstruction.WaitForSeconds(_config.intervalEvaluateIntent);
+                _applyIntent(_evaluateIntent());
             }
         }
     }

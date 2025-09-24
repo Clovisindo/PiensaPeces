@@ -5,6 +5,8 @@ using Game.Services;
 using Game.Events;
 using Game.Data;
 using Game.FishLogic;
+using Unity.VisualScripting.TextureAssets;
+using Game.Utilities;
 
 namespace Game.Fishes
 {
@@ -61,7 +63,14 @@ namespace Game.Fishes
 
                 var config = GetRandomFishConfig();
                 config.Init();
-                fish.Init(config, this, FishStateFactory, boundsService, daysPassed, sfxEventBus);
+                NPCFishDependencies dependencies = new NPCFishDependencies(
+                    fish,
+                    FishStateFactory,
+                    boundsService,
+                    new UnityResourceLoader(),
+                    new UnityGlobal(),
+                    sfxEventBus);
+                fish.Init(config, this, dependencies, daysPassed);
                 fish.ResetFish();
 
                 activeFish.Add(fish);
@@ -73,7 +82,6 @@ namespace Game.Fishes
             if (fishConfigs == null || fishConfigs.Length == 0)
             {
                 Debug.LogWarning("No fish configs provided.");
-                //return ScriptableObject.CreateInstance<FishConfig>();
             }
 
             return fishConfigs[Random.Range(0, fishConfigs.Length)];

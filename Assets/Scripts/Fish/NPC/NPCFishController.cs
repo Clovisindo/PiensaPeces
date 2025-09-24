@@ -2,11 +2,9 @@
 using Game.Components;
 using Game.Core;
 using Game.Data;
-using Game.Events;
-using Game.FishLogic;
-using Game.Services;
 using Game.StateMachineManager;
 using Game.Utilities;
+using NSubstitute.Routing.Handlers;
 using UnityEngine;
 
 namespace Game.Fishes
@@ -14,105 +12,113 @@ namespace Game.Fishes
 
     public class NPCFishController : BaseFishController
     {
-        private NPCFishPool pool;
-        private IBoundsService boundsService;
-        private TransformLimiter limiter;
-        private NPCFishAI ai;
-        private IFishIntentScheduler intentScheduler;
-        private ExitableFish exitFishComponent;
-        private FishTalker talker;
-        private IFishStateFactory FishStateFactory;
+        private NPCFishPool _pool;
+        private TransformLimiter _limiter;
+        private ExitableFish _exitFishComponent;
+        private FishTalker _talker;
+        private NPCFishLogic _logic;
+        private ITimeService _timeService;
 
-        private float lifeTime;
-        private float maxLifeTime;
-        public void Init(FishConfig config, NPCFishPool pool, IFishStateFactory fishFactory, IBoundsService boundsService, int daysPassed, EventBus<SFXEvent> sfxEventBus)
+        private NPCFishDependencies _dependencies;
+
+        private bool isInitialized = false;
+
+        public void Init(
+           FishConfig config,
+           NPCFishPool pool,
+           NPCFishDependencies dependencies,
+           int daysPassed)
         {
-            this.pool = pool;
-            this.boundsService = boundsService;
-            this.FishStateFactory = fishFactory;
+            _pool = pool;
+            _dependencies = dependencies;
+            _timeService = dependencies.TimeService;
 
+            // --- Renderer ---
             var renderer = GetComponent<SpriteRenderer>();
             if (renderer != null && config.fishSprite != null)
             {
                 renderer.sprite = config.fishSprite;
             }
 
-            limiter = GetComponent<TransformLimiter>();
-            limiter?.Init(boundsService);
+            // --- Limiter ---
+            _limiter = GetComponent<TransformLimiter>();
+            _limiter?.Init(dependencies.BoundsService);
 
-            talker = GetComponent<FishTalker>();
-            var dependenciesFishTalker = new FishTalkerDependencies(
+            // --- Talker ---
+            _talker = GetComponent<FishTalker>();
+            var depsTalker = new FishTalkerDependencies(
                 new NPCFishDialogueEvaluator(),
                 new DialoguePathResolver(),
-                new UnityResourceLoader(),
-                new UnityGameObjectFactory(),
-                new UnityTimeService(),
-                new UnityGlobal(),
-                 sfxEventBus, config, daysPassed);
-            this.talker.Init(dependenciesFishTalker);
+                dependencies.ResourceLoader,
+                dependencies.GameObjectFactory,
+                dependencies.TimeService,
+                dependencies.Global,
+                dependencies.SfxEventBus,
+                config,
+                daysPassed
+            );
+            
+            _talker.Init(depsTalker);
 
-            ai = new NPCFishAI(Random.value);
-            exitFishComponent = new ExitableFish();
-            exitFishComponent.Init(this, pool);
-            intentScheduler = new NPCFishIntentScheduler(new UnityCoroutineRunner(this), new UnityYieldInstruction(), config, ai.EvaluateIntent, ApplyIntent);
-            this.maxLifeTime = config.maxLifetime;
-            this.speed = config.speed;
+            // --- AI ---
+            var ai = new NPCFishAI(dependencies.RandomService.Value);
 
+            // --- Exit ---
+            _exitFishComponent = new ExitableFish();
+            _exitFishComponent.Init(this, pool);
+
+            // --- State Machine ---
             stateMachine = new StateMachine();
             stateManager = new StateManager(stateMachine);
-            intentScheduler.StartEvaluatingPeriodically();
+
+            // --- Logic ---
+            _logic = new NPCFishLogic(
+                _dependencies,
+                this,
+                config,
+                _exitFishComponent,
+                ai.EvaluateIntent,
+                intent => ApplyIntent(intent)
+            );
+
+            _logic.StartIntentLoop();
+            isInitialized = true;
         }
+
 
         protected override void Update()
         {
-            base.Update();
-            lifeTime += Time.deltaTime;
+            if (!isInitialized || _dependencies == null)
+            {
+                return;
+            }
+            else
+            {
+                base.Update();
+                _logic.Tick(_timeService.DeltaTime);
+            }
         }
 
         public void NotifyExit()
         {
             ResetFish();
-            pool.RecycleFish(this);
+            _pool.RecycleFish(this);
         }
 
         public void ResetFish()
         {
-            lifeTime = 0;
-            limiter.enabled = true;
-            talker.ResetTalker();
-            stateMachine.ChangeState(FishStateFactory.CreateSwimState(this, boundsService, speed));
-        }
-
-        private bool LifeTimeBehaviour()
-        {
-            if (lifeTime > maxLifeTime)
-            {
-                return true;
-            }
-            return false;
+            _logic.ResetFish(_talker, stateMachine, _limiter);
         }
 
         private void ApplyIntent(FishIntent intent)
         {
-            if (LifeTimeBehaviour())
+            _logic.ApplyIntent(intent, stateManager, _limiter, transform);
+            if (_logic.LifeTimeBehaviour())
             {
-                stateManager.ApplyState(FishStateFactory.CreateExitState(transform, boundsService, this.exitFishComponent, speed));
-                intentScheduler.Stop();
-                limiter.enabled = false;
-            }
-            else
-            {
-                switch (intent)
-                {
-                    case FishIntent.SwimRandomly:
-                        stateManager.ApplyState(FishStateFactory.CreateSwimState(this,boundsService,speed));
-                        break;
-                    case FishIntent.Idle:
-                    default:
-                        stateManager.ApplyState(FishStateFactory.CreateIdleState(this));
-                        break;
-                }
+                _limiter.enabled = false;
             }
         }
+
+        public float GetLifeTime() => _logic.LifeTime;
     }
 }

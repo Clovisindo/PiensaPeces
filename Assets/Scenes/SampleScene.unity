@@ -1198,7 +1198,7 @@ MonoBehaviour:
   sfxManager: {fileID: 1511659653}
   playerConfig: {fileID: 11400000, guid: 2a244fa70794d8f458488bd7fbb68837, type: 2}
   audioEnvSystem: {fileID: 36836005}
-  firstGameLaunch: 2025-09-09
+  firstGameLaunch: 2025-09-21
 --- !u!4 &862757931
 Transform:
   m_ObjectHideFlags: 0
