@@ -46,7 +46,7 @@ namespace Game.Fishes
 
             this.boundsService = boundsService;
             limiter.Init(boundsService);
-            this.hungerComponent.Init(hungryEventBus);
+            this.hungerComponent.Init(hungryEventBus, new UnityCoroutineRunner(hungerComponent));
             var dependenciesFishTalker = new FishTalkerDependencies(
                 new PlayerFishDialogueEvaluator(hungerComponent),
                 new DialoguePathResolver(),

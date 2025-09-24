@@ -15,7 +15,6 @@ namespace Game.Fish.Tests
         private FishConfig _config;
         private FishIntent _lastAppliedIntent;
         private int _applyCallCount;
-        private FishIntent _currentEvaluatedIntent;
 
         [SetUp]
         public void Setup()
@@ -26,7 +25,6 @@ namespace Game.Fish.Tests
             _config = new FishConfig { intervalEvaluateIntent = 0.1f };
             _lastAppliedIntent = FishIntent.Idle;
             _applyCallCount = 0;
-            _currentEvaluatedIntent = FishIntent.SwimRandomly;
 
             _scheduler = new NPCFishIntentScheduler(
                 new UnityCoroutineRunner(_testMonoBehaviour),
