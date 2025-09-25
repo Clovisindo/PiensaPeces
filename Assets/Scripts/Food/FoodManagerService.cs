@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.FishFood
 {
-    public class FoodManagerService
+    public class FoodManagerService : IFoodManagerService
     {
         private readonly List<GameObject> activeFoods = new();
         public bool HasAnyFood() => activeFoods.Any();
@@ -30,7 +30,7 @@ namespace Game.FishFood
                 .FirstOrDefault();
         }
 
-        
+
     }
 
 }

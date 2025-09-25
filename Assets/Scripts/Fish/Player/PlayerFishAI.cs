@@ -1,4 +1,5 @@
 ﻿using Game.FishFood;
+using System;
 using UnityEngine;
 
 namespace Game.Fishes
@@ -13,29 +14,29 @@ namespace Game.Fishes
 
     public class PlayerFishAI : IFishAI
     {
-        private readonly Transform fishTransform;
-        private readonly HungerComponent hungerComponent;
-        private readonly FoodManagerService foodManagerService;
+        private readonly Transform _fishTransform;
+        private readonly IHungerComponent _hungerComponent;
+        private readonly IFoodManagerService _foodManagerService;
 
-        public PlayerFishAI(Transform fishTransform, HungerComponent hungerComponent, FoodManagerService foodManagerService)
+        public PlayerFishAI(Transform fishTransform, IHungerComponent hungerComponent, IFoodManagerService foodManagerService)
         {
-            this.fishTransform = fishTransform;
-            this.hungerComponent = hungerComponent;
-            this.foodManagerService = foodManagerService;
+            _fishTransform = fishTransform ?? throw new ArgumentNullException(nameof(fishTransform));
+            _hungerComponent = hungerComponent ?? throw new ArgumentNullException(nameof(hungerComponent));
+            _foodManagerService = foodManagerService ?? throw new ArgumentNullException(nameof(foodManagerService));
         }
 
         public FishIntent EvaluateIntent()
         {
-            if (!hungerComponent.IsHungry)
+            if (!_hungerComponent.IsHungry)
                 return FishIntent.SwimRandomly;
 
-            var closestFood = foodManagerService.GetClosestFood(fishTransform.position);
+            var closestFood = _foodManagerService.GetClosestFood(_fishTransform.position);
             return closestFood != null ? FishIntent.FollowFood : FishIntent.SwimRandomly;
         }
 
         public Transform GetTargetFood()
         {
-            return foodManagerService.GetClosestFood(fishTransform.position)?.transform;
+            return _foodManagerService.GetClosestFood(_fishTransform.position)?.transform;
         }
     }
 

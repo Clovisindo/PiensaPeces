@@ -58,7 +58,7 @@ namespace Game.Fishes
             this.talker.Init(dependenciesFishTalker);
             ai = new PlayerFishAI(transform, hungerComponent, foodManagerService);
             intentScheduler = new PlayerFishIntentScheduler(this, config, ai.EvaluateIntent, ApplyIntent);
-            eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, sFXManager, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus);
+            eventHandler = new PlayerFishEventHandler(intentScheduler, hungerComponent, foodEatentEventBus, foodSpawnedEventBus, hungryEventBus);
             eventHandler.RegisterEvents();
         }
 

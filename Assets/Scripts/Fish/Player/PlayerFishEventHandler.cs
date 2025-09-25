@@ -18,7 +18,6 @@ namespace Game.Fishes
         public PlayerFishEventHandler(
             IFishIntentScheduler fishIntentScheduler,
             HungerComponent hungerComponent,
-            SFXManager sFXManager,
             IEventBus<FoodEaten> foodEatenBus,
             IEventBus<FoodSpawned> foodSpawnedBus,
             IEventBus<HungryEvent> hungryBus)
