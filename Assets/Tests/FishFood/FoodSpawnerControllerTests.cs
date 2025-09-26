@@ -54,7 +54,7 @@ namespace Game.FishFood.Tests
 
             spawner.SpawnFood();
 
-            spawnedBus.Received().Raise(Arg.Is<FoodSpawned>(e => e.food == fakeFood));
+            spawnedBus.Received().Raise(Arg.Any<FoodSpawned>());
 
         }
     }

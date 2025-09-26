@@ -1,32 +1,32 @@
 ﻿using Game.Events;
-using Game.Services;
+using System;
 
 namespace Game.Fishes
 {
     public class PlayerFishEventHandler
     {
-        private readonly IFishIntentScheduler intentScheduler;
-        private readonly HungerComponent hungerComponent;
+        private readonly IFishIntentScheduler _intentScheduler;
+        private readonly IHungerComponent _hungerComponent;
 
-        private readonly IEventBus<FoodEaten> foodEatenBus;
-        private readonly IEventBus<FoodSpawned> foodSpawnedBus;
-        private readonly IEventBus<HungryEvent> hungryBus;
+        private readonly IEventBus<FoodEaten> _foodEatenBus;
+        private readonly IEventBus<FoodSpawned> _foodSpawnedBus;
+        private readonly IEventBus<HungryEvent> _hungryBus;
         private EventBinding<FoodEaten> foodEatenBinding;
         private EventBinding<FoodSpawned> foodSpawnedBinding;
         private EventBinding<HungryEvent> hungryBinding;
 
         public PlayerFishEventHandler(
             IFishIntentScheduler fishIntentScheduler,
-            HungerComponent hungerComponent,
+            IHungerComponent hungerComponent,
             IEventBus<FoodEaten> foodEatenBus,
             IEventBus<FoodSpawned> foodSpawnedBus,
             IEventBus<HungryEvent> hungryBus)
         {
-            this.intentScheduler = fishIntentScheduler;
-            this.hungerComponent = hungerComponent;
-            this.foodEatenBus = foodEatenBus;
-            this.foodSpawnedBus = foodSpawnedBus;
-            this.hungryBus = hungryBus;
+            _intentScheduler = fishIntentScheduler ?? throw new ArgumentNullException(nameof(_intentScheduler));
+            _hungerComponent = hungerComponent ?? throw new ArgumentNullException(nameof(_hungerComponent));
+            _foodEatenBus = foodEatenBus ?? throw new ArgumentNullException(nameof(_foodEatenBus));
+            _foodSpawnedBus = foodSpawnedBus ?? throw new ArgumentNullException(nameof(_foodSpawnedBus));
+            _hungryBus = hungryBus ?? throw new ArgumentNullException(nameof(_hungryBus));
         }
 
         public void RegisterEvents()
@@ -35,36 +35,36 @@ namespace Game.Fishes
             foodSpawnedBinding = new EventBinding<FoodSpawned>(OnFoodSpawned);
             hungryBinding = new EventBinding<HungryEvent>(OnHungry);
 
-            foodEatenBus.Register(foodEatenBinding);
-            foodSpawnedBus.Register(foodSpawnedBinding);
-            hungryBus.Register(hungryBinding);
+            _foodEatenBus.Register(foodEatenBinding);
+            _foodSpawnedBus.Register(foodSpawnedBinding);
+            _hungryBus.Register(hungryBinding);
         }
 
         public void DeregisterEvents()
         {
-            foodEatenBus?.Deregister(foodEatenBinding);
-            foodSpawnedBus?.Deregister(foodSpawnedBinding);
-            hungryBus?.Deregister(hungryBinding);
+            _foodEatenBus?.Deregister(foodEatenBinding);
+            _foodSpawnedBus?.Deregister(foodSpawnedBinding);
+            _hungryBus?.Deregister(hungryBinding);
         }
 
         private void OnFoodEaten()
         {
-            hungerComponent.ResetHunger();
-            intentScheduler.Stop();
-            intentScheduler.EvaluateNow();
+            _hungerComponent.ResetHunger();
+            _intentScheduler.Stop();
+            _intentScheduler.EvaluateNow();
         }
 
-        private void OnFoodSpawned(FoodSpawned e)
+        private void OnFoodSpawned()
         {
-            if (hungerComponent.IsHungry)
+            if (_hungerComponent.IsHungry)
             {
-                intentScheduler.EvaluateNow();
+                _intentScheduler.EvaluateNow();
             }
         }
 
-        private void OnHungry(HungryEvent e)
+        private void OnHungry()
         {
-            intentScheduler.StartEvaluatingPeriodically();
+            _intentScheduler.StartEvaluatingPeriodically();
         }
     }
 }

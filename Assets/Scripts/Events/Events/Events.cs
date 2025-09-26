@@ -3,12 +3,9 @@ using UnityEngine;
 
 namespace Game.Events
 {
-    public interface IEvent{ }
+    public interface IEvent { }
     public struct FoodEaten : IEvent { }
-    public struct FoodSpawned : IEvent
-    {
-        public GameObject food;
-    }
+    public struct FoodSpawned : IEvent {}
     public struct HungryEvent: IEvent { }
 
     public struct SFXEvent : IEvent

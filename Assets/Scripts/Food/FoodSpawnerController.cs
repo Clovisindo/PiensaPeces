@@ -47,7 +47,7 @@ namespace Game.FishFood
             var food = instantiate(actualFoodConfig.prefab, spawnPosition, Quaternion.identity);
             food.GetComponent<Food>().Init(foodManagerService, actualFoodConfig.sprite, foodFallSpeed, min.y, foodEatentBus);
 
-            foodSpawnedBus.Raise(new FoodSpawned { food = food });
+            foodSpawnedBus.Raise(new FoodSpawned());
         }
     }
 }
